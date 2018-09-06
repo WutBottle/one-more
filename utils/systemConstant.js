@@ -1,0 +1,9 @@
+module.exports = {
+  "COOKIE": "HEALS_READER_COOKIE",
+  'WECHAT_USER_ID': 'WECHAT_USER_ID',
+  'LOGGED_IN': 'LOGGED_IN',
+  'REGISTERED': 'REGISTERED',
+  'LOCAL_HOSPITAL': 'LOCAL_HOSPITAL',
+  'VISIT_GUIDE': 'VISIT_GUIDE', //是否第一次访问小程序
+  'VISIT_TYPE': 'VISIT_TYPE', //访问小程序的入喉，是否扫码进入
+};

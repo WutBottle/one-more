@@ -1,11 +1,15 @@
 //app.js
+import constant from './utils/systemConstant.js';
 App({
+  globalData: {
+    requestRoot: "https://www.wanzhuanshudu.top/sodu",
+  },
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
+    console.log(constant)
     // 登录
     wx.login({
       success: res => {
