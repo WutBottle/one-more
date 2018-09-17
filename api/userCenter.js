@@ -1,7 +1,7 @@
 'use strict';
 
 let api = require('./requestService');
-let userCenter = api("usercenter/v1.0");
+let userCenter = api("onemore");
 
 module.exports = {
   //1.获取医院列表

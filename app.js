@@ -2,7 +2,7 @@
 import constant from './utils/systemConstant.js';
 App({
   globalData: {
-    requestRoot: "https://www.wanzhuanshudu.top/sodu",
+    requestRoot: "https://www.wanzhuanshudu.top/",
   },
   onLaunch: function () {
     // 展示本地存储能力
