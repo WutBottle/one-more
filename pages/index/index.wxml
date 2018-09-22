@@ -1,14 +1,36 @@
 <!--index.wxml-->
-<view class="container">
+<view class="index-container">
   <!-- 推荐书籍 -->
-  <view class='recommend'>
+  <view class='recommend-container'>
     <view class='recommend-title'>
-      <text>推荐书籍</text>
-      <navigator url="#">查看更多</navigator>
+      <view class='recommend-title-left'>推荐书籍</view>
+      <view class='recommend-title-right'><navigator url="#">查看更多</navigator></view>
     </view>
-    <view class='recommend-content'></view>
+    <view class='recommend-content-container'>
+      <scroll-view class='recommend-scrollX' scroll-x="true">
+        <view id='recommend-book-list' wx:for="{{imgInfo}}" wx:key="{{index}}">
+          <image src="{{item.url}}" mode="widthFix"></image>
+        </view>
+      </scroll-view>
+    </view>
   </view>
 
-  <!-- 开始悦读 -->
-  
+  <!-- 体验版块 -->
+  <view class='function-block-container'>
+    <view class='recommend-title'>
+      <view class='recommend-title-left'>oneMore世界</view>
+    </view>
+    <view class='function-essay'>
+      <image src='../../images/function_pen.png' mode="widthFix"></image>
+      <text class='function-words'>随笔</text>
+    </view>
+    <view class='function-voice'>
+      <image src='../../images/function_voice.png' mode="widthFix"></image>
+      <text class='function-words'>语音</text>
+    </view>
+    <view class='function-text'>
+      <image src='../../images/function_test.png' mode="widthFix"></image>
+      <text class='function-words'>趣味测试</text>
+    </view>
+  </view>
 </view>
