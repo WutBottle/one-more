@@ -1,4 +1,14 @@
 <!--index.wxml-->
 <view class="container">
+  <!-- 推荐书籍 -->
+  <view class='recommend'>
+    <view class='recommend-title'>
+      <text>推荐书籍</text>
+      <navigator url="#">查看更多</navigator>
+    </view>
+    <view class='recommend-content'></view>
+  </view>
 
+  <!-- 开始悦读 -->
+  
 </view>
