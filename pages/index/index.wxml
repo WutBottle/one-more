@@ -4,7 +4,7 @@
   <view class='recommend-container'>
     <view class='recommend-title'>
       <view class='recommend-title-left'>推荐书籍</view>
-      <view class='recommend-title-right'><navigator url="#">查看更多</navigator></view>
+      <view class='recommend-title-right'><navigator url="../readMore/readMore">查看更多</navigator></view>
     </view>
     <view class='recommend-content-container'>
       <scroll-view class='recommend-scrollX' scroll-x="true">

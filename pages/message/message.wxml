@@ -1,2 +1,18 @@
 <!--pages/message/message.wxml-->
-<text>pages/message/message.wxml</text>
+<view class='message-container'>
+  <view class='sys-message'>
+    <image src='../../images/sys_message.png' mode='aspectFit'></image>
+    <text>系统消息</text>
+    <image src='../../images/arrow_right.png' mode='aspectFit'></image>
+  </view>
+  <view class='private-message'>
+    <image src='../../images/private_message.png' mode='aspectFit'></image>
+    <text>私信</text>
+    <image src='../../images/arrow_right.png' mode='aspectFit'></image>
+  </view>
+  <view class='comment-message'>
+    <image src='../../images/comment_message.png' mode='aspectFit'></image>
+    <text>评论</text>
+    <image src='../../images/arrow_right.png' mode='aspectFit'></image>
+  </view>
+</view>

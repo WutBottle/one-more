@@ -37,6 +37,13 @@
 			"list": [
 				{
 					"id": 0,
+					"name": "查看更多",
+					"pathName": "pages/readMore/readMore",
+					"query": "",
+					"scene": "1011"
+				},
+				{
+					"id": 1,
 					"name": "配置资源页面",
 					"pathName": "pages/recommendResource/recommendResource",
 					"query": "recommendModal=1&userResourceModal=1",

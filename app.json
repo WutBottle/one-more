@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/message/message",
     "pages/userCenter/userCenter",
-    "pages/recommendResource/recommendResource"
+    "pages/recommendResource/recommendResource",
+    "pages/readMore/readMore"
     
   ],
   "window": {
