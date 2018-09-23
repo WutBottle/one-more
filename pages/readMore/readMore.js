@@ -4,7 +4,19 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
+    bookValue:null,
+    imgInfo: [
+      {
+        url: "https://img1.doubanio.com/dae/niffler/niffler/images/37832904-b80c-11e8-be8b-0242ac11001c.jpg"
+      }, {
+        url: "https://img3.doubanio.com/dae/niffler/niffler/images/155d88ce-b0d7-11e8-b24b-0242ac11000e.jpg"
+      }, {
+        url: "https://img3.doubanio.com/dae/niffler/niffler/images/f90e218a-b8aa-11e7-9cc5-0242ac110021.jpg"
+      }, {
+        url: "https://img1.doubanio.com/dae/niffler/niffler/images/81c6658c-6341-11e8-b830-0242ac110019.jpg"
+      }, {
+        url: "https://img3.doubanio.com/dae/niffler/niffler/images/f9493ac4-d428-11e7-a75c-0242ac11002e.jpg"
+      }],
   },
 
   /**
@@ -61,5 +73,13 @@ Page({
    */
   onShareAppMessage: function () {
     
+  },
+  bookValueChange(e){
+    this.setData({
+      bookValue: e.detail.value,
+    })
+  },
+  submitBookValue(e){
+    console.log("需要查找的书本名称是：" + e.detail.value);
   }
 })
