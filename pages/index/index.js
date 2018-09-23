@@ -16,7 +16,7 @@ Page({
         url: "https://img1.doubanio.com/dae/niffler/niffler/images/81c6658c-6341-11e8-b830-0242ac110019.jpg"
       }],
   },
-  onLoad: function () {
+  onLoad: function (options) {
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/message/message",
-    "pages/userCenter/userCenter"
+    "pages/userCenter/userCenter",
+    "pages/recommendResource/recommendResource"
     
   ],
   "window": {
