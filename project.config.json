@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 3,
 			"list": [
 				{
 					"id": 0,
@@ -47,6 +47,20 @@
 					"name": "配置资源页面",
 					"pathName": "pages/recommendResource/recommendResource",
 					"query": "recommendModal=1&userResourceModal=1",
+					"scene": "1011"
+				},
+				{
+					"id": -1,
+					"name": "系统消息",
+					"pathName": "pages/message/messageSys/messageSys",
+					"query": "",
+					"scene": "1011"
+				},
+				{
+					"id": -1,
+					"name": "私信",
+					"pathName": "pages/message/messagePrivate/messagePrivate",
+					"query": "",
 					"scene": "1011"
 				}
 			]

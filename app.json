@@ -4,7 +4,9 @@
     "pages/message/message",
     "pages/userCenter/userCenter",
     "pages/recommendResource/recommendResource",
-    "pages/readMore/readMore"
+    "pages/readMore/readMore",
+    "pages/message/messageSys/messageSys",
+    "pages/message/messagePrivate/messagePrivate"
     
   ],
   "window": {
