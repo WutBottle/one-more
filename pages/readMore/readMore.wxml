@@ -1,0 +1,30 @@
+<!--readMore.wxml-->
+
+<view class='readMore-container'> 
+  <view class="search-container">
+    <icon color='#9140e4' class="searchcion" size='20' type='search'></icon>
+    <input placeholder="搜索" value="{{bookValue}}" bindinput="bookValueChange" bindconfirm="submitBookValue"/>
+  </view>
+  <view class='common-hot-div'>
+    <view class='hot-div-title'>本周热门</view>
+    <view class='hot-img-top' wx:if="{{imgInfo.length > 0}}">
+      <image src='{{imgInfo[0].url}}' mode='aspectFit'></image>
+    </view>
+    <view class='hot-img-other'>
+      <block wx:for="{{imgInfo}}" wx:key="{{index}}">  
+        <image wx:if="{{index != 0}}" src='{{item.url}}' mode='aspectFit'></image>
+      </block>
+    </view>
+  </view>
+  <view class='common-hot-div'>
+    <view class='hot-div-title'>推荐热榜</view>
+    <view class='hot-img-top' wx:if="{{imgInfo.length > 0}}">
+      <image src='{{imgInfo[0].url}}' mode='aspectFit'></image>
+    </view>
+    <view class='hot-img-other'>
+      <block wx:for="{{imgInfo}}" wx:key="{{index}}">  
+        <image wx:if="{{index != 0}}" src='{{item.url}}' mode='aspectFit'></image>
+      </block>
+    </view>
+  </view>
+</view>

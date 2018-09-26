@@ -1,0 +1,36 @@
+/* pages/message/messageSys/messageSys.wxss */
+
+.sys-message-container{
+  border-top: 1rpx solid #999999;
+}
+
+.sys-content-container{
+  border-bottom: 1rpx solid #9140e4;
+  margin-left: 20rpx;
+  position: relative;
+}
+
+.sys-info{
+  line-height: 48rpx;
+  font-size: 26rpx;
+  color: #333333;
+  font-weight: bold;
+}
+
+.sys-time{
+  line-height: 50rpx;
+  font-size: 22rpx;
+  color: #666666;
+  font-weight: bold;
+}
+
+.sys-hasRead-index{
+  position: absolute;
+  background-color: #9140e4;
+  display: inline-block;
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  right: 40rpx;
+  bottom: 32rpx;
+}
