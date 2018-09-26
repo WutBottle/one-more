@@ -10,6 +10,23 @@
   </view>
 </view>
 
-<view class='dialog-pop-container' wx:if="{{}}">
-
+<view class='dialog-pop-container' data-modalBlank='true' bindtap='closeDialogModal' wx:if="{{showDialogModal}}">
+  <view class='user-dialog-div'>
+    <view class='user-dialog-name'>
+      {{userDialogInfo.username}}
+    </view>
+    <scroll-view class='dialog-scrollY' scroll-into-view="lastOne" scroll-y="true">
+      <block wx:for="{{userDialogInfo.contentList}}" wx:key="{{index}}">
+        <view class='dialog-time'>{{item.sendTime}}</view>
+        <view id="{{userDialogInfo.contentList.length === index + 1 ? 'lastOne':''}}" class='left-dialog-container' wx:if="{{item.userId === userDialogInfo.userId}}">
+          <image src='{{item.avatarUrl}}' mode='aspectFit'></image>
+          <view class='dialog-content'>{{item.content}}</view>
+        </view>
+        <view id="{{userDialogInfo.contentList.length === index + 1 ? 'lastOne':''}}" wx:else class='right-dialog-container'>
+          <view class='dialog-content'>{{item.content}}</view>
+          <image src='{{item.avatarUrl}}' mode='aspectFit'></image>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
 </view>

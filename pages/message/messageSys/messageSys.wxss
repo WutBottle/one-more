@@ -1,7 +1,7 @@
 /* pages/message/messageSys/messageSys.wxss */
 
 .sys-message-container{
-  border-top: 1rpx solid #999999;
+
 }
 
 .sys-content-container{
