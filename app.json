@@ -6,7 +6,9 @@
     "pages/recommendResource/recommendResource",
     "pages/readMore/readMore",
     "pages/message/messageSys/messageSys",
-    "pages/message/messagePrivate/messagePrivate"    
+    "pages/message/messagePrivate/messagePrivate",
+    "pages/userCenter/myBookshelves/myBookshelves",
+    "pages/userCenter/editInfo/editInfo"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -18,7 +20,7 @@
     "color": "#fff",
     "selectedColor": "#fdfb5f",
     "borderStyle": "white",
-    "backgroundColor":"#2f074b",
+    "backgroundColor": "#2f074b",
     "list": [
       {
         "pagePath": "pages/index/index",

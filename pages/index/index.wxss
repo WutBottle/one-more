@@ -25,7 +25,7 @@
   color: #9140e4;
 }
 
-.recommend-title-left,.recommend-title-right,#recommend-book-list{
+.recommend-title-left,.recommend-title-right,.recommend-book-list{
   display: inline-block;
 }
 
@@ -35,7 +35,7 @@
   white-space:nowrap;
 }
 
-#recommend-book-list>image{
+.recommend-book-list>image{
   display: inline-block;
   height: 300rpx;
   width: 212rpx;

@@ -1,0 +1,18 @@
+/* pages/userCenter/myBookshelves/myBookshelves.wxss */
+.bookshelves-container{
+  width: 100%;
+  height: 100vh;
+}
+
+.bookshelves-book-list {
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  
+}
+
+.tr {
+  border-bottom: #6d1aa7 1rpx solid;
+  width: 100%;
+  height: 303rpx;
+}
