@@ -1,6 +1,6 @@
 /**index.wxss**/
 .index-container{
-  border-top: 1rpx solid #999999; 
+  
 }
 
 .recommend-container,.function-block-container{

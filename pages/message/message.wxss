@@ -1,7 +1,6 @@
 /* pages/message/message.wxss */
 .message-container{
   padding: 0 30rpx;
-  border-top: 1rpx solid #999999;
 }
 
 .message-container image{

@@ -42,18 +42,37 @@ Page({
         {
           userId: 1,
           avatarUrl: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1810152264,2923293270&fm=27&gp=0.jpg",
-          content: "你今天读了哪一本书",
-          time: "18:00",
-        },{
+          content: "你今天读了哪一本书你今天读了哪一本书你今天读了哪一本书你今天读了哪一本书你今天读了哪一本书你今天读了哪一本书你今天读了哪一本书",
+          sendTime: "18:00",
+        }, {
           userId: 3,
           avatarUrl: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3028269206,4116848032&fm=27&gp=0.jpg",
           content: "百年孤独啦",
-          time: "18:05",
-        },
+          sendTime: "18:05",
+        }, {
+          userId: 3,
+          avatarUrl: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3028269206,4116848032&fm=27&gp=0.jpg",
+          content: "百年孤独啦百年孤独啦百年孤独啦百年孤独啦百年孤独啦百年孤独啦百年孤独啦百年孤独啦百年孤独啦百年孤独啦",
+          sendTime: "18:05",
+        }, {
+          userId: 1,
+          avatarUrl: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1810152264,2923293270&fm=27&gp=0.jpg",
+          content: "我最近迷上了红楼梦",
+          sendTime: "18:05",
+        }, {
+          userId: 1,
+          avatarUrl: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1810152264,2923293270&fm=27&gp=0.jpg",
+          content: "我最近迷上了红楼梦",
+          sendTime: "18:05",
+        }, {
+          userId: 3,
+          avatarUrl: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3028269206,4116848032&fm=27&gp=0.jpg",
+          content: "百年孤独啦百年孤独啦百年孤独啦百年孤独啦百年孤独啦百年孤独啦百年孤独啦百年孤独啦百年孤独啦百年孤独啦",
+          sendTime: "18:05",
+        }, 
       ],
-      
-      
-    }
+    },
+    showDialogModal: false,
   },
 
   /**
@@ -112,6 +131,16 @@ Page({
     
   },
   showDialogModal(e){
-    console.log(e.target.dataset.id)
+    console.log(e.target.dataset.id);
+    this.setData({
+      showDialogModal: true,
+    })
+  },
+  closeDialogModal(e){
+    if (e.target.dataset.modalblank){
+      this.setData({
+        showDialogModal: false,
+      })
+    }
   }
 })
