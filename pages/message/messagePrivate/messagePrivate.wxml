@@ -14,6 +14,7 @@
   <view class='user-dialog-div'>
     <view class='user-dialog-name'>
       {{userDialogInfo.username}}
+      <view class='user-establish-friend'>添加好友</view>
     </view>
     <scroll-view class='dialog-scrollY' scroll-into-view="lastOne" scroll-y="true">
       <block wx:for="{{userDialogInfo.contentList}}" wx:key="{{index}}">
@@ -28,5 +29,11 @@
         </view>
       </block>
     </scroll-view>
+    <view class='dialog-send-msg'>
+      <view class='dialog-msg-input'>
+        <textarea value="{{sendMsgValue}}" auto-height='true' bindinput="sendMsgValueChange"></textarea>
+      </view>
+      <view class="dialog-send-btn {{!!sendMsgValue ? 'btn-active' : 'btn-disable'}}" bindtap='submitSendMsgValue' type='primary'>发送</view>
+    </view>
   </view>
 </view>

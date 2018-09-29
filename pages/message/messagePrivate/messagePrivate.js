@@ -67,12 +67,14 @@ Page({
         }, {
           userId: 3,
           avatarUrl: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3028269206,4116848032&fm=27&gp=0.jpg",
-          content: "百年孤独啦百年孤独啦百年孤独啦百年孤独啦百年孤独啦百年孤独啦百年孤独啦百年孤独啦百年孤独啦百年孤独啦",
+          content: "动态？动态？动态？动态？动态？动态？动态？动态？动态？动态？动态？动态？动态？动态？动态？动态？动态？",
           sendTime: "18:05",
         }, 
       ],
     },
     showDialogModal: false,
+    sendMsgValue: '',
+    currentUserId: '',
   },
 
   /**
@@ -135,11 +137,28 @@ Page({
     this.setData({
       showDialogModal: true,
     })
+    this.currentUserId = e.target.dataset.id;//设置当前点击私信用户的id
   },
   closeDialogModal(e){
     if (e.target.dataset.modalblank){
       this.setData({
         showDialogModal: false,
+        sendMsgValue: ''
+      })
+    }
+  },
+  sendMsgValueChange(e){
+    this.setData({
+      sendMsgValue: e.detail.value
+    })
+  },
+  submitSendMsgValue(){
+    let msgValue = this.data.sendMsgValue;
+    if(!!msgValue){
+      //发送私信接口
+      console.log("发送成功！");
+      this.setData({
+        sendMsgValue: '',
       })
     }
   }
