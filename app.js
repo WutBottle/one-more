@@ -1,8 +1,9 @@
 //app.js
 import constant from './utils/systemConstant.js';
+import { postLogin } from './api/userController.js';
+
 App({
   globalData: {
-    requestRoot: "https://www.wanzhuanshudu.top/",
     code: null,
   },
   onLaunch: function () {
@@ -11,12 +12,6 @@ App({
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
     console.log(constant)
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
     // 登录
     wx.login({
       success: resCode => {
@@ -28,18 +23,15 @@ App({
           wx.getUserInfo({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
-              wx.request({
-                url: this.globalData.requestHost + '/index/login',
-                method: 'POST',
-                data: {
-                  code: resCode.code,
-                  encryptedData: res.encryptedData,
-                  iv: res.iv,
-                },
-                success: res => {
-                  this.globalData.openId = res.data.openid
-                }
+              this.globalData.userInfo = res.userInfo;
+              const param = {
+                code: resCode.code,
+                encryptedData: res.encryptedData,
+                iv: res.iv,
+              }
+              //登录接口示例
+              postLogin(param).then((data) => {
+                console.log(data)
               })
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况

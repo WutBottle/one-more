@@ -1,4 +1,7 @@
+//login.js
+//获取应用实例
 const app = getApp();
+import { postLogin } from '../../api/userController.js';
 
 Page({
 
@@ -70,17 +73,13 @@ Page({
     //接下来写业务代码
     wx.getUserInfo({
       success: res => {
-        wx.request({
-          url: app.globalData.requestHost + '/index/login',
-          method: 'POST',
-          data: {
-            code: app.globalData.code,
-            encryptedData: res.encryptedData,
-            iv: res.iv,
-          },
-          success: res => {
-            console.log(res);
-          }
+        let param = {
+          code: app.globalData.code,
+          encryptedData: res.encryptedData,
+          iv: res.iv,
+        }
+        postLogin(param).then((data) => {
+          console.log(data);
         })
       }
     })
