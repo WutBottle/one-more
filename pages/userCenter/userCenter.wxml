@@ -1,5 +1,6 @@
 <!--pages/userCenter/userCenter.wxml-->
-<view class='user-container' style='background-image:url("../../images/bk-个人中心.png");background-size:100%;'>
+<view class='user-container'>
+  <image src='../../images/bk-个人中心.png' class='user-bk'></image>
   <view class='container-head'>
     <!-- 用户信息部分 -->
     <view class='user-img'>

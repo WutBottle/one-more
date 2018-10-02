@@ -14,9 +14,11 @@
       <image src='../../images/arrow_right.png' mode='aspectFit'></image>
     </view>
   </navigator>
-  <view class='comment-message'>
-    <image src='../../images/comment_message.png' mode='aspectFit'></image>
-    <text>评论</text>
-    <image src='../../images/arrow_right.png' mode='aspectFit'></image>
-  </view>
+  <navigator url='./messageComment/messageComment'>
+    <view class='comment-message'>
+      <image src='../../images/comment_message.png' mode='aspectFit'></image>
+      <text>评论</text>
+      <image src='../../images/arrow_right.png' mode='aspectFit'></image>
+    </view>
+  </navigator>
 </view>
