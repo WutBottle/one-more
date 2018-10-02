@@ -1,6 +1,6 @@
 //app.js
 import constant from './utils/systemConstant.js';
-import { postLogin } from './api/userController.js';
+import { userLogin } from './api/userController.js';
 
 App({
   globalData: {
@@ -11,7 +11,6 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-    console.log(constant)
     // 登录
     wx.login({
       success: resCode => {
@@ -30,7 +29,7 @@ App({
                 iv: res.iv,
               }
               //登录接口示例
-              postLogin(param).then((data) => {
+              userLogin(param).then((data) => {
                 console.log(data)
               })
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
