@@ -5,5 +5,5 @@ module.exports = {
   'REGISTERED': 'REGISTERED',
   'LOCAL_HOSPITAL': 'LOCAL_HOSPITAL',
   'VISIT_GUIDE': 'VISIT_GUIDE', //是否第一次访问小程序
-  'VISIT_TYPE': 'VISIT_TYPE', //访问小程序的入喉，是否扫码进入
+  'VISIT_TYPE': 'VISIT_TYPE', //访问小程序的入口，是否扫码进入
 };

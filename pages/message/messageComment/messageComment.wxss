@@ -4,9 +4,13 @@
 }
 
 .tablist {
+  z-index: 1;
+  position: fixed;
+  top: 0;
   display: flex;
   height: 100rpx;
-  
+  width: 100%;
+  background-color: #fff;
 }
 
 .tablist .item {
@@ -34,6 +38,7 @@
 }
 
 .out {
+  margin-top: 100rpx;
   flex: auto;
   height: 100vh;  
 }

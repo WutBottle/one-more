@@ -37,6 +37,34 @@ Page({
         time: "09-16 18:00",
         latestMsg: "你今天读了哪一本书",
         noRead: false,
+      }, {
+        userId: 4,
+        username: "曹雪纯",
+        avatarUrl: "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1663046701,2739831134&fm=27&gp=0.jpg",
+        time: "09-16 18:00",
+        latestMsg: "你今天读了哪一本书",
+        noRead: false,
+      }, {
+        userId: 4,
+        username: "曹雪纯",
+        avatarUrl: "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1663046701,2739831134&fm=27&gp=0.jpg",
+        time: "09-16 18:00",
+        latestMsg: "你今天读了哪一本书",
+        noRead: false,
+      }, {
+        userId: 4,
+        username: "曹雪纯",
+        avatarUrl: "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1663046701,2739831134&fm=27&gp=0.jpg",
+        time: "09-16 18:00",
+        latestMsg: "你今天读了哪一本书",
+        noRead: false,
+      }, {
+        userId: 4,
+        username: "曹雪纯",
+        avatarUrl: "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1663046701,2739831134&fm=27&gp=0.jpg",
+        time: "09-16 18:00",
+        latestMsg: "你今天读了哪一本书",
+        noRead: false,
       }
     ],
     commentGet: [
@@ -80,7 +108,7 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
-          clientHeight: res.windowHeight - 40, //40为调试测试出的tabBar高度 160为轮播栏高度（ip6换算rpx和px标准）
+          clientHeight: res.windowHeight - 50, //40为调试测试出的tabBar高度 160为轮播栏高度（ip6换算rpx和px标准）
         });
       }
     });
