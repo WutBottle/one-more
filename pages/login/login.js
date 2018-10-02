@@ -1,7 +1,7 @@
 //login.js
 //获取应用实例
 const app = getApp();
-import { postLogin } from '../../api/userController.js';
+import { userLogin } from '../../api/userController.js';
 
 Page({
 
@@ -78,7 +78,7 @@ Page({
           encryptedData: res.encryptedData,
           iv: res.iv,
         }
-        postLogin(param).then((data) => {
+        userLogin(param).then((data) => {
           console.log(data);
         })
       }
