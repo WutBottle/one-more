@@ -51,14 +51,6 @@
   margin-right: 10rpx;
 }
 
-.more-detail {
-  position: absolute;
-  top: 120rpx;
-  right: 80rpx;
-  width: 34rpx;
-  height: 60rpx;
-}
-
 .container-body {
   display: flex;
   flex-direction: column;

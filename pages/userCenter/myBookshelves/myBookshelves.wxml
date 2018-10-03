@@ -2,7 +2,31 @@
 <view class='bookshelves-container'>
   <view class='bookshelves-book-list'>
     <view class='tr'>
-      <view class='td' wx:for="{{bookList}}" wx:for-index='index' wx:key="">
+      <view class='td' wx:if="{{listLen}}<=3" wx:for="{{bookList}}" wx:for-index='index' wx:key="">
+        <image src='{{item.cover}}'></image>
+        <view>
+          <text>《{{item.title}}》</text>
+        </view>
+      </view>
+    </view>
+    <view class='tr'>
+      <view class='td' wx:if="{{listLen > 3 && listLen < 6 && listLen === 6}}" wx:for="{{bookList}}" wx:for-index='index' wx:key="">
+        <image src='{{item.cover}}'></image>
+        <view>
+          <text>《{{item.title}}》</text>
+        </view>
+      </view>
+    </view>
+    <view class='tr'>
+      <view class='td' wx:if="{{listLen}}<=9&&{{listLen}}>6" wx:for="{{bookList}}" wx:for-index='index' wx:key="">
+        <image src='{{item.cover}}'></image>
+        <view>
+          <text>《{{item.title}}》</text>
+        </view>
+      </view>
+    </view>
+    <view class='tr'>
+      <view class='td' wx:if="{{listLen}}<=12&&{{listLen}}>9" wx:for="{{bookList}}" wx:for-index='index' wx:key="">
         <image src='{{item.cover}}'></image>
         <view>
           <text>《{{item.title}}》</text>
