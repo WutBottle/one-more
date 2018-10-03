@@ -19,13 +19,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    //查找用户信息
-    const param = {
-      uid: 1,//测试用
-    }
-    selectUserBrief(param).then((data) => {
-      console.log(data)
-    })
     console.log(app.globalData.userInfo)
     this.setData({
       userInfo: app.globalData.userInfo

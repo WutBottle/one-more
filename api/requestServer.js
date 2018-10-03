@@ -29,7 +29,7 @@ function dispatchRequest(config) {
     .then((response) => {
       const { statusCode, data } = response;
       if (statusCode == 200) {
-        console.log(response)
+        console.log(response.data)
         return data;
       } else if (statusCode == 401) {
         // 已登录状态下，token过期则redirect到登录页

@@ -7,7 +7,8 @@ import {
 App({
   globalData: {
     code: null,
-    userInfo:[],
+    userInfo:{},
+    uid: null,
   },
   onLaunch: function() {
     // 展示本地存储能力
@@ -31,12 +32,9 @@ App({
                 encryptedData: res.encryptedData,
                 iv: res.iv,
               }
-              console.log(resCode);
-              console.log(param);
-              //登录接口示例
+              //登录接口
               userLogin(param).then((data) => {
-                console.log(data)
-                this.userInfo=data
+                this.uid = data.uid;
               })
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
@@ -63,7 +61,4 @@ App({
       }
     })
   },
-  globalData: {
-    userInfo: null
-  }
 })
