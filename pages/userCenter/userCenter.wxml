@@ -14,8 +14,8 @@
         <text class='user-country'>{{userInfo.country}}{{userInfo.province ? '/'+userInfo.province:''}}{{userInfo.city ? '/'+userInfo.city:''}}</text>
       </view>
     </view>
-    <navigator url='./editInfo/editInfo' class="more-detail">
-      <image class src='../../images/arrow-right.png' mode='aspectFit'></image>
+    <navigator url='./editInfo/editInfo'>
+      <image class="more-detail" src='../../images/arrow-right.png' mode='aspectFit'></image>
     </navigator>
   </view>
   <view class='container-body'>

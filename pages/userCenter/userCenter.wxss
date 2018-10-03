@@ -17,6 +17,7 @@
   display: flex;
   flex-direction: row;
   align-items:center;
+  position: relative;
   box-sizing: border-box;
   width: 100%;
   height: 300rpx;
@@ -51,10 +52,9 @@
 }
 
 .more-detail {
-  margin-left: 220rpx;
-}
-
-.more-detail image {
+  position: absolute;
+  top: 120rpx;
+  right: 80rpx;
   width: 34rpx;
   height: 60rpx;
 }
