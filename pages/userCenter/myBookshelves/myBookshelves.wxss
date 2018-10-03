@@ -7,12 +7,33 @@
 .bookshelves-book-list {
   width: 100%;
   height: 100%;
-  background-color: #000;
   
 }
 
 .tr {
+  display: flex;
+  flex-direction: row;
+
   border-bottom: #6d1aa7 1rpx solid;
+  padding: 0 47rpx;
   width: 100%;
   height: 303rpx;
+}
+
+.td {
+  box-sizing: border-box;
+  padding: 35rpx 35rpx 32rpx 35rpx;
+  width: 33.33%;
+}
+
+.td image {
+  border-radius: 10rpx;
+  width: 141rpx;
+  height: 200rpx;
+  box-shadow: 0 3rpx 15rpx 0 rgba(0, 0, 0, 0.24);
+}
+
+.td text {
+  font-size: 24rpx;
+  color: #333;
 }

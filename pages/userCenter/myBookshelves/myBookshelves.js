@@ -1,4 +1,7 @@
 // pages/userCenter/myBookshelves/myBookshelves.js
+import {
+  findAllBooks
+} from '../../../api/bookShelfController.js'
 var app = getApp()
 Page({
 
@@ -6,25 +9,22 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    bookList:[],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if (app.globalData.openId) {
-      wx.request({
-        url: app.globalData.requestRoot +'/onemore/bookShelf/findAll',
-        method:"POST",
-        data:{
-          uid:app.globalData.userInfo,
-        },
-        success:res =>{
-          console.log(res);
-        }
-      })
+    const param ={
+      uid:1,//测试用
     }
+    findAllBooks(param).then((data)=>{
+      console.log(data);
+      this.setData({
+        bookList:data.books
+      })
+    })
   },
 
   /**

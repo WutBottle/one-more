@@ -46,6 +46,10 @@
   color: #fff;
 }
 
+.user-basic-info text{
+  margin-right: 10rpx;
+}
+
 .more-detail {
   margin-left: 220rpx;
 }

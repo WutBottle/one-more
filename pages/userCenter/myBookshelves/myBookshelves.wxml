@@ -1,28 +1,10 @@
 <!--pages/userCenter/myBookshelves/myBookshelves.wxml-->
 <view class='bookshelves-container'>
-  <view class='bookshelves-book-list' wx:for="{{bookList}}" wx:for-index='index' wx:key="">
-    <view class='tr' wx:if="{{index<3}}">
-      <view class='td'>
-        <image></image>
-        <text></text>
-      </view>
-    </view>
-    <view class='tr' wx:elif="{{index<6}}">
-      <view class='td'>
-        <image></image>
-        <text></text>
-      </view>
-    </view>
-    <view class='tr' wx:elif="{{index<9}}">
-      <view class='td'>
-        <image></image>
-        <text></text>
-      </view>
-    </view>
-    <view class='tr' wx:elif="{{index<12}}">
-      <view class='td'>
-        <image></image>
-        <text></text>
+  <view class='bookshelves-book-list' >
+    <view class='tr' >
+      <view class='td' wx:for="{{bookList}}" wx:for-index='index' wx:key="">
+        <image src='{{item.cover}}'></image>
+        <text>《{{item.title}}》</text>
       </view>
     </view>
   </view>

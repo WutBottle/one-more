@@ -11,7 +11,7 @@
         <open-data type="userNickName" lang="zh_CN"></open-data>
       </view>
       <view class='user-basic-info'>
-        <text>基本信息</text>
+        <text class='user-country'>{{userInfo.country}}{{userInfo.province ? '/'+userInfo.province:''}}{{userInfo.city ? '/'+userInfo.city:''}}</text>
       </view>
     </view>
     <navigator url='./editInfo/editInfo' class="more-detail">

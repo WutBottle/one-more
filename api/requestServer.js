@@ -1,5 +1,5 @@
 //获取应用实例
-const requestRoot = 'https://www.wanzhuanshudu.top/';
+const requestRoot = 'https://wanzhuanshudu.top/';
 import constant from '../utils/systemConstant.js';
 
 function dispatchRequest(config) {

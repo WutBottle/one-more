@@ -1,12 +1,15 @@
 //app.js
 import constant from './utils/systemConstant.js';
-import { userLogin } from './api/userController.js';
+import {
+  userLogin
+} from './api/userController.js';
 
 App({
   globalData: {
     code: null,
+    userInfo:[],
   },
-  onLaunch: function () {
+  onLaunch: function() {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -32,6 +35,7 @@ App({
               //登录接口示例
               userLogin(param).then((data) => {
                 console.log(data)
+                this.userInfo=data
               })
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
@@ -39,12 +43,12 @@ App({
                 this.userInfoReadyCallback(res)
               }
             },
-            fail: function () {
+            fail: function() {
               //获取用户信息失败后。请跳转授权页面
               wx.showModal({
                 title: '警告',
                 content: '尚未进行授权，请点击确定跳转到授权页面进行授权。',
-                success: function (res) {
+                success: function(res) {
                   if (res.confirm) {
                     wx.navigateTo({
                       url: '../login/login',
