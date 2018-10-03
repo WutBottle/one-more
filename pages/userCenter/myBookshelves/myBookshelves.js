@@ -10,6 +10,7 @@ Page({
    */
   data: {
     bookList:[],
+    listLen:null,
   },
 
   /**
@@ -17,12 +18,12 @@ Page({
    */
   onLoad: function (options) {
     const param ={
-      uid:1,//测试用
+      uid:1,
     }
     findAllBooks(param).then((data)=>{
-      console.log(data);
       this.setData({
-        bookList:data.books
+        bookList:data.books,
+        listLen: data.books.length
       })
     })
   },

@@ -1,6 +1,6 @@
 <!--pages/userCenter/userCenter.wxml-->
 <view class='user-container'>
-  <image src='../../images/bk-个人中心.png' class='user-bk'></image>
+  <image src='../../images/bg_usercenter.png' class='user-bk'></image>
   <view class='container-head'>
     <!-- 用户信息部分 -->
     <view class='user-img'>
@@ -14,44 +14,41 @@
         <text class='user-country'>{{userInfo.country}}{{userInfo.province ? '/'+userInfo.province:''}}{{userInfo.city ? '/'+userInfo.city:''}}</text>
       </view>
     </view>
-    <navigator url='./editInfo/editInfo'>
-      <image class="more-detail" src='../../images/arrow-right.png' mode='aspectFit'></image>
-    </navigator>
   </view>
   <view class='container-body'>
     <navigator class='function' url='./myBookshelves/myBookshelves'>
       <view class='function-item bookshelves'>
-        <image src='../../images/logo_书架.png' style='width:50rpx;height:57rpx;'></image>
+        <image src='../../images/logo_bookshelf.png' style='width:50rpx;height:57rpx;'></image>
         <text>我的书架</text>
       </view>
     </navigator>
     <navigator class='function' url='#'>
       <view class='function-item bookshelves'>
-        <image src='../../images/logo_朋友.png' style='width:54rpx;height:52rpx;'></image>
+        <image src='../../images/logo_friend.png' style='width:54rpx;height:52rpx;'></image>
         <text>我的朋友</text>
       </view>
     </navigator>
     <navigator class='function' url='#'>
       <view class='function-item bookshelves'>
-        <image src='../../images/logo_历史记录.png' style='width:56rpx;height:54rpx;'></image>
+        <image src='../../images/logo_history.png' style='width:56rpx;height:54rpx;'></image>
         <text>历史记录</text>
       </view>
     </navigator>
     <navigator class='function' url='#'>
       <view class='function-item bookshelves'>
-        <image src='../../images/logo_趣味测试.png' style='width:45rpx;height:61rpx;'></image>
+        <image src='../../images/logo_test.png' style='width:45rpx;height:61rpx;'></image>
         <text>趣味测试</text>
       </view>
     </navigator>
     <navigator class='function' url='#'>
       <view class='function-item bookshelves'>
-        <image src='../../images/logo_意见反馈.png' style='width:56rpx;height:56rpx;'></image>
+        <image src='../../images/logo_feedback.png' style='width:56rpx;height:56rpx;'></image>
         <text>意见反馈</text>
       </view>
     </navigator>
     <navigator class='function' url='#'>
       <view class='function-item bookshelves'>
-        <image src='../../images/logo_设置.png' style='width:58rpx;height:54rpx;'></image>
+        <image src='../../images/logo_setup.png' style='width:58rpx;height:54rpx;'></image>
         <text>设置</text>
       </view>
     </navigator>

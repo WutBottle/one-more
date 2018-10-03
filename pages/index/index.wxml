@@ -8,8 +8,8 @@
     </view>
     <view class='recommend-content-container'>
       <scroll-view class='recommend-scrollX' scroll-x="true">
-        <view class='recommend-book-list' wx:for="{{imgInfo}}" wx:key="{{index}}">
-          <image src="{{item.url}}" mode="widthFix"></image>
+        <view class='recommend-book-list' wx:for="{{recommendBookInfo}}" wx:key="{{index}}">
+          <image src="{{item.cover}}" data-id="{{item.bookId}}" bindtap='recommendBookClick' mode="widthFix"></image>
         </view>
       </scroll-view>
     </view>

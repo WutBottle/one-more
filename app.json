@@ -9,7 +9,6 @@
     "pages/message/messageSys/messageSys",
     "pages/message/messagePrivate/messagePrivate",
     "pages/userCenter/myBookshelves/myBookshelves",
-    "pages/userCenter/editInfo/editInfo",
     "pages/message/messageComment/messageComment"
   ],
   "window": {
