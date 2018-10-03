@@ -28,6 +28,8 @@ App({
                 encryptedData: res.encryptedData,
                 iv: res.iv,
               }
+              console.log(resCode);
+              console.log(param);
               //登录接口示例
               userLogin(param).then((data) => {
                 console.log(data)

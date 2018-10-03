@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -13,7 +13,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.2.4",
 	"appid": "wxe8ea7d18bc852ed4",
-	"projectname": "one-more",
+	"projectname": "oneMore",
 	"isGameTourist": false,
 	"condition": {
 		"search": {

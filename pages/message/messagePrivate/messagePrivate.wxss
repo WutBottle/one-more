@@ -198,7 +198,3 @@
 .btn-active{
   background-color: #6f564b;
 }
-
-.dialog-send-btn:active{
-  background-color: #41322c;
-}
