@@ -1,6 +1,6 @@
 <!--pages/userCenter/userCenter.wxml-->
 <view class='user-container'>
-  <image src='../../images/bg_usercenter.png' class='user-bk'></image>
+  <image src='../../images/bg_usercenter.png' class='user-bg'></image>
   <view class='container-head'>
     <!-- 用户信息部分 -->
     <view class='user-img'>
@@ -10,8 +10,8 @@
       <view class='user-id'>
         <open-data type="userNickName" lang="zh_CN"></open-data>
       </view>
-      <view class='user-basic-info'>
-        <text class='user-country'>{{userInfo.country}}{{userInfo.province ? '/'+userInfo.province:''}}{{userInfo.city ? '/'+userInfo.city:''}}</text>
+      <view class='user-area'>
+        <text class='user-country'>{{userInfo.country ? '/'+userInfo.country:''}}{{userInfo.province ? '/'+userInfo.province:''}}{{userInfo.city ? '/'+userInfo.city:''}}</text>
       </view>
     </view>
   </view>
