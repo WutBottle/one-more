@@ -10,7 +10,7 @@ module.exports = {
   },
   //2.查找最新书籍
   bookFindNew: (data) => {
-    return bookController('post', 'book', 'findNew', data)
+    return bookController('get', 'book', 'findNew', data)
   },
   //3.根据标题查找最新书籍
   bookSelectByTitle: (data) => {

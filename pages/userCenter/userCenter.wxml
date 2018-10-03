@@ -1,6 +1,6 @@
 <!--pages/userCenter/userCenter.wxml-->
 <view class='user-container'>
-  <image src='../../images/bk-个人中心.png' class='user-bk'></image>
+  <image src='../../images/bg_usercenter.png' class='user-bk'></image>
   <view class='container-head'>
     <!-- 用户信息部分 -->
     <view class='user-img'>
@@ -21,7 +21,7 @@
   <view class='container-body'>
     <navigator class='function' url='./myBookshelves/myBookshelves'>
       <view class='function-item bookshelves'>
-        <image src='../../images/logo_书架.png' style='width:50rpx;height:57rpx;'></image>
+        <image src='../../images/logo_bookshelf.png' style='width:50rpx;height:57rpx;'></image>
         <text>我的书架</text>
       </view>
     </navigator>

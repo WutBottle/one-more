@@ -20,7 +20,6 @@ Page({
       uid:1,//测试用
     }
     findAllBooks(param).then((data)=>{
-      console.log(data);
       this.setData({
         bookList:data.books
       })
