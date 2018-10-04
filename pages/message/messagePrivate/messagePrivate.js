@@ -96,7 +96,7 @@ Page({
     this.currentUserId = e.target.dataset.id; //设置当前点击私信用户的id
     this.setData({
       currentUserName: e.target.dataset.name,//设置当前点击私信用户的name
-      isFollow: !!e.target.dataset.isFollow
+      isFollow: !!e.target.dataset.isfollow
     })
     this.updateDialogList();
     this.updatePrivateMsgList();
@@ -167,7 +167,12 @@ Page({
       status: 0,
     }
     followerAddOne(param).then((data) => {
-      
+      wx.showToast({
+        title: '已发送申请',
+        icon: 'success',
+        duration: 1500,
+        mask: true,
+      })
     })
   }
 })

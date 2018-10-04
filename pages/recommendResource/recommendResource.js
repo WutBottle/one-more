@@ -10,9 +10,10 @@ Page({
   data: {
     recommendModal:'',
     userResourceModal:'',
-    resourceType:null,
-    commentList:[],
-    resourceContent:''
+    resourceType:null,//资源类型 0：图文，1：音频
+    commentList:[],//资源评论列表
+    resourceContent:'',//资源文本内容
+    commentMsgValue:'',//发送评论的内容
   },
 
   /**
