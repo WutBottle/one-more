@@ -1,8 +1,12 @@
+const app = getApp();
 import {
   selectMessageBrief,
-  selectMessageInfo
-} from '../../../api/messageController.js'
-var app = getApp()
+  selectMessageInfo,
+  messageAddOne,
+} from '../../../api/messageController.js';
+import {
+  followerAddOne
+} from '../../../api/followerController.js';
 Page({
 
   /**
@@ -21,32 +25,30 @@ Page({
       }],
     },
     showDialogModal: false,
-    sendMsgValue: '',
-    currentUserId: '',
-    pageSize:5,
-    pageNum:0,
+    sendMsgValue: '',//发送私信的内容
+    currentUserName: '',//当前点击用户name
+    uid: '',//当前用户id
+    isFollow: '',//与点击用户是否是好友
   },
+  currentUserId: '',//当前点击用户ID
+  pageSize: 10,
+  pageNum: 0,
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    const param = {
-      // uid:app.globalData.uid,
-      uid: 1
-    }
-    selectMessageBrief(param).then((data) => {
-      this.setData({
-        privateMessage:data.comment
-      })
+    this.setData({
+      uid: app.globalData.uid,
     })
+    this.updatePrivateMsgList();
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-
+    
   },
 
   /**
@@ -91,28 +93,19 @@ Page({
 
   },
   showDialogModal(e) {
-    console.log(e.target.dataset.id);
-    this.currentUserId = e.target.dataset.id; //设置当前点击私信用户的id    
-    const param = {
-      // publishUid:this.currentUserId,
-      // receiveUid:app.globalData.uid
-      publishUid: 1,
-      receiveUid:2,
-      pageNum:this.pageNum,
-      pageSize:this.pageSize
-    }
-    selectMessageInfo(param).then((data) => {
-      this.setData({
-        showDialogModal: true,
-        // userDialogInfo:data.      
-      })
+    this.currentUserId = e.target.dataset.id; //设置当前点击私信用户的id
+    this.setData({
+      currentUserName: e.target.dataset.name,//设置当前点击私信用户的name
+      isFollow: !!e.target.dataset.isfollow
     })
+    this.updateDialogList();
+    this.updatePrivateMsgList();
   },
   closeDialogModal(e) {
     if (e.target.dataset.modalblank) {
       this.setData({
         showDialogModal: false,
-        sendMsgValue: ''
+        sendMsgValue: '',
       })
     }
   },
@@ -125,10 +118,61 @@ Page({
     let msgValue = this.data.sendMsgValue;
     if (!!msgValue) {
       //发送私信接口
-      console.log("发送成功！");
-      this.setData({
-        sendMsgValue: '',
+      let param = {
+        publishUid: app.globalData.uid,
+        receiveUid: this.currentUserId,
+        text: msgValue,
+      }
+      messageAddOne(param).then((data) => {
+        console.log("发送成功！");
+        this.updatePrivateMsgList();
+        this.updateDialogList();
+        this.setData({
+          sendMsgValue: '',
+        })
       })
     }
+  },
+  //获取私信列表
+  updatePrivateMsgList(){
+    const param = {
+      uid: app.globalData.uid
+    }
+    selectMessageBrief(param).then((data) => {
+      this.setData({
+        privateMessage: data.comment,
+      })
+    })
+  },
+  //获取私信弹窗对话
+  updateDialogList(){
+    const param = {
+      publishUid: this.currentUserId,
+      receiveUid: app.globalData.uid,
+      pageNum: this.pageNum,
+      pageSize: this.pageSize
+    }
+    selectMessageInfo(param).then((data) => {
+      this.setData({
+        showDialogModal: true,
+        userDialogInfo: data.comment.reverse(),
+      })
+    })
+  },
+  //处理添加好友
+  handleAddFriends(){
+    const param = {
+      publishUid: app.globalData.uid,
+      followerUid: this.currentUserId,
+      status: 0,
+    }
+    followerAddOne(param).then((data) => {
+      wx.showToast({
+        title: '已发送申请',
+        icon: 'success',
+        duration: 1500,
+        mask: true,
+      })
+    })
   }
 })

@@ -8,6 +8,7 @@
       <text>如果有人影响了你的情绪，你的焦点应该放在控制自己的情绪上，而不是影响你的情绪的人身上。只有这样，才能真正的自信起来。</text>
     </view>
   </view>
+  
   <view class='user-upload-resource'>
     <view class='comment-content'>
        <scroll-view scroll-y style="height:630rpx">
