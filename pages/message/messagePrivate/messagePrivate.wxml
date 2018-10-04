@@ -1,12 +1,12 @@
 <!--pages/message/messagePrivate/messagePrivate.wxml-->
 
 <view class='private-message-container'>
-  <view class="private-msg-list {{index%2 === 0 ? 'purpleShallowBG' : 'whiteBG'}}" wx:for="{{privateMessage}}" bindtap='showDialogModal' data-id="{{item.userId}}" wx:key="{{index}}">
-    <image data-id="{{item.userId}}" src='{{item.avatarUrl}}' mode='aspectFit'></image>
-    <view data-id="{{item.userId}}" class='private-msg-username displayInlineBlock'>{{item.username}}</view>
-    <view data-id="{{item.userId}}" class='private-msg-time displayInlineBlock'>{{item.time}}</view>
-    <view data-id="{{item.userId}}" class='private-msg-latestMsg displayInlineBlock'>{{item.latestMsg}}</view>
-    <view data-id="{{item.userId}}" class='private-msg-noReadMsgNum displayInlineBlock' wx:if="{{!!item.noReadMsgNum}}">{{item.noReadMsgNum}}</view>
+  <view class="private-msg-list {{index%2 === 0 ? 'purpleShallowBG' : 'whiteBG'}}" wx:for="{{privateMessage}}" bindtap='showDialogModal' data-id="{{item.publishUid}}" wx:key="{{index}}">
+    <image data-id="{{item.publishUid}}" src='{{item.publishImg}}' mode='aspectFit'></image>
+    <view data-id="{{item.publishUid}}" class='private-msg-username displayInlineBlock'>{{item.publishFakeName}}</view>
+    <view data-id="{{item.publishUid}}" class='private-msg-time displayInlineBlock'>{{item.createTime}}</view>
+    <view data-id="{{item.publishUid}}" class='private-msg-latestMsg displayInlineBlock'>{{item.text}}</view>
+    <view data-id="{{item.publishUid}}" class='private-msg-noReadMsgNum displayInlineBlock' wx:if="{{!!item.noReadCount}}">{{item.noReadCount}}</view>
   </view>
 </view>
 

@@ -11,7 +11,7 @@
         <open-data type="userNickName" lang="zh_CN"></open-data>
       </view>
       <view class='user-area'>
-        <text class='user-country'>{{userInfo.country ? '/'+userInfo.country:''}}{{userInfo.province ? '/'+userInfo.province:''}}{{userInfo.city ? '/'+userInfo.city:''}}</text>
+        <text class='user-country'>{{userInfo.country ? userInfo.country:''}}{{userInfo.province ? '/'+userInfo.province:''}}{{userInfo.city ? '/'+userInfo.city:''}}</text>
       </view>
     </view>
   </view>

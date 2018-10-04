@@ -1,4 +1,9 @@
 // pages/message/messageComment/messageComment.js
+import {
+  findAllReceive,
+  findAllSend
+} from '../../../api/commentController.js'
+var app = getApp()
 Page({
 
   /**
@@ -112,6 +117,20 @@ Page({
         });
       }
     });
+    //加载数据
+    // const param = {
+    //   uid:1,
+    // }
+    // findAllSend(param).then((data) =>{
+    //   this.setData({
+    //     commentSend:data
+    //   })
+    // })
+    // findAllReceive(param).then((data) => {
+    //   this.setData({
+    //     commentGet: data
+    //   })
+    // })
   },
 
   /**
