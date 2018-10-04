@@ -4,6 +4,7 @@
   <view class='high-quality-resource'>
     recommendModal是{{recommendModal}}
   </view>
+  
   <view class='user-upload-resource'>
     userResourceModal是{{userResourceModal}}
   </view>
