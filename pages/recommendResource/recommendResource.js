@@ -1,3 +1,7 @@
+import {
+  findInfo
+} from '../../api/resourceController.js'
+var app = getApp()
 Page({
 
   /**
@@ -6,6 +10,9 @@ Page({
   data: {
     recommendModal:'',
     userResourceModal:'',
+    resourceType:null,
+    commentList:[],
+    resourceContent:''
   },
 
   /**
@@ -16,6 +23,18 @@ Page({
     this.setData({
       recommendModal: options.recommendModal,
       userResourceModal: options.userResourceModal,
+    })
+    const param = {
+      rid:1,
+      uid:1
+      // uid:app.globalData.uid
+    }
+    findInfo(param).then((data) =>{
+      this.setData({
+        resourceType:data.resource.type,
+        commentList:data.resource.commentInfos,
+        resourceContent:data.resource.content
+      })
     })
   },
 

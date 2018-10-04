@@ -1,10 +1,35 @@
 <!--recommendResource.wxml-->
 
-<view class='recommend-recource-container'>
+<view class='recommend-recource-container' wx:if="{{resourceType===0}}">
+  <!--  -->
   <view class='high-quality-resource'>
-    recommendModal是{{recommendModal}}
+    <image class='resource-bg' src='../../images/bg_resource.png' mode="widthFix"></image>
+    <view class='resource-content'>
+      <text>如果有人影响了你的情绪，你的焦点应该放在控制自己的情绪上，而不是影响你的情绪的人身上。只有这样，才能真正的自信起来。</text>
+    </view>
   </view>
   <view class='user-upload-resource'>
-    userResourceModal是{{userResourceModal}}
+    <view class='comment-content'>
+       <scroll-view scroll-y style="height:630rpx">
+          <view class='comment-list send' wx:for="{{commentList}}" data-id="{{item.userId}}" wx:key="{{index}}">
+            <image data-id="{{item.userId}}" src='{{item.userImg}}' mode='aspectFit'></image>
+            <view data-id="{{item.userId}}" class='comment-username displayInlineBlock'>{{item.userFakeName}}</view>
+            <view data-id="{{item.userId}}" class='comment-time displayInlineBlock'>{{item.createTime}}</view>
+            <view data-id="{{item.userId}}" class='comment-text displayInlineBlock'>{{item.content}}</view>
+            <view data-id="{{item.userId}}" class='comment-praise displayInlineBlock' wx:if="{{!!item.praiseStatus}}">
+              <image src='../../images/praise_after.png'></image>
+              <text>{{item.praiseNum}}</text>
+            </view>
+            <view data-id="{{item.userId}}" class='comment-praise displayInlineBlock' wx:else>
+              <image src='../../images/praise_before.png'></image>
+              <text>{{item.praiseNum}}</text>
+            </view>
+            <view class='report-button'>
+              <image src='../../images/report.png' mode='widthFix'></image>
+            </view>
+            <view class='line'></view>
+          </view>
+        </scroll-view>
+    </view>
   </view>
 </view>
