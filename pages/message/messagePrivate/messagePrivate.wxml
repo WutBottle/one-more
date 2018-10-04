@@ -1,31 +1,31 @@
 <!--pages/message/messagePrivate/messagePrivate.wxml-->
 
 <view class='private-message-container'>
-  <view class="private-msg-list {{index%2 === 0 ? 'purpleShallowBG' : 'whiteBG'}}" wx:for="{{privateMessage}}" bindtap='showDialogModal' data-id="{{item.publishUid}}" wx:key="{{index}}">
-    <image data-id="{{item.publishUid}}" src='{{item.publishImg}}' mode='aspectFit'></image>
-    <view data-id="{{item.publishUid}}" class='private-msg-username displayInlineBlock'>{{item.publishFakeName}}</view>
-    <view data-id="{{item.publishUid}}" class='private-msg-time displayInlineBlock'>{{item.createTime}}</view>
-    <view data-id="{{item.publishUid}}" class='private-msg-latestMsg displayInlineBlock'>{{item.text}}</view>
-    <view data-id="{{item.publishUid}}" class='private-msg-noReadMsgNum displayInlineBlock' wx:if="{{!!item.noReadCount}}">{{item.noReadCount}}</view>
+  <view class="private-msg-list {{index%2 === 0 ? 'purpleShallowBG' : 'whiteBG'}}" wx:for="{{privateMessage}}" bindtap='showDialogModal' data-id="{{item.uid}}" data-name='{{item.publishFakeName}}' data-isFollow='{{item.followerId}}' wx:key="{{index}}">
+    <image data-id="{{item.uid}}" data-name='{{item.publishFakeName}}' data-isFollow='{{item.followerId}}' src='{{item.publishImg}}' mode='aspectFit'></image>
+    <view data-id="{{item.uid}}" data-name='{{item.publishFakeName}}' data-isFollow='{{item.followerId}}' class='private-msg-username displayInlineBlock'>{{item.publishFakeName}}</view>
+    <view data-id="{{item.uid}}" data-name='{{item.publishFakeName}}' data-isFollow='{{item.followerId}}' class='private-msg-time displayInlineBlock'>{{item.createTime}}</view>
+    <view data-id="{{item.uid}}" data-name='{{item.publishFakeName}}' data-isFollow='{{item.followerId}}' class='private-msg-latestMsg displayInlineBlock'>{{item.text}}</view>
+    <view data-id="{{item.uid}}" data-name='{{item.publishFakeName}}' data-isFollow='{{item.followerId}}' class='private-msg-noReadMsgNum displayInlineBlock' wx:if="{{!!item.unReadCount}}">{{item.unReadCount}}</view>
   </view>
 </view>
 
 <view class='dialog-pop-container' data-modalBlank='true' bindtap='closeDialogModal' wx:if="{{showDialogModal}}">
   <view class='user-dialog-div'>
     <view class='user-dialog-name'>
-      {{userDialogInfo.username}}
-      <view class='user-establish-friend'>添加好友</view>
+      {{currentUserName}}
+      <view class='user-establish-friend' bindtap='handleAddFriends' wx:if="{{!isFollow}}">申请好友</view>
     </view>
     <scroll-view class='dialog-scrollY' scroll-into-view="lastOne" scroll-y="true">
-      <block wx:for="{{userDialogInfo.contentList}}" wx:key="{{index}}">
-        <view class='dialog-time'>{{item.sendTime}}</view>
-        <view id="{{userDialogInfo.contentList.length === index + 1 ? 'lastOne':''}}" class='left-dialog-container' wx:if="{{item.userId === userDialogInfo.userId}}">
-          <image src='{{item.avatarUrl}}' mode='aspectFit'></image>
-          <view class='dialog-content'>{{item.content}}</view>
+      <block wx:for="{{userDialogInfo}}" wx:key="{{index}}">
+        <view class='dialog-time'>{{item.createTime}}</view>
+        <view id="{{userDialogInfo.length === index + 1 ? 'lastOne':''}}" class='left-dialog-container' wx:if="{{item.receiveUid === uid}}">
+          <image src='{{item.publishImg}}' mode='aspectFit'></image>
+          <view class='dialog-content'>{{item.text}}</view>
         </view>
-        <view id="{{userDialogInfo.contentList.length === index + 1 ? 'lastOne':''}}" wx:else class='right-dialog-container'>
-          <view class='dialog-content'>{{item.content}}</view>
-          <image src='{{item.avatarUrl}}' mode='aspectFit'></image>
+        <view id="{{userDialogInfo.length === index + 1 ? 'lastOne':''}}" wx:else class='right-dialog-container'>
+          <view class='dialog-content'>{{item.text}}</view>
+          <image src='{{item.publishImg}}' mode='aspectFit'></image>
         </view>
       </block>
     </scroll-view>
