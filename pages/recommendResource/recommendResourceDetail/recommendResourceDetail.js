@@ -234,6 +234,7 @@ Page({
  */
   deleteReport: function (e) {
     const param = {
+      reportId: e.target.dataset.reportid,
       workId: e.target.dataset.id,
       workType: 1,
       reportUid: 19

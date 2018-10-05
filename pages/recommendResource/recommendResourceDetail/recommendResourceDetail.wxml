@@ -33,12 +33,12 @@
           </view>
 
           <!-- 举报后 -->
-          <view data-id="{{item.commentId}}" class='report-button' wx:if="{{!!item.reportStatus}}" bindtap='deleteReport'>
-            <image data-id="{{item.commentId}}" src='../../../images/report_after.png' mode='widthFix'></image>
+          <view data-id="{{item.commentId}}" data-reportid="{{item.reportStatus}}" class='report-button' wx:if="{{!!item.reportStatus}}" bindtap='deleteReport' >
+            <image data-id="{{item.commentId}}" data-reportid="{{item.reportStatus}}" src='../../../images/report_after.png' mode='widthFix'></image>
           </view>
           <!-- 举报前 -->
           <view data-id="{{item.commentId}}" class='report-button' wx:else bindtap='addReport'>
-            <image data-id="{{item.commentId}}" data-reportid="{{item.reportStatus}}" src='../../../images/report_before.png' mode='widthFix'></image>
+            <image data-id="{{item.commentId}}"  src='../../../images/report_before.png' mode='widthFix'></image>
           </view>
           <!-- 最后一个评论下无分割线 -->
           <!-- <view class="line"></view> -->
