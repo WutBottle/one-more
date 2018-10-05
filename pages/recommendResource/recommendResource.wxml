@@ -1,0 +1,49 @@
+<!--recommendResourceDetail.wxml-->
+
+<view class='recommend-recource-container' wx:if="{{resourceType===0}}">
+  <view class="mask" wx:if="{{showMask}}" bindtap='maskClose'></view>
+  <!-- 资源模块 -->
+  <view class='resource-box'>
+    <image class='resource-bg' src='../../images/bg_resource.png' mode="widthFix"></image>
+    <view class='resource-content'>
+      <text>如果有人影响了你的情绪，你的焦点应该放在控制自己的情绪上，而不是影响你的情绪的人身上。只有这样，才能真正的自信起来。</text>
+    </view>
+  </view>
+  <!-- 资源评论模块 -->
+  <view class='comment-box'>
+    <view class='comment-content'>
+      <scroll-view scroll-y style="height:610rpx">
+        <!-- 点赞数最高的三条评论 -->
+        <view class='comment-list send' wx:for="{{commentList}}" data-id="{{item.commentId}}" wx:key="{{index}}">
+          <view class="{{index===0 ? 'none':'line'}} "></view>
+          <image src='{{item.userImg}}' mode='aspectFit'></image>
+          <view class='comment-username displayInlineBlock'>{{item.userFakeName}}</view>
+          <view class='comment-time displayInlineBlock'>{{item.createTime}}</view>
+          <view class='comment-text displayInlineBlock'>{{item.content}}</view>
+          <!-- 点赞后 -->
+          <view data-id="{{item.commentId}}" data-praiseid="{{item.praiseStatus}}" class='comment-praise displayInlineBlock' wx:if="{{!!item.praiseStatus}}" bindtap='deletePraise'>
+            <image data-id="{{item.commentId}}" data-praiseid="{{item.praiseStatus}}" src='../../images/praise_after.png'></image>
+            <text data-id="{{item.commentId}}" data-praiseid="{{item.praiseStatus}}">{{item.praiseNum}}</text>
+          </view>
+
+          <!-- 点赞前 -->
+          <view data-id="{{item.commentId}}" class='comment-praise displayInlineBlock' wx:else bindtap='addPraise'>
+            <image data-id="{{item.commentId}}" src='../../images/praise_before.png'></image>
+            <text data-id="{{item.commentId}}">{{item.praiseNum}}</text>
+          </view>
+
+          <!-- 举报后 -->
+          <view data-id="{{item.commentId}}" class='report-button' wx:if="{{!!item.reportStatus}}" bindtap='deleteReport'>
+            <image data-id="{{item.commentId}}" src='../../images/report_after.png' mode='widthFix'></image>
+          </view>
+          <!-- 举报前 -->
+          <view data-id="{{item.commentId}}" class='report-button' wx:else bindtap='addReport'>
+            <image data-id="{{item.commentId}}" data-reportid="{{item.reportStatus}}" src='../../images/report_before.png' mode='widthFix'></image>
+          </view>
+          <!-- 最后一个评论下无分割线 -->
+          <!-- <view class="line"></view> -->
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</view>

@@ -6,10 +6,10 @@ let praiseController = api("onemore");
 module.exports = {
   //1.添加一条点赞记录
   praiseAddOne: (data) => {
-    return praiseController('post', '', 'addOne', data);
+    return praiseController('post', 'praise', 'addOne', data);
   },
   //2.删除一条点赞记录
   praiseDeleteOne: (data) => {
-    return praiseController('post', '', 'deleteOne', data);
+    return praiseController('post', 'praise', 'deleteOne', data);
   },
 }

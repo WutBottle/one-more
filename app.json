@@ -4,13 +4,14 @@
     "pages/login/login",
     "pages/message/message",
     "pages/userCenter/userCenter",
-    "pages/recommendResourceDetail/recommendResourceDetail",
     "pages/readMore/readMore",
     "pages/message/messageSys/messageSys",
     "pages/message/messagePrivate/messagePrivate",
     "pages/message/messagePrivate/friendsApplication/friendsApplication",
     "pages/userCenter/myBookshelves/myBookshelves",
-    "pages/message/messageComment/messageComment"
+    "pages/message/messageComment/messageComment",
+    "pages/recommendResource/recommendResource",
+    "pages/recommendResource/recommendResourceDetail/recommendResourceDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",

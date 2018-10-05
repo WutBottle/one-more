@@ -25,7 +25,7 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
-          clientHeight: res.windowHeight - 50, //40为调试测试出的tabBar高度 160为轮播栏高度（ip6换算rpx和px标准）
+          clientHeight: res.windowHeight - 50, //50为导航切换栏高度
         });
       }
     });
