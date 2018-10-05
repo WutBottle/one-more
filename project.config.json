@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 5,
+			"current": 6,
 			"list": [
 				{
 					"id": 0,
@@ -73,6 +73,13 @@
 					"id": -1,
 					"name": "好友申请列表",
 					"pathName": "pages/message/messagePrivate/friendsApplication/friendsApplication",
+					"query": "",
+					"scene": "1011"
+				},
+				{
+					"id": -1,
+					"name": "echarts例子",
+					"pathName": "pages/echarts/echarts",
 					"query": "",
 					"scene": "1011"
 				}

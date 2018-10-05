@@ -2,6 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/login/login",
+    "pages/echarts/echarts",
+    "pages/funTest/funTest",
     "pages/message/message",
     "pages/userCenter/userCenter",
     "pages/recommendResourceDetail/recommendResourceDetail",
