@@ -108,12 +108,12 @@ Page({
   },
   closeDialogModal(e) {
     if (e.target.dataset.modalblank) {
+      this.updateFriendApplication();
       this.setData({
         showDialogModal: false,
         sendMsgValue: '',
       })
     }
-    this.updateFriendApplication();
   },
   sendMsgValueChange(e) {
     this.setData({
