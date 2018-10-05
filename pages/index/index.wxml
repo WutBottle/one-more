@@ -28,9 +28,11 @@
       <image src='../../images/function_voice.png' mode="widthFix"></image>
       <text class='function-words'>语音</text>
     </view>
-    <view class='function-text'>
-      <image src='../../images/function_test.png' mode="widthFix"></image>
-      <text class='function-words'>趣味测试</text>
-    </view>
+    <navigator url='../funTest/funTest'>
+      <view class='function-text'>
+        <image src='../../images/function_test.png' mode="widthFix"></image>
+        <text class='function-words'>趣味测试</text>
+      </view>
+    </navigator>
   </view>
 </view>

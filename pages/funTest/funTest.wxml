@@ -1,0 +1,9 @@
+<view class='fun-test-wrapper'>
+  <view class='test-list-item'>
+    <view class='test-title'>性格特质测试</view>
+    <view class='test-status'>未测试过</view>
+    <view class='test-data-num'>
+      已有<text style='color: #1ff0dd'>2460</text>人测试过
+    </view>
+  </view>
+</view>
