@@ -5,7 +5,8 @@ import {
   messageAddOne,
 } from '../../../api/messageController.js';
 import {
-  followerAddOne
+  followerAddOne,
+  selectNoAgree
 } from '../../../api/followerController.js';
 Page({
 
@@ -29,6 +30,7 @@ Page({
     currentUserName: '',//当前点击用户name
     uid: '',//当前用户id
     isFollow: '',//与点击用户是否是好友
+    hasFriendsHints: false,//是否有好友申请
   },
   currentUserId: '',//当前点击用户ID
   pageSize: 10,
@@ -42,6 +44,7 @@ Page({
       uid: app.globalData.uid,
     })
     this.updatePrivateMsgList();
+    this.updateFriendApplication();
   },
 
   /**
@@ -55,7 +58,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this.updateFriendApplication();
   },
 
   /**
@@ -76,7 +79,9 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
+    this.updatePrivateMsgList();//刷新私信列表数据
+    this.updateFriendApplication()//刷新好友申请数据
+    wx.stopPullDownRefresh();//回弹下拉
   },
 
   /**
@@ -103,6 +108,7 @@ Page({
   },
   closeDialogModal(e) {
     if (e.target.dataset.modalblank) {
+      this.updateFriendApplication();
       this.setData({
         showDialogModal: false,
         sendMsgValue: '',
@@ -124,7 +130,6 @@ Page({
         text: msgValue,
       }
       messageAddOne(param).then((data) => {
-        console.log("发送成功！");
         this.updatePrivateMsgList();
         this.updateDialogList();
         this.setData({
@@ -174,5 +179,22 @@ Page({
         mask: true,
       })
     })
-  }
+  },
+  //是否有好友申请
+  updateFriendApplication(){
+    const param = {
+      uid: app.globalData.uid
+    }
+    selectNoAgree(param).then((data) => {
+      if (!!data.followers.length){
+        this.setData({
+          hasFriendsHints: true
+        })
+      }else {
+        this.setData({
+          hasFriendsHints: false
+        })
+      }
+    })
+  },
 })
