@@ -1,0 +1,12 @@
+<view class='friend-application-wrapper'>
+  <block wx:if="{{!!applicationList.length}}">
+    <view class='friend-application-item' wx:for="{{applicationList}}" wx:key="{{index}}">
+      <image src="{{item.followerImg}}" mode='aspectFit'></image>
+      <view class='friend-application-username displayInlineBlock'>{{item.followerFakeName}}</view>
+      <view class='friend-application-time displayInlineBlock'>{{item.createTime}}</view>
+      <view data-id="{{item.followerId}}" class='application-agree-btn displayInlineBlock' bindtap='agreeHints'>同意</view>
+      <view data-id="{{item.followerId}}" class='application-disagree-btn displayInlineBlock' bindtap='disagreeHints'>拒绝</view>
+    </view>
+  </block>
+  <view class='noapplication-msg' wx:else>暂无好友申请~</view>
+</view>

@@ -8,6 +8,7 @@
     "pages/readMore/readMore",
     "pages/message/messageSys/messageSys",
     "pages/message/messagePrivate/messagePrivate",
+    "pages/message/messagePrivate/friendsApplication/friendsApplication",
     "pages/userCenter/myBookshelves/myBookshelves",
     "pages/message/messageComment/messageComment"
   ],
