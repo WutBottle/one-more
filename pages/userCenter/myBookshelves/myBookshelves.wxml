@@ -5,8 +5,8 @@
       <view class='td' wx:for-index='index' wx:if="{{index<3}}" wx:for="{{bookList}}" wx:key="">
         <image src='{{item.cover}}'></image>
         <view>
-          <!-- <text>《{{item.title}}》</text> -->
-          <text>{{index}}</text>
+          <text>《{{item.title}}》</text>
+          <!-- <text>{{index}}</text> -->
         </view>
       </view>
     </view>
