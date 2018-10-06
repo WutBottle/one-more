@@ -1,39 +1,45 @@
-.recommend-recource-container {
+.recommend-resource-container {
   position: relative;
   width: 100%;
   height: 100vh;
 }
 
-.resource-box {
+.sys-resource-box {
   position: relative;
   width: 100%;
   height: 490rpx;
+}
+
+.sys-sresource-img {
+  overflow: hidden;
+  height: 416rpx;
 }
 
 .resource-bg {
   width: 100%;
 }
 
-.resource-content {
+.sys-resource-content1 {
   z-index: 1;
   position: absolute;
-  left: 10rpx;
-  top: 346rpx;
+  left: 2%;
+  bottom: 0;
   box-sizing: border-box;
   border-radius: 10rpx;
   padding: 30rpx 45rpx;
-  width: 730rpx;
-  height: 140rpx;
+  width: 96%;
+  height: 200rpx;
   box-shadow: 0 3rpx 15rpx rgba(0, 0, 0, 0.24);
   line-height: 28rpx;
-  background-color: #fff;
+  background-color: #fff;  
 }
 
-.resource-content text {
+.sys-resource-content1 text {
   font-size: 24rpx;
+  color: #333;
 }
 
-.comment-list {
+.user-text-list {
   position: relative;
   box-sizing: border-box;
   padding-top: 29rpx;
@@ -42,13 +48,13 @@
   height: 156rpx;
 }
 
-.comment-list image {
+.user-text-list image {
   width: 100rpx;
   height: 100rpx;
   border-radius: 50%;
 }
 
-.comment-username {
+.resource-username {
   position: absolute;
   font-size: 24rpx;
   color: #333;
@@ -57,7 +63,7 @@
   left: 160rpx;
 }
 
-.comment-time {
+.resource-time {
   position: absolute;
   font-size: 20rpx;
   color: #666;
@@ -66,7 +72,7 @@
   right: 31rpx;
 }
 
-.comment-text {
+.resource-text {
   position: absolute;
   bottom: 40rpx;
   left: 160rpx;
@@ -74,7 +80,29 @@
   color: #666;
 }
 
-.comment-praise {
+.resource-praise {
+  position: absolute;
+  bottom: 40rpx;
+  right: 30rpx;
+  width: 60rpx;
+  line-height: 30rpx;
+}
+
+.resource-praise image {
+  float: left;
+  /* margin-top: 3rpx; */
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.resource-praise text {
+  float: left;
+  margin-left: 5rpx;
+  font-size: 20rpx;
+  color: #666;
+}
+
+.resource-comment {
   position: absolute;
   bottom: 40rpx;
   right: 88rpx;
@@ -82,29 +110,17 @@
   line-height: 30rpx;
 }
 
-.comment-praise image {
+.resource-comment image {
   float: left;
-  /* margin-top: 3rpx; */
+  overflow: visible;
   width: 30rpx;
-  height: 30rpx;
 }
 
-.comment-praise text {
+.resource-comment text {
   float: left;
   margin-left: 5rpx;
   font-size: 20rpx;
   color: #666;
-}
-
-.report-button {
-  position: absolute;
-  bottom: 40rpx;
-  right: 32rpx;
-}
-
-.report-button image {
-  display: block;
-  width: 30rpx;
 }
 
 .line {
@@ -119,4 +135,196 @@
 
 .none {
   display: none;
+}
+
+.sys-resource-content2 {
+  z-index: 1;
+  position: absolute;
+  bottom: 0rpx;
+  left: 2%;
+  box-sizing: border-box;
+  border-radius: 10rpx;
+  /* box-shadow: 0 3rpx 15rpx rgba(0, 0, 0, 0.24); */
+  width: 96%;
+  height: 210rpx;
+  /* background-color: #fff; */
+}
+
+/* 语音部分 */
+
+.sys-audio {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.sys-comment-box {
+  z-index: 1;
+  position: absolute;
+  bottom: 5%;  
+  left: 25%;
+}
+
+.sys-comment-box image {
+  float: left;
+  width: 40rpx;
+}
+
+.sys-comment-box text {
+  float: left;  
+  font-size: 28rpx;
+  color: #666;
+}
+
+.sys-praise-box {
+  z-index: 1;
+  position: absolute;
+  bottom: 5%;
+  right: 25%;
+
+  line-height: 40rpx;  
+}
+
+.sys-praise-box image {
+  float: left;
+  width: 40rpx;
+}
+
+.sys-praise-box text {
+  float: left;
+  font-size: 28rpx;
+  color: #666;
+}
+
+.user-resource-box {
+  box-sizing: border-box;
+  padding: 40rpx 20rpx 0 20rpx;
+}
+
+.user-resource-title {
+  border-left: #6d1aa7 solid 5rpx;
+  box-sizing: border-box;
+  padding-left: 35rpx;
+  height: 28rpx;
+
+  font-size: 28rpx;
+  line-height: 28rpx;
+  font-weight: bold;
+
+  color: #333;
+}
+
+.user-audio {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 60rpx;
+}
+
+.user-info{
+  margin: 0 auto;
+}
+
+.user-info image {
+  display: block;
+
+  margin: 0 auto;  
+  border-radius: 50%;
+  width: 60rpx;
+  
+}
+
+.user-info text {
+  display: inline-block;
+
+  font-size: 24rpx;
+  color: #666;
+}
+
+.resource-function-btn {
+  margin-top: 50rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  position: relative;
+}
+
+.user-report-box {
+  position: absolute;
+  top: -10rpx;
+  right: 0;
+}
+
+.report-button image {
+  display: block;
+  width: 30rpx;
+}
+
+.user-comment-box {
+  display: inline-block;
+}
+
+.user-comment-box image {
+  width: 70rpx;
+}
+
+.user-comment-box text {
+  display: block;
+
+  font-size: 24rpx;
+  text-align: center;
+
+  color: #666;
+}
+
+.user-praise-box {
+  display: inline-block;
+  
+}
+
+.user-praise-box image {
+  width: 64rpx;
+  height: 62rpx;
+}
+
+.user-praise-box text {
+  display: block;
+
+  font-size: 24rpx;
+  text-align: center;
+  color: #666;
+}
+
+.change-function-btn {
+  width: 100%;
+  position: absolute;
+  bottom: 30rpx;
+}
+
+.change-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  margin: 20rpx auto;
+  line-height: 40rpx;
+  font-size: 24rpx;  
+}
+
+.change-box image{
+  width: 40rpx;
+}
+
+.change-box text {
+  margin-left: 20rpx;
+  font-weight: bold;
+  color: #6d1aa7;
+}
+
+.change-function-btn > text {
+  display: block;
+  
+  text-align: center;
+  font-size: 20rpx;
+  color: #666;
 }

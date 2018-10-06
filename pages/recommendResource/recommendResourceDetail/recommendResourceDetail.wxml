@@ -1,6 +1,6 @@
 <!--recommendResourceDetail.wxml-->
 
-<view class='recommend-recource-container' wx:if="{{resourceType===0}}">
+<view class='recommend-recource-container' wx:if="{{resourceType===3}}">
   <view class="mask" wx:if="{{showMask}}" bindtap='maskClose'></view>
   <!-- 资源模块 -->
   <view class='resource-box'>
@@ -40,8 +40,6 @@
           <view data-id="{{item.commentId}}" class='report-button' wx:else bindtap='addReport'>
             <image data-id="{{item.commentId}}"  src='../../../images/report_before.png' mode='widthFix'></image>
           </view>
-          <!-- 最后一个评论下无分割线 -->
-          <!-- <view class="line"></view> -->
         </view>
       </scroll-view>
     </view>

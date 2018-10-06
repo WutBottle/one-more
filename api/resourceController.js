@@ -32,11 +32,15 @@ module.exports = {
   findInfoSend: (data) => {
     return resourceController('post', 'resource', 'findInfoSend', data);
   },
-  //8.资源首页初始化
-  findResourceIndex: (data) => {
-    return resourceController('post', 'resource', 'findResourceIndex', data);
+  //8.系统发表资源首页初始化
+  findOurResource: (data) => {
+    return resourceController('post', 'resource', 'findOurResource', data);
   },
-  //9.查找某人发表评论的页面（可分页）
+  //9.用户发表资源首页初始化
+  findUserResource: (data) => {
+    return resourceController('post', 'resource', 'findUserResource', data);
+  },
+  //10.查找某人发表的资源(可分页)
   selectByPublish: (data) => {
     return resourceController('post', 'resource', 'selectByPublish', data);
   },
