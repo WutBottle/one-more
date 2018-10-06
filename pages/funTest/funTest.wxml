@@ -1,9 +1,19 @@
 <view class='fun-test-wrapper'>
-  <view class='test-list-item' wx:for="{{testList}}" wx:key="{{index}}" style="background-image: url({{item.cover}})">
-    <view class='test-title'>{{item.title}}</view>
-    <view class='test-status'>{{item.status ? '已完成' : '未测试过'}}</view>
-    <view class='test-data-num'>
-      已有<text style='color: #1ff0dd'>{{item.peopleCount}}</text>人测试过
+  <view class='test-list-item' wx:for="{{testList}}" wx:key="{{index}}" data-id='{{item.problemId}}' bindtap='showTestStem' style="background-image: url({{item.cover}})">
+    <view data-id='{{item.problemId}}' class='test-title'>{{item.title}}</view>
+    <view data-id='{{item.problemId}}' class='test-status'>{{!!item.problemStatus ? '已完成' : '未测试过'}}</view>
+    <view data-id='{{item.problemId}}' class='test-data-num'>
+      已有<text data-id='{{item.problemId}}' style='color: #1ff0dd'>{{item.testNum}}</text>人测试过
     </view>
   </view>
+
+  <view class='test-stem-wrapper' data-modalBlank='true' wx:if="{{showTestStem}}" bindtap='closeTestStem'>
+    <view class='stem-wrapper'>
+      <view class='test-request-info'>{{stemInfo.description}}</view>
+      <view class='test-detail-info'>{{stemInfo.rule}}</view>
+      <view class='test-common-info'>如果你发现难以决定选择哪一项的时候，只需要靠你的直觉来回答即可</view>
+      <view class='start-test-btn' data-id='{{stemInfo.problemId}}' bindtap='startTest'>开始测试</view>
+    </view>
+  </view>
+
 </view>

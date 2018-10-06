@@ -15,16 +15,7 @@ Page({
    */
   data: {
     privateMessage: [],
-    userDialogInfo: {
-      userId: 1,
-      username: "王玉菡",
-      contentList: [{
-        userId: 1,
-        avatarUrl: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1810152264,2923293270&fm=27&gp=0.jpg",
-        content: "你今天读了哪一本书你今天读了哪一本书你今天读了哪一本书你今天读了哪一本书你今天读了哪一本书你今天读了哪一本书你今天读了哪一本书",
-        sendTime: "18:00",
-      }],
-    },
+    userDialogInfo: [],
     showDialogModal: false,
     sendMsgValue: '',//发送私信的内容
     currentUserName: '',//当前点击用户name
@@ -109,6 +100,7 @@ Page({
   closeDialogModal(e) {
     if (e.target.dataset.modalblank) {
       this.updateFriendApplication();
+      this.updatePrivateMsgList();
       this.setData({
         showDialogModal: false,
         sendMsgValue: '',

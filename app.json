@@ -7,6 +7,7 @@
     "pages/message/message",
     "pages/userCenter/userCenter",
     "pages/readMore/readMore",
+    "pages/funTest/testDetail/testDetail",
     "pages/message/messageSys/messageSys",
     "pages/message/messagePrivate/messagePrivate",
     "pages/message/messagePrivate/friendsApplication/friendsApplication",
