@@ -1,49 +1,213 @@
 <!--recommendResourceDetail.wxml-->
 
-<view class='recommend-recource-container' wx:if="{{resourceType===0}}">
-  <view class="mask" wx:if="{{showMask}}" bindtap='maskClose'></view>
+<!-- 图文资源 -->
+<view class='recommend-recource-container' wx:if="{{sysResource.type===3}}">
   <!-- 资源模块 -->
-  <view class='resource-box'>
-    <image class='resource-bg' src='../../images/bg_resource.png' mode="widthFix"></image>
-    <view class='resource-content'>
-      <text>如果有人影响了你的情绪，你的焦点应该放在控制自己的情绪上，而不是影响你的情绪的人身上。只有这样，才能真正的自信起来。</text>
+  <view class='sys-resource-box'>
+    <view class='sys-sresource-img'>
+      <image class='resource-bg' src='{{sysResource.imageUrl}}' mode="widthFix"></image>
+    </view>
+    <view class='sys-resource-content1'>
+      <text>{{sysResource.content}}</text>
+    </view>
+    <view class='sys-comment-box'>
+      <image src='../../images/comment.png' mode='widthFix'></image>
+      <text>{{sysResource.commentNum}}</text>
+    </view>
+    <!-- 点赞后 -->
+    <view class='sys-praise-box' data-id="{{sysResource.resourceId}}" data-praiseid="{{sysResource.praiseStatus}}" wx:if="{{!!sysResource.praiseStatus}}" bindtap='deletePraise'>
+      <image data-id="{{sysResource.resourceId}}" data-praiseid="{{sysResource.praiseStatus}}" src='../../images/praise_after.png' mode='widthFix'></image>
+      <text data-id="{{sysResource.resourceId}}" data-praiseid="{{sysResource.praiseStatus}}">{{sysResource.praiseNum}}</text>
+    </view>
+    <!-- 点赞前 -->
+    <view class='sys-praise-box' data-id="{{sysResource.resourceId}}" wx:else bindtap='addPraise'>
+      <image data-id="{{sysResource.resourceId}}" src='../../images/praise_before.png' mode='widthFix'></image>
+      <text data-id="{{sysResource.resourceId}}">{{sysResource.praiseNum}}</text>
     </view>
   </view>
-  <!-- 资源评论模块 -->
-  <view class='comment-box'>
-    <view class='comment-content'>
-      <scroll-view scroll-y style="height:610rpx">
-        <!-- 点赞数最高的三条评论 -->
-        <view class='comment-list send' wx:for="{{commentList}}" data-id="{{item.commentId}}" wx:key="{{index}}">
+
+  <!-- 用户资源模块 -->
+  <view class='user-resource-box'>
+    <view class='user-resource-title'>
+      <text>有所感</text>
+    </view>
+    <!-- 用户图文 -->
+    <view class='user-text-resource-content' wx:if="{{userResourceSingle.type===0}}">
+      <view class='user-text'>
+        <view class='user-text-list' wx:for="{{userResource}}" data-id="{{item.resourceId}}" wx:key="{{index}}">
           <view class="{{index===0 ? 'none':'line'}} "></view>
-          <image src='{{item.userImg}}' mode='aspectFit'></image>
-          <view class='comment-username displayInlineBlock'>{{item.userFakeName}}</view>
-          <view class='comment-time displayInlineBlock'>{{item.createTime}}</view>
-          <view class='comment-text displayInlineBlock'>{{item.content}}</view>
+          <image src='{{item.avatarUrl}}' mode='aspectFit'></image>
+          <view class='resource-username displayInlineBlock'>{{item.fakeName}}</view>
+          <view class='resource-time displayInlineBlock'>{{item.publishDate}}</view>
+          <view class='resource-text displayInlineBlock'>{{item.content}}</view>
+
+          <!-- 评论部分 -->
+          <view class='resource-comment displayInlineBlock'>
+            <image src='../../images/comment.png' mode='widthFix'></image>
+            <text>{{sysResource.commentNum}}</text>
+          </view>
+
           <!-- 点赞后 -->
-          <view data-id="{{item.commentId}}" data-praiseid="{{item.praiseStatus}}" class='comment-praise displayInlineBlock' wx:if="{{!!item.praiseStatus}}" bindtap='deletePraise'>
-            <image data-id="{{item.commentId}}" data-praiseid="{{item.praiseStatus}}" src='../../images/praise_after.png'></image>
-            <text data-id="{{item.commentId}}" data-praiseid="{{item.praiseStatus}}">{{item.praiseNum}}</text>
+          <view data-id="{{item.resourceId}}" data-praiseid="{{item.praiseStatus}}" class='resource-praise displayInlineBlock' wx:if="{{!!item.praiseStatus}}" bindtap='deletePraise'>
+            <image data-id="{{item.resourceId}}" data-praiseid="{{item.praiseStatus}}" src='../../../images/praise_after.png'></image>
+            <text data-id="{{item.resourceId}}" data-praiseid="{{item.praiseStatus}}">{{item.praiseNum}}</text>
           </view>
-
           <!-- 点赞前 -->
-          <view data-id="{{item.commentId}}" class='comment-praise displayInlineBlock' wx:else bindtap='addPraise'>
-            <image data-id="{{item.commentId}}" src='../../images/praise_before.png'></image>
-            <text data-id="{{item.commentId}}">{{item.praiseNum}}</text>
+          <view data-id="{{item.resourceId}}" class='resource-praise displayInlineBlock' wx:else bindtap='addPraise'>
+            <image data-id="{{item.resourceId}}" src='../../../images/praise_before.png'></image>
+            <text data-id="{{item.resourceId}}">{{item.praiseNum}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 用户音频 -->
+    <view class='user-audio-resource-content' wx:if="{{userResourceSingle.type===1}}">
+      <view class='user-audio'>
+        <audio id='audioRes' src='{{userResourceSingle.audioUrl}}' name='{{userResourceSingle.title}}' author='{{userResourceSingle.fakeName}}' controls bindplay="audioPlay" bindpause='audioPause' bindtimeupdate="audioTimeUpdate" bindended="audioEnded" binderror="audioError"></audio>
+      </view>
+      <view class='resource-function-btn'>
+        <!-- 举报部分 -->
+        <!-- <view class='user-report-box'>
+          举报后
+          <view data-id="{{userResourceSingle.resourceId}}" data-reportid="{{userResourceSingle.reportStatus}}" class='report-button' wx:if="{{!!userResourceSingle.reportStatus}}" bindtap='deleteReport'>
+            <image data-id="{{userResourceSingle.resourceId}}" data-reportid="{{userResourceSingle.reportStatus}}" src='../../images/report_after.png' mode='widthFix'></image>
+          </view>
+          举报前
+          <view data-id="{{userResourceSingle.resourceId}}" class='report-button' wx:else bindtap='addReport'>
+            <image data-id="{{userResourceSingle.resourceId}}" src='../../images/report_before.png' mode='widthFix'></image>
+          </view>
+        </view> -->
+
+        <!-- 评论部分 -->
+        <view class='user-comment-box'>
+          <image src='../../images/comment1.png' mode='widthFix'></image>
+          <text>{{userResourceSingle.commentNum}}</text>
+        </view>
+        <!-- 点赞后 -->
+        <view class='user-praise-box' data-id="{{userResourceSingle.resourceId}}" data-praiseid="{{userResourceSingle.praiseStatus}}" wx:if="{{!!userResourceSingle.praiseStatus}}" bindtap='deletePraise'>
+          <image data-id="{{userResourceSingle.resourceId}}" data-praiseid="{{userResourceSingle.praiseStatus}}" src='../../images/praise_after1.png' mode='widthFix'></image>
+          <text data-id="{{userResourceSingle.resourceId}}" data-praiseid="{{userResourceSingle.praiseStatus}}">{{userResourceSingle.praiseNum}}</text>
+        </view>
+        <!-- 点赞前 -->
+        <view data-id="{{userResourceSingle.resourceId}}" class='user-praise-box' wx:else bindtap='addPraise'>
+          <image data-id="{{userResourceSingle.resourceId}}" src='../../images/praise_before1.png' mode='widthFix'></image>
+          <text data-id="{{userResourceSingle.resourceId}}">{{userResourceSingle.praiseNum}}</text>
+        </view>
+      </view>
+      <view class='change-function-btn'>
+        <view class='change-box' bindtap='changeResource'>
+          <image src='../../images/change.png' mode='widthFix'></image>
+          <text>换一个</text>
+        </view>
+        <text>剩余次数:{{changeCount}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 语音资源 -->
+<view class='recommend-resource-container' wx:elif="{{sysResource.type===4}}">
+  <!-- 系统资源模块 -->
+  <view class='sys-resource-box'>
+    <view class='sys-sresource-img'>
+      <image class='resource-bg' src='{{sysResource.imageUrl}}' mode="widthFix"></image>
+    </view>
+    <view class='sys-resource-content2'>
+      <view class='sys-audio'>
+        <audio id='audioRes' src='{{sysResource.audioUrl}}' name='{{userResourceSingle.title}}' author='{{sysResource.fakeName}}' controls bindplay="audioPlay" bindpause='audioPause' bindtimeupdate="audioTimeUpdate" bindended="audioEnded" binderror="audioError"></audio>
+      </view>
+      <view class='sys-comment-box'>
+        <image src='../../images/comment.png' mode='widthFix'></image>
+        <text>{{sysResource.commentNum}}</text>
+      </view>
+      <!-- 点赞后 -->
+      <view class='sys-praise-box' data-id="{{sysResource.resourceId}}" data-praiseid="{{sysResource.praiseStatus}}" wx:if="{{!!sysResource.praiseStatus}}" bindtap='deletePraise'>
+        <image data-id="{{sysResource.resourceId}}" data-praiseid="{{sysResource.praiseStatus}}" src='../../images/praise_after.png' mode='widthFix'></image>
+        <text data-id="{{sysResource.resourceId}}" data-praiseid="{{sysResource.praiseStatus}}">{{sysResource.praiseNum}}</text>
+      </view>
+      <!-- 点赞前 -->
+      <view class='sys-praise-box' data-id="{{sysResource.resourceId}}" wx:else bindtap='addPraise'>
+        <image data-id="{{sysResource.resourceId}}" src='../../images/praise_before.png' mode='widthFix'></image>
+        <text data-id="{{sysResource.resourceId}}">{{sysResource.praiseNum}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 用户资源模块 -->
+  <view class='user-resource-box'>
+    <view class='user-resource-title'>
+      <text>有所感</text>
+    </view>
+    <!-- 用户图文 -->
+    <view class='user-text-resource-content' wx:if="{{userResourceSingle.type===0}}">
+      <view class='user-text'>
+        <view class='user-text-list' wx:for="{{userResource}}" data-id="{{item.resourceId}}" wx:key="{{index}}">
+          <view class="{{index===0 ? 'none':'line'}} "></view>
+          <image src='{{item.avatarUrl}}' mode='aspectFit'></image>
+          <view class='resource-username displayInlineBlock'>{{item.fakeName}}</view>
+          <view class='resource-time displayInlineBlock'>{{item.publishDate}}</view>
+          <view class='resource-text displayInlineBlock'>{{item.content}}</view>
+
+          <!-- 评论部分 -->
+          <view class='resource-comment displayInlineBlock'>
+            <image src='../../images/comment.png' mode='widthFix'></image>
+            <text>{{sysResource.commentNum}}</text>
           </view>
 
-          <!-- 举报后 -->
-          <view data-id="{{item.commentId}}" class='report-button' wx:if="{{!!item.reportStatus}}" bindtap='deleteReport'>
-            <image data-id="{{item.commentId}}" src='../../images/report_after.png' mode='widthFix'></image>
+          <!-- 点赞后 -->
+          <view data-id="{{item.resourceId}}" data-praiseid="{{item.praiseStatus}}" class='resource-praise displayInlineBlock' wx:if="{{!!item.praiseStatus}}" bindtap='deletePraise'>
+            <image data-id="{{item.resourceId}}" data-praiseid="{{item.praiseStatus}}" src='../../../images/praise_after.png'></image>
+            <text data-id="{{item.resourceId}}" data-praiseid="{{item.praiseStatus}}">{{item.praiseNum}}</text>
           </view>
-          <!-- 举报前 -->
-          <view data-id="{{item.commentId}}" class='report-button' wx:else bindtap='addReport'>
-            <image data-id="{{item.commentId}}" data-reportid="{{item.reportStatus}}" src='../../images/report_before.png' mode='widthFix'></image>
+          <!-- 点赞前 -->
+          <view data-id="{{item.resourceId}}" class='resource-praise displayInlineBlock' wx:else bindtap='addPraise'>
+            <image data-id="{{item.resourceId}}" src='../../../images/praise_before.png'></image>
+            <text data-id="{{item.resourceId}}">{{item.praiseNum}}</text>
           </view>
-          <!-- 最后一个评论下无分割线 -->
-          <!-- <view class="line"></view> -->
         </view>
-      </scroll-view>
+      </view>
+    </view>
+    <!-- 用户音频 -->
+    <view class='user-audio-resource-content' wx:if="{{userResourceSingle.type===1}}">
+      <view class='user-audio'>
+        <audio id='audioRes' src='{{userResourceSingle.audioUrl}}' name='{{userResourceSingle.title}}' author='{{userResourceSingle.fakeName}}' controls bindplay="audioPlay" bindpause='audioPause' bindtimeupdate="audioTimeUpdate" bindended="audioEnded" binderror="audioError"></audio>
+      </view>
+      <view class='resource-function-btn'>
+        <!-- 举报部分 -->
+        <!-- <view class='user-report-box'>
+          举报后
+          <view data-id="{{userResourceSingle.resourceId}}" data-reportid="{{userResourceSingle.reportStatus}}" class='report-button' wx:if="{{!!userResourceSingle.reportStatus}}" bindtap='deleteReport'>
+            <image data-id="{{userResourceSingle.resourceId}}" data-reportid="{{userResourceSingle.reportStatus}}" src='../../images/report_after.png' mode='widthFix'></image>
+          </view>
+          举报前
+          <view data-id="{{userResourceSingle.resourceId}}" class='report-button' wx:else bindtap='addReport'>
+            <image data-id="{{userResourceSingle.resourceId}}" src='../../images/report_before.png' mode='widthFix'></image>
+          </view>
+        </view> -->
+
+        <!-- 评论部分 -->
+        <view class='user-comment-box'>
+          <image src='../../images/comment1.png' mode='widthFix'></image>
+          <text>{{userResourceSingle.commentNum}}</text>
+        </view>
+        <!-- 点赞后 -->
+        <view class='user-praise-box' data-id="{{userResourceSingle.resourceId}}" data-praiseid="{{userResourceSingle.praiseStatus}}" wx:if="{{!!userResourceSingle.praiseStatus}}" bindtap='deletePraise'>
+          <image data-id="{{userResourceSingle.resourceId}}" data-praiseid="{{userResourceSingle.praiseStatus}}" src='../../images/praise_after1.png' mode='widthFix'></image>
+          <text data-id="{{userResourceSingle.resourceId}}" data-praiseid="{{userResourceSingle.praiseStatus}}">{{userResourceSingle.praiseNum}}</text>
+        </view>
+        <!-- 点赞前 -->
+        <view data-id="{{userResourceSingle.resourceId}}" class='user-praise-box' wx:else bindtap='addPraise'>
+          <image data-id="{{userResourceSingle.resourceId}}" src='../../images/praise_before1.png' mode='widthFix'></image>
+          <text data-id="{{userResourceSingle.resourceId}}">{{userResourceSingle.praiseNum}}</text>
+        </view>
+      </view>
+      <view class='change-function-btn'>
+        <view class='change-box' bindtap='changeResource'>
+          <image src='../../images/change.png' mode='widthFix'></image>
+          <text>换一个</text>
+        </view>
+        <text>剩余次数:{{changeCount}}</text>
+      </view>
     </view>
   </view>
 </view>

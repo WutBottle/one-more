@@ -24,6 +24,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    resouceId: null,
     recommendModal: '',
     userResourceModal: '',
     resourceType: null, //资源类型 0：图文，1：音频
