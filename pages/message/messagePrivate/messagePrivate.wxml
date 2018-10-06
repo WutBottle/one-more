@@ -5,6 +5,7 @@
     <image data-id="{{item.uid}}" data-name='{{item.publishFakeName}}' data-isFollow='{{item.followerId}}' src='{{item.publishImg}}' mode='aspectFit'></image>
     <view data-id="{{item.uid}}" data-name='{{item.publishFakeName}}' data-isFollow='{{item.followerId}}' class='private-msg-username displayInlineBlock'>{{item.publishFakeName}}</view>
     <view data-id="{{item.uid}}" data-name='{{item.publishFakeName}}' data-isFollow='{{item.followerId}}' class='private-msg-time displayInlineBlock'>{{item.createTime}}</view>
+    <image data-id="{{item.uid}}" data-name='{{item.publishFakeName}}' data-isFollow='{{item.followerId}}' class='private-msg-gender' src="{{item.gender === 1 ? '../../../images/male.png' : '../../../images/female.png'}}" mode='aspectFit'></image>
     <view data-id="{{item.uid}}" data-name='{{item.publishFakeName}}' data-isFollow='{{item.followerId}}' class='private-msg-latestMsg displayInlineBlock'>{{item.text}}</view>
     <view data-id="{{item.uid}}" data-name='{{item.publishFakeName}}' data-isFollow='{{item.followerId}}' class='private-msg-noReadMsgNum displayInlineBlock' wx:if="{{!!item.unReadCount}}">{{item.unReadCount}}</view>
   </view>

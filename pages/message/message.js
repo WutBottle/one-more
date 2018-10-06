@@ -1,4 +1,5 @@
 // pages/message/message.js
+
 Page({
 
   /**
@@ -62,5 +63,6 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+
 })

@@ -4,6 +4,7 @@
       <image src="{{item.followerImg}}" mode='aspectFit'></image>
       <view class='friend-application-username displayInlineBlock'>{{item.followerFakeName}}</view>
       <view class='friend-application-time displayInlineBlock'>{{item.createTime}}</view>
+      <image class='friend-application-gender' src="{{item.gender === 1 ? '../../../../images/male.png' : '../../../../images/female.png'}}" mode='aspectFit'></image>
       <view data-id="{{item.followerId}}" class='application-agree-btn displayInlineBlock' bindtap='agreeHints'>同意</view>
       <view data-id="{{item.followerId}}" class='application-disagree-btn displayInlineBlock' bindtap='disagreeHints'>拒绝</view>
     </view>

@@ -11,11 +11,19 @@
   border-radius: 50%;
 }
 
+.friend-application-gender{
+  width: 30rpx!important;
+  height: 25rpx!important;
+  position: absolute;
+  top: 70rpx;
+  left: 160rpx;
+}
+
 .friend-application-username{
   position: absolute;
   font-size: 36rpx;
   color: #000;
-  top: 30rpx;
+  top: 18rpx;
   left: 160rpx;
 }
 
@@ -23,7 +31,7 @@
   position: absolute;
   font-size: 24rpx;
   color: #a6a6a6;
-  top: 100rpx;
+  top: 96rpx;
   left: 160rpx;
 }
 
@@ -34,7 +42,7 @@
   padding: 10rpx 20rpx;
   border-radius: 10rpx;
   position: absolute;
-  top: 55rpx;
+  top: 42rpx;
   right: 160rpx;
 }
 
@@ -45,7 +53,7 @@
   padding: 10rpx 20rpx;
   border-radius: 10rpx;
   position: absolute;
-  top: 55rpx;
+  top: 42rpx;
   right: 30rpx;
 }
 

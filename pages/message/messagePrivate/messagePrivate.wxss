@@ -38,6 +38,14 @@
   right: 40rpx;
 }
 
+.private-msg-gender{
+  width: 30rpx!important;
+  height: 25rpx!important;
+  position: absolute;
+  top: 70rpx;
+  left: 160rpx;
+}
+
 .private-msg-latestMsg{
   position: absolute;
   font-size: 20rpx;
