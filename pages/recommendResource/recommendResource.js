@@ -1,4 +1,5 @@
 // pages/recommendResource/recommendResouce.js
+var app = getApp();
 import {
   findOurResource,
   findUserResource
@@ -14,6 +15,10 @@ import {
   reportDeleteOne
 } from '../../api/reportController.js'
 
+import {
+  shelfAddOne
+}from '../../api/bookShelfController.js'
+
 var app = getApp();
 Page({
 
@@ -21,12 +26,14 @@ Page({
    * 页面的初始数据
    */
   data: {
+    chapterId:null,
     scrollHeight: null, //滚动部分高度
     sysResource: [],
     userResource: [],
     userResourceSingle:[],
     changeCount:null,
   },
+    sysResourceType:null,
     userResourceIndex:0,//用户资源序号
   /**
    * 生命周期函数--监听页面加载
@@ -46,6 +53,7 @@ Page({
         });
       }
     });
+    this.addBookShelf();//添加一条书架记录
     this.loadOurResource();
     this.loadUserResource();
   },
@@ -100,16 +108,30 @@ Page({
   },
 
   /**
+   * 添加一条书架记录
+   */
+  addBookShelf:function() {
+    const param ={
+      chapterId:this.data.chapterId,
+      shelfUid:app.globalData.uid
+    }
+    shelfAddOne(param).then((data) => {
+
+    })
+  },
+
+  /**
    * 加载系统资源
    */
   loadOurResource: function() {
     const param = {
       chapterId: this.data.chapterId,
-      uid:19
+      uid:app.globalData.uid
     }
     findOurResource(param).then((data) => {
       if (data.status === true) {
         this.setData({
+          sysResourceType: data.resources[0].type,
           sysResource: data.resources[0],
         })
       }
@@ -122,13 +144,13 @@ Page({
   loadUserResource: function () {
     const param = {
       chapterId: this.data.chapterId,
-      uid:19
+      uid:app.globalData.uid
     }
     findUserResource(param).then((data) => {
       if (data.status === true) {
         this.setData({
           userResource: data.resources,
-          userResourceSingle:data.resources[0]
+          userResourceSingle: data.resources[this.userResourceIndex]
         })
       }
     })
@@ -138,12 +160,11 @@ Page({
  * 给资源删除点赞
  */
   deletePraise: function (e) {
-    console.log(e.target.dataset.praiseid)
     const param = {
       praiseId: e.target.dataset.praiseid,
       workId: e.target.dataset.id,
       workType: 0,
-      praiseUid: 19
+      praiseUid: app.globalData.uid
     }
     praiseDeleteOne(param).then((data) => {
       this.loadOurResource();
@@ -155,11 +176,10 @@ Page({
    * 给资源添加点赞
    */
   addPraise: function (e) {
-    console.log(e.target.dataset.id);
     const param = {
       workId: e.target.dataset.id,
       workType: 0,
-      praiseUid: 19
+      praiseUid: app.globalData.uid
     }
     praiseAddOne(param).then((data) => {
       this.loadOurResource();
@@ -175,7 +195,7 @@ Page({
       reportId: e.target.dataset.reportid,
       workId: e.target.dataset.id,
       workType: 0,
-      reportUid: 19
+      reportUid: app.globalData.uid
     }
     reportDeleteOne(param).then((data) => {
       this.loadOurResource();
@@ -192,7 +212,7 @@ Page({
       // reportid:e.target.dataset.reportid,
       workId: e.target.dataset.id,
       workType: 0,
-      reportUid: 19
+      reportUid: app.globalData.uid
     }
     reportAddOne(param).then((data) => {
       this.loadOurResource();
@@ -209,8 +229,29 @@ Page({
     console.log(index);
     this.setData({
       userResourceSingle:this.data.userResource[index],
+      changeCount: this.data.changeCount-1
     })
     this.userResourceIndex = index;
+  },
+
+  /**
+   * 跳转对应资源详情页
+   */
+  gotoResDetailPage:function(e) {
+    console.log(e.target.dataset.id);
+    wx.navigateTo({
+      url: 'recommendResourceDetail/recommendResourceDetail?resourceId='+e.target.dataset.id,
+    })
+  },
+
+  /**
+   * 跳转发表资源页
+   */
+  gotoPublishPage:function(e) {
+    console.log(this.data.chapterId)
+    wx.navigateTo({
+      url: 'publishResource/publishResource?chapterId=' + this.data.chapterId +'&resourceType='+this.resourceType,
+    })
   },
 
   audioPlay: function () {

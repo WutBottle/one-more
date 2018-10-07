@@ -24,113 +24,118 @@ Page({
    * 页面的初始数据
    */
   data: {
-    resouceId: null,
-    recommendModal: '',
-    userResourceModal: '',
-    resourceType: null, //资源类型 0：图文，1：音频
+    isResExit:false,
+    resourceId: null,
+    resourceType: null, //资源类型 0：用户图文，1：用户音频，3：系统图文，4：系统音频
+    resourceContent: {}, //资源内容
     commentList: [], //资源评论列表
     commentListOfNew: [], //最新资源评论列表
-    resourceContent: '', //资源文本内容
     commentMsgValue: '', //发送评论的内容
     showMask: false, //发表评论时遮盖其他部分
     pubSuccess: false, //评论发表成功
-    scrollHeight: null,//滚动部分高度
+    scrollHeight: null, //滚动部分高度
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     console.log(options);
     this.setData({
-      resouceId: options.resouceId
+      resourceId: options.resourceId
     })
     // 高度适配
     let that = this
     wx.getSystemInfo({
-      success: function (res) {
+      success: function(res) {
         that.setData({
-          scrollHeight: res.windowHeight - 250, //250为页面出去滚动部分其余高度
+          scrollHeight: res.windowHeight - 240, //250为页面出去滚动部分其余高度
         });
       }
     });
-    this.findCommentInfo();
+    this.findResourceInfo();
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
 
   /**
-   * 加载点赞数最高三条评论
+   * 加载资源详情&点赞数最高三条评论
    */
-  findCommentInfo: function () {
+  findResourceInfo: function() {
     const param = {
-      rid: 1,
+      rid: this.data.resourceId,
       uid: 19
       // uid:app.globalData.uid
     }
     findInfo(param).then((data) => {
-      this.setData({
-        resourceType: data.resource.type,
-        commentList: data.resource.commentInfos,
-        resourceContent: data.resource.content
-      })
-      this.findCommentInfoNew();
+      if (data.status) {
+        this.setData({
+          isResExit:true,
+          resourceType: data.resource.type,
+          resourceContent: data.resource,
+          commentList: data.resource.commentInfos,
+        })
+        this.findCommentInfoNew();
+      } else {
+        this.setData({
+          isResExit:false
+        })
+      }
     })
-
   },
   /**
    * 加载最新评论
    */
-  findCommentInfoNew: function () {
+  findCommentInfoNew: function() {
     const param = {
-      rid: 1,
+      rid: this.data.resourceId,
       uid: 19
       // uid:app.globalData.uid
     }
@@ -144,7 +149,7 @@ Page({
   /**
    * 用户发表评论
    */
-  doComment: function (e) {
+  doComment: function(e) {
     this.setData({
       commentMsgValue: e.detail.value
     })
@@ -153,7 +158,7 @@ Page({
   /**
    * 输入框聚焦触发蒙层出现
    */
-  maskShow: function () {
+  maskShow: function() {
     this.setData({
       showMask: true,
     })
@@ -162,7 +167,7 @@ Page({
   /**
    * 关闭蒙层
    */
-  maskClose: function () {
+  maskClose: function() {
     this.setData({
       showMask: false,
     })
@@ -171,7 +176,7 @@ Page({
   /**
    * 发表评论
    */
-  submitSendComment: function () {
+  submitSendComment: function() {
     console.log(this.data.commentMsgValue)
     var comment = this.data.commentMsgValue;
     if (!!comment) {
@@ -188,7 +193,7 @@ Page({
         })
         if (this.data.pubSuccess === true) {
           console.log("成功")
-          this.findCommentInfo();
+          this.findResourceInfo();
           wx.showToast({
             title: '发表成功',
             icon: 'success',
@@ -202,23 +207,23 @@ Page({
   /**
    * 给评论删除点赞
    */
-  deletePraise: function (e) {
+  deletePraise: function(e) {
     console.log(e.target.dataset.praiseid)
     const param = {
-      praiseId: e.target.dataset.praiseid,      
+      praiseId: e.target.dataset.praiseid,
       workId: e.target.dataset.id,
       workType: 1,
       praiseUid: 19
     }
     praiseDeleteOne(param).then((data) => {
-      this.findCommentInfo();
+      this.findResourceInfo();
     })
   },
 
   /**
    * 给评论添加点赞
    */
-  addPraise: function (e) {
+  addPraise: function(e) {
     console.log(e.target.dataset.id);
     const param = {
       workId: e.target.dataset.id,
@@ -226,14 +231,14 @@ Page({
       praiseUid: 19
     }
     praiseAddOne(param).then((data) => {
-      this.findCommentInfo();
+      this.findResourceInfo();
     })
   },
 
   /**
- * 对评论删除举报
- */
-  deleteReport: function (e) {
+   * 对评论删除举报
+   */
+  deleteReport: function(e) {
     const param = {
       reportId: e.target.dataset.reportid,
       workId: e.target.dataset.id,
@@ -241,14 +246,14 @@ Page({
       reportUid: 19
     }
     reportDeleteOne(param).then((data) => {
-      this.findCommentInfo();
+      this.findResourceInfo();
     })
   },
 
   /**
    * 对评论添加举报
    */
-  addReport: function (e) {
+  addReport: function(e) {
     // console.log(e.target.dataset.reportid)
     const param = {
       // reportid:e.target.dataset.reportid,
@@ -257,7 +262,27 @@ Page({
       reportUid: 19
     }
     reportAddOne(param).then((data) => {
-      this.findCommentInfo();
+      this.findResourceInfo();
     })
-  }
+  },
+
+  /**
+   * 音频对应事件
+   */
+  audioPlay: function() {
+    console.log("audio play");
+  },
+  audioPause: function() {
+    console.log("audio pause");
+  },
+  audioTimeUpdate: function(u) {
+    // console.log(u.detail.currentTime);
+    // console.log(u.detail.duration);
+  },
+  audioEnded: function() {
+    console.log("audio end");
+  },
+  audioError: function(u) {
+    console.log(u.detail.errMsg);
+  },
 })

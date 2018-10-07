@@ -16,7 +16,8 @@
     "pages/userCenter/myBookshelves/myBookshelves",
     "pages/message/messageComment/messageComment",
     "pages/recommendResource/recommendResource",
-    "pages/recommendResource/recommendResourceDetail/recommendResourceDetail"
+    "pages/recommendResource/recommendResourceDetail/recommendResourceDetail",
+    "pages/recommendResource/publishResource/publishResource"
   ],
   "window": {
     "backgroundTextStyle": "light",

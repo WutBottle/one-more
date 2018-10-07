@@ -10,7 +10,7 @@
   height: 490rpx;
 }
 
-.sys-sresource-img {
+.sys-resource-img {
   overflow: hidden;
   height: 416rpx;
 }
@@ -74,16 +74,23 @@
 
 .resource-text {
   position: absolute;
+  overflow: hidden;
   bottom: 40rpx;
   left: 160rpx;
+
+  width: 18em;
+
+  text-overflow:ellipsis;
+  white-space:nowrap;  
   font-size: 22rpx;
+  line-height: 25rpx;
   color: #666;
 }
 
 .resource-praise {
   position: absolute;
   bottom: 40rpx;
-  right: 30rpx;
+  right: 20rpx;
   width: 60rpx;
   line-height: 30rpx;
 }
@@ -105,7 +112,7 @@
 .resource-comment {
   position: absolute;
   bottom: 40rpx;
-  right: 88rpx;
+  right: 75rpx;
   width: 60rpx;
   line-height: 30rpx;
 }
@@ -147,7 +154,7 @@
   /* box-shadow: 0 3rpx 15rpx rgba(0, 0, 0, 0.24); */
   width: 96%;
   height: 210rpx;
-  /* background-color: #fff; */
+  background-color: #fff;
 }
 
 /* 语音部分 */
@@ -327,4 +334,21 @@
   text-align: center;
   font-size: 20rpx;
   color: #666;
+}
+
+.publish-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  bottom: 28rpx;
+  right: 32rpx;
+  width: 80rpx;
+  font-size: 22rpx;
+  color: #6d1aa7;
+}
+
+.publish-box image {
+  width: 80rpx;
 }
