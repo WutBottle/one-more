@@ -1,0 +1,166 @@
+/* pages/recommendResource/publishResource/publishResource.wxss */
+.publish-resource-container {
+  position: relative;
+  background-color: #f7f7f7;
+  height: 100vh;
+}
+
+.resource-title {
+  padding-top: 50rpx;
+  box-sizing: border-box;
+}
+
+.resource-title input {
+  margin: 0 auto;
+  border: #6d19a7 solid 3rpx;
+  box-sizing: border-box;
+  border-radius: 10rpx;
+  padding: 0 25rpx;
+  width: 690rpx;
+  height: 60rpx;
+  font-size: 24rpx;
+}
+
+.recorder {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 80rpx auto 0;
+  width: 690rpx;
+}
+
+.recorder image {
+  width: 59rpx;
+}
+
+/* 初始按钮 */
+
+.record-btn {
+  margin: 0;
+  box-shadow: 0 3rpx 15rpx rgba(0, 0, 0, 0.24);
+  padding: 0;
+  width: 580rpx;
+  height: 78rpx;
+  font-size: 28rpx;
+  line-height: 78rpx;
+  color: #fefefe;
+  background-color: #9140e4;
+}
+
+/* 正在录音按钮 */
+
+.active-btn {
+  margin: 0;
+  box-shadow: 0 3rpx 15rpx rgba(0, 0, 0, 0.24);
+  padding: 0;
+  width: 580rpx;
+  height: 78rpx;
+  font-size: 28rpx;
+  line-height: 78rpx;
+  color: #fefefe;
+  background-color: #b79afb;
+}
+
+.tip {
+  margin: 30rpx 0;
+  width: 100%;
+  height: 100rpx;
+  text-align: center;
+  line-height: 100rpx;
+  font-size: 32rpx;
+  color: #f00;
+}
+
+.function-btn-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 100rpx;
+  height: 564rpx;
+}
+
+.function-btn {
+  width: 100%;
+  height: 168rpx;
+}
+
+.function-btn button {
+  position: relative;
+  margin: 0 auto;
+  padding: 0;
+  width: 690rpx;
+  height: 100%;
+  font-size: 40rpx;
+  line-height: 168rpx;
+  color: #fff;
+  background-color: #9140e4;
+}
+
+.function-btn button image {
+  position: absolute;
+  top: 54rpx;
+  left: 40rpx;
+  width: 64rpx;
+}
+
+.resource-content {
+  position: relative;
+  height: 400rpx;
+  background-color: #fff;  
+}
+
+.resource-content textarea{
+  box-sizing: border-box;
+  padding: 30rpx;
+  width: 100%;
+  height: 100%;
+  max-height: 280rpx;
+  font-size: 26rpx;
+  background-color: #fff;
+}
+
+.content-placeholder {
+  color: #999;
+}
+
+.add-pic {
+  overflow: hidden;
+  
+  position: absolute;
+  left: 30rpx;
+  bottom: 30rpx;
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.add-pic image {
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.resource-content text {
+  position: absolute;
+  left: 130rpx;
+  bottom: 30rpx;
+  font-size: 22rpx;
+  color: #666;
+}
+
+.submit-text {
+  position: absolute;
+  bottom: 400rpx;
+  left: 0;
+  right: 0;
+}
+
+.submit-text button{
+  z-index: 999;
+  border: #6d1aa7 solid 3rpx;
+  width: 240rpx;
+  height: 80rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  line-height: 80rpx;
+  color: #6d1aa7;
+  background-color: #fff;
+}

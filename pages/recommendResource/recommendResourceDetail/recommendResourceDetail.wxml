@@ -1,12 +1,24 @@
 <!--recommendResourceDetail.wxml-->
 
-<view class='recommend-recource-container' wx:if="{{resourceType===3}}">
+<!-- 资源评论页面 -->
+<view class='recommend-recource-container' wx:if="{{isResExit}}">
   <view class="mask" wx:if="{{showMask}}" bindtap='maskClose'></view>
-  <!-- 资源模块 -->
-  <view class='resource-box'>
-    <image class='resource-bg' src='../../../images/bg_resource.png' mode="widthFix"></image>
+  <!-- 图文资源模块 -->
+  <view class='resource-box' wx:if="{{resourceType===3||resourceType===0}}">
+    <view class='resource-img'>
+      <image class='resource-bg' src='{{resourceContent.imageUrl}}' mode="widthFix"></image>
+    </view>
     <view class='resource-content'>
-      <text>如果有人影响了你的情绪，你的焦点应该放在控制自己的情绪上，而不是影响你的情绪的人身上。只有这样，才能真正的自信起来。</text>
+      <text>{{resourceContent.content}}</text>
+    </view>
+  </view>
+  <!-- 音频资源模块 -->
+  <view class='resource-box' wx:if="{{resourceType===4||resourceType===1}}">
+    <view class='resource-img'>
+      <image class='resource-bg' src='{{resourceContent.imageUrl}}' mode="widthFix"></image>
+    </view>
+    <view class='resource-content'>
+      <audio id='audioRes' src='{{resourceContent.audioUrl}}' name='{{userResourceSingle.title}}' author='{{sysResource.fakeName}}' controls bindplay="audioPlay" bindpause='audioPause' bindtimeupdate="audioTimeUpdate" bindended="audioEnded" binderror="audioError"></audio>
     </view>
   </view>
   <!-- 资源评论模块 -->
@@ -15,15 +27,17 @@
       <scroll-view scroll-y style="height:610rpx">
         <!-- 点赞数最高的三条评论 -->
         <view class='comment-list send' wx:for="{{commentList}}" data-id="{{item.commentId}}" wx:key="{{index}}">
-          <view class="{{index===0 ? 'none':'line'}} "></view>        
+          <view class="{{index===0 ? 'none':'line'}} "></view>
           <image src='{{item.userImg}}' mode='aspectFit'></image>
           <view class='comment-username displayInlineBlock'>{{item.userFakeName}}</view>
           <view class='comment-time displayInlineBlock'>{{item.createTime}}</view>
-          <view class='comment-text displayInlineBlock'>{{item.content}}</view>
+          <view class='comment-text displayInlineBlock'>
+            <text>啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦</text>
+          </view>
           <!-- 点赞后 -->
           <view data-id="{{item.commentId}}" data-praiseid="{{item.praiseStatus}}" class='comment-praise displayInlineBlock' wx:if="{{!!item.praiseStatus}}" bindtap='deletePraise'>
-            <image data-id="{{item.commentId}}"  data-praiseid="{{item.praiseStatus}}" src='../../../images/praise_after.png'></image>
-            <text data-id="{{item.commentId}}"  data-praiseid="{{item.praiseStatus}}">{{item.praiseNum}}</text>
+            <image data-id="{{item.commentId}}" data-praiseid="{{item.praiseStatus}}" src='../../../images/praise_after.png'></image>
+            <text data-id="{{item.commentId}}" data-praiseid="{{item.praiseStatus}}">{{item.praiseNum}}</text>
           </view>
 
           <!-- 点赞前 -->
@@ -33,15 +47,16 @@
           </view>
 
           <!-- 举报后 -->
-          <view data-id="{{item.commentId}}" data-reportid="{{item.reportStatus}}" class='report-button' wx:if="{{!!item.reportStatus}}" bindtap='deleteReport' >
+          <view data-id="{{item.commentId}}" data-reportid="{{item.reportStatus}}" class='report-button' wx:if="{{!!item.reportStatus}}" bindtap='deleteReport'>
             <image data-id="{{item.commentId}}" data-reportid="{{item.reportStatus}}" src='../../../images/report_after.png' mode='widthFix'></image>
           </view>
           <!-- 举报前 -->
           <view data-id="{{item.commentId}}" class='report-button' wx:else bindtap='addReport'>
-            <image data-id="{{item.commentId}}"  src='../../../images/report_before.png' mode='widthFix'></image>
+            <image data-id="{{item.commentId}}" src='../../../images/report_before.png' mode='widthFix'></image>
           </view>
         </view>
-      </scroll-view>
+        <view class='comment-box-bottom'>已加载全部内容~</view>     
+      </scroll-view> 
     </view>
   </view>
   <!-- 发表评论模块 -->
@@ -51,4 +66,9 @@
     </view>
     <view class="comment-send-btn {{!!commentMsgValue ? 'btn-active' : 'btn-disable'}}" bindtap='submitSendComment' bindblur='maskClose' type='primary'>发表</view>
   </view>
+</view>
+
+<!-- 后台暂无配置资源 -->
+<view class='recommend-recource-container' wx:else>
+  <image class='no-data-pic' src='../../../images/no_data.png' mode='widthFix'></image>
 </view>

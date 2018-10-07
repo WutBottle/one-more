@@ -4,15 +4,16 @@
 <view class='recommend-recource-container' wx:if="{{sysResource.type===3}}">
   <!-- 资源模块 -->
   <view class='sys-resource-box'>
-    <view class='sys-sresource-img'>
+    <view class='sys-resource-img'>
       <image class='resource-bg' src='{{sysResource.imageUrl}}' mode="widthFix"></image>
     </view>
     <view class='sys-resource-content1'>
       <text>{{sysResource.content}}</text>
     </view>
-    <view class='sys-comment-box'>
-      <image src='../../images/comment.png' mode='widthFix'></image>
-      <text>{{sysResource.commentNum}}</text>
+    <!-- 评论部分 -->
+    <view class='sys-comment-box' data-id='{{sysResource.resourceId}}' bindtap='gotoResDetailPage'>
+      <image data-id='{{sysResource.resourceId}}' src='../../images/comment.png' mode='widthFix'></image>
+      <text data-id='{{sysResource.resourceId}}'>{{sysResource.commentNum}}</text>
     </view>
     <!-- 点赞后 -->
     <view class='sys-praise-box' data-id="{{sysResource.resourceId}}" data-praiseid="{{sysResource.praiseStatus}}" wx:if="{{!!sysResource.praiseStatus}}" bindtap='deletePraise'>
@@ -39,12 +40,14 @@
           <image src='{{item.avatarUrl}}' mode='aspectFit'></image>
           <view class='resource-username displayInlineBlock'>{{item.fakeName}}</view>
           <view class='resource-time displayInlineBlock'>{{item.publishDate}}</view>
-          <view class='resource-text displayInlineBlock'>{{item.content}}</view>
+          <view class='resource-text displayInlineBlock'>
+            <text>{{item.content}}</text>
+          </view>
 
           <!-- 评论部分 -->
-          <view class='resource-comment displayInlineBlock'>
-            <image src='../../images/comment.png' mode='widthFix'></image>
-            <text>{{sysResource.commentNum}}</text>
+          <view data-id='{{item.resourceId}}' bindtap='gotoResDetailPage' class='resource-comment displayInlineBlock'>
+            <image data-id='{{item.resourceId}}' src='../../images/comment.png' mode='widthFix'></image>
+            <text data-id='{{item.resourceId}}' >{{sysResource.commentNum}}</text>
           </view>
 
           <!-- 点赞后 -->
@@ -79,9 +82,9 @@
         </view> -->
 
         <!-- 评论部分 -->
-        <view class='user-comment-box'>
-          <image src='../../images/comment1.png' mode='widthFix'></image>
-          <text>{{userResourceSingle.commentNum}}</text>
+        <view data-id='{{userResourceSingle.resourceId}}' bindtap='gotoResDetailPage' class='user-comment-box'>
+          <image data-id='{{userResourceSingle.resourceId}}' bindtap='gotoResDetailPage' src='../../images/comment1.png' mode='widthFix'></image>
+          <text data-id='{{userResourceSingle.resourceId}}' bindtap='gotoResDetailPage'>{{userResourceSingle.commentNum}}</text>
         </view>
         <!-- 点赞后 -->
         <view class='user-praise-box' data-id="{{userResourceSingle.resourceId}}" data-praiseid="{{userResourceSingle.praiseStatus}}" wx:if="{{!!userResourceSingle.praiseStatus}}" bindtap='deletePraise'>
@@ -103,22 +106,27 @@
       </view>
     </view>
   </view>
+  <view class='publish-box' bindtap='gotoPublishPage' >
+    <image src='../../images/publish.png' mode='widthFix'></image>
+    <text>发布</text>
+  </view>
 </view>
 
 <!-- 语音资源 -->
 <view class='recommend-resource-container' wx:elif="{{sysResource.type===4}}">
   <!-- 系统资源模块 -->
   <view class='sys-resource-box'>
-    <view class='sys-sresource-img'>
+    <view class='sys-resource-img'>
       <image class='resource-bg' src='{{sysResource.imageUrl}}' mode="widthFix"></image>
     </view>
     <view class='sys-resource-content2'>
       <view class='sys-audio'>
-        <audio id='audioRes' src='{{sysResource.audioUrl}}' name='{{userResourceSingle.title}}' author='{{sysResource.fakeName}}' controls bindplay="audioPlay" bindpause='audioPause' bindtimeupdate="audioTimeUpdate" bindended="audioEnded" binderror="audioError"></audio>
+        <audio id='audioRes' src='{{sysResource.audioUrl}}' name='{{sysResource.title}}' author='{{sysResource.fakeName}}' controls bindplay="audioPlay" bindpause='audioPause' bindtimeupdate="audioTimeUpdate" bindended="audioEnded" binderror="audioError"></audio>
       </view>
-      <view class='sys-comment-box'>
-        <image src='../../images/comment.png' mode='widthFix'></image>
-        <text>{{sysResource.commentNum}}</text>
+      <!-- 评论部分 -->
+      <view data-id='{{sysResource.resourceId}}' bindtap='gotoResDetailPage' class='sys-comment-box'>
+        <image data-id='{{sysResource.resourceId}}' src='../../images/comment.png' mode='widthFix'></image>
+        <text data-id='{{sysResource.resourceId}}'>{{sysResource.commentNum}}</text>
       </view>
       <!-- 点赞后 -->
       <view class='sys-praise-box' data-id="{{sysResource.resourceId}}" data-praiseid="{{sysResource.praiseStatus}}" wx:if="{{!!sysResource.praiseStatus}}" bindtap='deletePraise'>
@@ -149,9 +157,9 @@
           <view class='resource-text displayInlineBlock'>{{item.content}}</view>
 
           <!-- 评论部分 -->
-          <view class='resource-comment displayInlineBlock'>
-            <image src='../../images/comment.png' mode='widthFix'></image>
-            <text>{{sysResource.commentNum}}</text>
+          <view data-id='{{item.resourceId}}' bindtap='gotoResDetailPage' class='resource-comment displayInlineBlock'>
+            <image data-id='{{userResourceSingle.resourceId}}' bindtap='gotoResDetailPage' src='../../images/comment.png' mode='widthFix'></image>
+            <text data-id='{{userResourceSingle.resourceId}}' bindtap='gotoResDetailPage'>{{sysResource.commentNum}}</text>
           </view>
 
           <!-- 点赞后 -->
@@ -186,9 +194,9 @@
         </view> -->
 
         <!-- 评论部分 -->
-        <view class='user-comment-box'>
-          <image src='../../images/comment1.png' mode='widthFix'></image>
-          <text>{{userResourceSingle.commentNum}}</text>
+        <view data-id='{{userResourceSingle.resourceId}}' bindtap='gotoResDetailPage' class='user-comment-box'>
+          <image data-id='{{userResourceSingle.resourceId}}' bindtap='gotoResDetailPage' src='../../images/comment1.png' mode='widthFix'></image>
+          <text data-id='{{userResourceSingle.resourceId}}' bindtap='gotoResDetailPage'>{{userResourceSingle.commentNum}}</text>
         </view>
         <!-- 点赞后 -->
         <view class='user-praise-box' data-id="{{userResourceSingle.resourceId}}" data-praiseid="{{userResourceSingle.praiseStatus}}" wx:if="{{!!userResourceSingle.praiseStatus}}" bindtap='deletePraise'>
@@ -202,12 +210,20 @@
         </view>
       </view>
       <view class='change-function-btn'>
-        <view class='change-box' bindtap='changeResource'>
+        <view class='change-box' bindtap='changeResource' wx:if="{{changeCount!==0}}">
+          <image src='../../images/change.png' mode='widthFix'></image>
+          <text>换一个</text>
+        </view>
+        <view class='change-box' wx:else>
           <image src='../../images/change.png' mode='widthFix'></image>
           <text>换一个</text>
         </view>
         <text>剩余次数:{{changeCount}}</text>
       </view>
     </view>
+  </view>
+  <view class='publish-box' bindtap='gotoPublishPage' >
+    <image src='../../images/publish.png' mode='widthFix'></image>
+    <text>发布</text>
   </view>
 </view>
