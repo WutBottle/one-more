@@ -1,6 +1,7 @@
 .question-list-wrapper{
   padding: 0 40rpx 40rpx 40rpx;
   height: 100vh;
+  box-sizing: border-box;
   background-color: #f1eeed;
 }
 

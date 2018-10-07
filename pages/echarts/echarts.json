@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "echarts",
+  "navigationBarTitleText": "测试结果",
   "usingComponents": {
     "ec-canvas": "../../ec-canvas/ec-canvas"
   }

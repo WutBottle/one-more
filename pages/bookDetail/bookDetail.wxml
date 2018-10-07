@@ -1,0 +1,33 @@
+<view class='book-detail-wrapper' wx:if="{{!!bookInfo}}">
+  <view class='header-wrapper'>
+    <image src='{{bookInfo.cover}}' mode='aspectFit'></image>
+    <view class='text-wrapper'>
+      <text class='book-name displayB'>《{{bookInfo.title}}》</text>
+      <text class='book-author displayB' decode="{{true}}">作者&nbsp;&nbsp;{{bookInfo.author}}</text>
+      <text class='book-press displayB' decode="{{true}}" >出版社&nbsp;&nbsp;{{bookInfo.pub}}</text>
+      <text class='book-press displayB' decode="{{true}}">ISBN&nbsp;&nbsp;{{bookInfo.isbn}}</text>
+    </view>
+  </view>
+  <view class='intro-wrapper'>
+    <view class='intro-title'>推荐理由</view>
+    <view class='intro-content'>{{bookInfo.brief}}</view>
+  </view>
+  <view class='catalog-wrapper'>
+    <view class='catalog-title'>章节目录</view>
+    <view class='catalog-item' wx:for="{{bookInfo.chapterDtos}}" wx:key="{{index}}" bindtap='handleTapCatalog' data-status='{{item.purchaseStatus}}' data-id='{{item.chapterId}}'>
+      <view class="catalog-item-text {{!item.purchaseStatus ? 'lock' : 'unlock'}}" data-status='{{item.purchaseStatus}}' data-id='{{item.chapterId}}'>{{item.description}}</view>
+      <image wx:if="{{!item.purchaseStatus}}" src='../../images/lock.png' mode='aspectFit' data-status='{{item.purchaseStatus}}' data-id='{{item.chapterId}}'></image>
+    </view>
+  </view>
+</view>
+
+<view class='tip-modal-wrapper' wx:if="{{showTipModal}}">
+  <view class='tip-wrapper'>
+    <view class='tip-info-wrapper'>
+      <view class='tip-title'>解锁说明</view>
+      <view class='tip-content'>本资源必须通过线下扫码进入，若您想听更多的故事，相遇更多有趣的人，还请先购买我们的实体书籍，要相信书中的世界才是最精彩的！</view>
+      <image src='../../images/close.png' bindtap='closeTipModal' mode='aspectFit'></image>
+    </view>
+    <view class='active-btn displayInlineBlock' bindtap='closeTipModal'>知道了</view>
+  </view>
+</view>

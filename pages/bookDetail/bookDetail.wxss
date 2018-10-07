@@ -1,0 +1,140 @@
+.book-detail-wrapper{
+  padding: 30rpx 50rpx 60rpx 50rpx;
+}
+
+.header-wrapper{
+  display: flex;
+}
+
+.header-wrapper>image{
+  width: 200rpx;
+  height: 300rpx;
+}
+
+.text-wrapper{
+  padding-left: 40rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.book-name{
+  font-size: 32rpx;
+  color: #000;
+  font-weight: bold;
+  padding-bottom: 50rpx; 
+}
+
+.book-author,.book-press,.book-ISBN{
+  font-size: 26rpx;
+}
+
+.intro-title,.catalog-title{
+  display: flex;
+  align-items: center;
+  text-align: justify;
+  padding: 30rpx 0;
+  font-size: 26rpx;
+}
+
+.intro-title::before,.catalog-title::before{
+  content: "";   
+  display: inline-block;   
+  width: 15rpx;
+  height: 26rpx;
+  margin-right: 10rpx;
+  background-color: #6d1aa7;
+}
+
+.intro-content{
+  text-align: justify;
+  font-size: 26rpx;
+  color: #666;
+  line-height: 45rpx;
+}
+
+.lock{
+  color: #666666;
+}
+
+.unlock{
+  color: #000;
+}
+
+.catalog-item-text{
+  display: inline-block;
+  font-size: 30rpx;
+  line-height: 30rpx;
+}
+
+.catalog-item{
+  display: flex;
+  justify-content: space-between;
+  padding: 10rpx 0 40rpx 0;
+}
+
+.catalog-item>image{
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.tip-modal-wrapper{
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 99999;
+  background: rgba(95, 95, 95, 0.6);
+}
+
+.tip-wrapper{
+  width: 80vw;
+  background-color: #ffffff;
+  margin: 0 auto;
+  margin-top: 20vh;
+  border-radius: 20rpx;
+  overflow: hidden;
+  text-align: center;
+}
+
+.tip-info-wrapper{
+  position: relative;
+  background-color: #61b8b0;
+  padding: 70rpx 40rpx 50rpx 40rpx;
+  color: #ffffff;
+  box-sizing: border-box;
+}
+
+.tip-info-wrapper>image{
+  position: absolute;
+  top: 20rpx;
+  right: 20rpx;
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.tip-title{
+  text-align: center;
+  font-size: 36rpx;
+  padding-bottom: 50rpx;
+  box-sizing: border-box;
+}
+
+.tip-content{
+  text-align: justify;
+  font-size: 30rpx;
+  line-height: 50rpx;
+}
+
+.active-btn{
+  font-size: 30rpx;
+  color: #ffffff;
+  background-color: #61b8b0;
+  border-radius: 30rpx;
+  padding: 10rpx 30rpx;
+  text-align: center;
+  margin: 40rpx 0;
+}

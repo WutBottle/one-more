@@ -1,3 +1,22 @@
-<view class="echarts-container">
-  <ec-canvas id="mychart-dom-line" canvas-id="mychart-line" ec="{{ ec }}"></ec-canvas>
+<view class='test-result-wrapper'>
+  <view class="echarts-container">
+    <ec-canvas id="mychart-dom-line" canvas-id="mychart-line" ec="{{ ec }}"></ec-canvas>
+  </view>
+
+  <view class='read-result-btn' wx:if="{{isShowModal&&barLoadStatus}}" bindtap='readResult'>查看分析结果</view>
+  <view class='result-wrapper' wx:elif="{{!isShowModal&&resultLoadStatus}}">
+    <view class='personality-type'>性格类型：{{resultObj.personalityName}}（{{resultObj.personalityBrief}}）</view>
+    <view class='analysis-item'>行为特征：</view>
+    <view>{{resultObj.behaviorCharacteristics}}</view>
+    <view class='analysis-item'>交流沟通：</view>
+    <view>{{resultObj.communication}}</view>
+    <view class='analysis-item'>能力特征：</view>
+    <view>{{resultObj.capabilityCharacteristics}}</view>
+    <view class='analysis-item'>行为优势：</view>
+    <view>{{resultObj.behavioralAdvantage}}</view>
+    <view class='analysis-item'>行为弱势：</view>
+    <view>{{resultObj.disadvantagedBehavior}}</view>
+  </view>
 </view>
+
+<text class='back-to-list' bindtap='backToTestList'>返回\n题目列表</text>

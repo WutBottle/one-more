@@ -1,0 +1,57 @@
+.history-item-wrapper{
+  padding: 15rpx;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  border: 1rpx #eee solid;
+}
+
+.history-item-wrapper>image{
+  width: 180rpx;
+  height: 240rpx;
+}
+
+.text-info-wrapper{
+  padding: 20rpx;
+  width: 70vw;
+  height: 240rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.book-title{
+  font-size: 34rpx;
+  color: #000;
+}
+
+.history-time{
+  font-size: 24rpx;
+  color: #666666;
+}
+
+.first-line{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.second-line{
+  font-size: 30rpx;
+  color: #666666;
+}
+
+.third-line{
+  font-size: 34rpx;
+  color: #000;
+  background-color: #eee;
+  border-radius: 10rpx;
+}
+
+.no-history-msg{
+  font-size: 30rpx;
+  color: #9c9c9c;
+  text-align: center;
+  padding: 50rpx;
+}

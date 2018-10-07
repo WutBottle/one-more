@@ -51,13 +51,6 @@
 				},
 				{
 					"id": -1,
-					"name": "系统消息",
-					"pathName": "pages/message/messageSys/messageSys",
-					"query": "",
-					"scene": "1011"
-				},
-				{
-					"id": -1,
 					"name": "私信",
 					"pathName": "pages/message/messagePrivate/messagePrivate",
 					"query": "",
@@ -71,13 +64,6 @@
 				},
 				{
 					"id": -1,
-					"name": "好友申请列表",
-					"pathName": "pages/message/messagePrivate/friendsApplication/friendsApplication",
-					"query": "",
-					"scene": "1011"
-				},
-				{
-					"id": -1,
 					"name": "评论",
 					"pathName": "pages/message/messageComment/messageComment",
 					"query": "",
@@ -88,6 +74,19 @@
 					"name": "资源初始化页面",
 					"pathName": "pages/recommendResource/recommendResource",
 					"query": "chapterId=3",
+					"scene": "1011"
+				},
+				{
+					"id": 8,
+					"name": "测试结果统计图",
+					"pathName": "pages/echarts/echarts",
+					"query": "I=8&D=32&S=11&C=8&problemId=1"
+				},
+				{
+					"id": -1,
+					"name": "书籍详情",
+					"pathName": "pages/bookDetail/bookDetail",
+					"query": "bookId=2&uid=8",
 					"scene": "1011"
 				}
 			]

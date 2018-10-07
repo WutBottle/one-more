@@ -7,7 +7,7 @@
     </view>
   </view>
 
-  <view class='test-stem-wrapper' data-modalBlank='true' wx:if="{{showTestStem}}" bindtap='closeTestStem'>
+  <view class='test-stem-wrapper' data-modalBlank='true' wx:if="{{ifShowTestStem}}" bindtap='closeTestStem'>
     <view class='stem-wrapper'>
       <view class='test-request-info'>{{stemInfo.description}}</view>
       <view class='test-detail-info'>{{stemInfo.rule}}</view>

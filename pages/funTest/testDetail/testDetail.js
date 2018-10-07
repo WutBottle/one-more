@@ -16,11 +16,13 @@ Page({
   },
   answerArray: [0, 0, 0, 0],//答案统计数组
   totalNum: 0,//题目总数
+  problemId: null,//题目ID
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.problemId = options.problemId;
     const param = {
       proId: options.problemId
     }
@@ -45,7 +47,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    this.setData({
+      questionOrder: 0,
+    })
+    this.answerArray = [0, 0, 0, 0];
   },
 
   /**
@@ -121,6 +126,9 @@ Page({
   //提交答案数组
   submitAnswer(){
     console.log(this.answerArray);
+    wx.navigateTo({
+      url: '../../echarts/echarts?I=' + this.answerArray[0] + '&D=' + this.answerArray[1] + '&S=' + this.answerArray[2] + '&C=' + this.answerArray[3] + '&problemId=' + this.problemId,
+    })
     this.setData({
       questionOrder: 0,
       currentQuestion: this.data.questionList[0],

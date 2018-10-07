@@ -1,9 +1,8 @@
 const app = getApp();
 
 import {
-  getFunTestList,
-  getTestStem
-} from '../../api/problemController.js';
+  selectBookInfo
+} from '../../api/bookController.js'
 
 Page({
 
@@ -11,16 +10,18 @@ Page({
    * 页面的初始数据
    */
   data: {
-    testList: [],
-    stemInfo: {},
-    ifShowTestStem: false,
+    bookInfo: {},
+    showTipModal: false,//提示弹窗标记
   },
-
+  bookId: null,
+  uid: null,
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.updateFunTestList();
+    this.bookId = 2;
+    this.uid = 8;
+    this.updateCatalog();
   },
 
   /**
@@ -34,9 +35,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.setData({
-      ifShowTestStem: false
-    })
+    
   },
 
   /**
@@ -50,7 +49,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    
   },
 
   /**
@@ -74,48 +73,35 @@ Page({
     
   },
 
-  //获取趣味测试列表
-  updateFunTestList(){
-    const param = {
-      uid: app.globalData.uid,
-    }
-    getFunTestList(param).then((data) => {
+  //处理点击目录
+  handleTapCatalog(e){
+    console.log(e.target.dataset)
+    if (!e.target.dataset.status){
       this.setData({
-        testList: data.problems,
-      })
-    })
-  },
-
-  //弹出题干
-  showTestStem(e){
-    const param = {
-      problemId: e.target.dataset.id
-    }
-    getTestStem(param).then((data) => {
-      this.setData({
-        stemInfo: data.problem,
-        ifShowTestStem: true,
-      })
-    })
-  },
-
-  //关闭题干
-  closeTestStem(e){
-    if (e.target.dataset.modalblank){
-      this.setData({
-        ifShowTestStem: false,
+        showTipModal: true
       })
     }else{
-      this.setData({
-        ifShowTestStem: true,
-      })
+      //跳转到资源配置页面
     }
   },
 
-  //跳转到测试页面
-  startTest(e){
-    wx.navigateTo({
-      url: 'testDetail/testDetail?problemId=' + e.target.dataset.id,
+  //刷新书籍详情页面
+  updateCatalog(){
+    const param = {
+      bookId: this.bookId,
+      uid: this.uid
+    }
+    selectBookInfo(param).then((data) => {
+      this.setData({
+        bookInfo: data.book[0]
+      })
+    })
+  },
+
+  //关闭tip弹窗
+  closeTipModal(){
+    this.setData({
+      showTipModal: false,
     })
   }
 })
