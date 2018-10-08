@@ -50,12 +50,12 @@
             <text data-id='{{item.resourceId}}' >{{item.commentNum}}</text>
           </view>
           <!-- 点赞后 -->
-          <view data-idx="{{index}}" data-id="{{item.resourceId}}" data-praiseid="{{item.praiseStatus}}" class='resource-praise displayInlineBlock' wx:if="{{!!item.praiseStatus}}" bindtap='deletePraise'>
+          <view data-idx="{{index}}" data-id="{{item.resourceId}}" data-praiseid="{{item.praiseStatus}}" class='resource-praise displayInlineBlock' wx:if="{{!!item.praiseStatus}}" bindtap='deleteTextPraise'>
             <image data-idx="{{index}}" data-id="{{item.resourceId}}" data-praiseid="{{item.praiseStatus}}" src='../../../images/praise_after.png'></image>
             <text data-idx="{{index}}" data-id="{{item.resourceId}}" data-praiseid="{{item.praiseStatus}}">{{item.praiseNum}}</text>
           </view>
           <!-- 点赞前 -->
-          <view data-idx="{{index}}" data-id="{{item.resourceId}}" class='resource-praise displayInlineBlock' wx:else bindtap='addPraise'>
+          <view data-idx="{{index}}" data-id="{{item.resourceId}}" class='resource-praise displayInlineBlock' wx:else bindtap='addTextPraise'>
             <image data-idx="{{index}}" data-id="{{item.resourceId}}" src='../../../images/praise_before.png'></image>
             <text data-idx="{{index}}" data-id="{{item.resourceId}}">{{item.praiseNum}}</text>
           </view>
@@ -162,12 +162,12 @@
           </view>
 
           <!-- 点赞后 -->
-          <view  data-idx="{{index}}" data-id="{{item.resourceId}}" data-praiseid="{{item.praiseStatus}}" class='resource-praise displayInlineBlock' wx:if="{{!!item.praiseStatus}}" bindtap='deletePraise'>
+          <view  data-idx="{{index}}" data-id="{{item.resourceId}}" data-praiseid="{{item.praiseStatus}}" class='resource-praise displayInlineBlock' wx:if="{{!!item.praiseStatus}}" bindtap='deleteTextPraise'>
             <image  data-idx="{{index}}" data-id="{{item.resourceId}}" data-praiseid="{{item.praiseStatus}}" src='../../../images/praise_after.png'></image>
             <text data-idx="{{index}}" data-id="{{item.resourceId}}" data-praiseid="{{item.praiseStatus}}">{{item.praiseNum}}</text>
           </view>
           <!-- 点赞前 -->
-          <view data-idx="{{index}}" data-id="{{item.resourceId}}" class='resource-praise displayInlineBlock' wx:else bindtap='addPraise'>
+          <view data-idx="{{index}}" data-id="{{item.resourceId}}" class='resource-praise displayInlineBlock' wx:else bindtap='addTextPraise'>
             <image data-idx="{{index}}" data-id="{{item.resourceId}}" src='../../../images/praise_before.png'></image>
             <text data-idx="{{index}}" data-id="{{item.resourceId}}">{{item.praiseNum}}</text>
           </view>

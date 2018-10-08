@@ -17,7 +17,7 @@ import {
   reportDeleteOne
 } from '../../../api/reportController.js'
 
-const app = getApp()
+var app = getApp()
 Page({
 
   /**
@@ -220,10 +220,11 @@ Page({
    * 给评论添加点赞
    */
   addPraise: function(e) {
+    console.log(e.target.dataset.id);
     const param = {
       workId: e.target.dataset.id,
       workType: 1,
-      praiseUid: app.globalData.data
+      praiseUid: app.globalData.uid
     }
     praiseAddOne(param).then((data) => {
       this.findResourceInfo();
@@ -238,7 +239,7 @@ Page({
       reportId: e.target.dataset.reportid,
       workId: e.target.dataset.id,
       workType: 1,
-      reportUid: app.globalData.data
+      reportUid: app.globalData.uid
     }
     reportDeleteOne(param).then((data) => {
       this.findResourceInfo();
@@ -252,7 +253,7 @@ Page({
     const param = {
       workId: e.target.dataset.id,
       workType: 1,
-      reportUid: app.globalData.data
+      reportUid: app.globalData.uid
     }
     reportAddOne(param).then((data) => {
       this.findResourceInfo();

@@ -149,9 +149,38 @@ Page({
   },
 
   /**
- * 给图文资源删除点赞（本地修改）
+ * 给系统资源删除点赞
  */
   deletePraise: function (e) {
+    const param = {
+      praiseId: e.target.dataset.praiseid,
+      workId: e.target.dataset.id,
+      workType: 0,
+      praiseUid: app.globalData.uid
+    }
+    praiseDeleteOne(param).then((data) => {
+      this.loadOurResource();
+    })
+  },
+
+  /**
+   * 给系统资源添加点赞
+   */
+  addPraise: function (e) {
+    const param = {
+      workId: e.target.dataset.id,
+      workType: 0,
+      praiseUid: app.globalData.uid
+    }
+    praiseAddOne(param).then((data) => {
+      this.loadOurResource();
+    })
+  },
+
+  /**
+ * 给图文资源删除点赞（本地修改）
+ */
+  deleteTextPraise: function (e) {
     var index = e.target.dataset.idx;
     const param = {
       praiseId: e.target.dataset.praiseid,
@@ -172,7 +201,7 @@ Page({
   /**
    * 给图文资源添加点赞（本地修改）
    */
-  addPraise: function (e) {
+  addTextPraise: function (e) {
     var index = e.target.dataset.idx;
     const param = {
       workId: e.target.dataset.id,
