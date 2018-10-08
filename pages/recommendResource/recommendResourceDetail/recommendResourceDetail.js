@@ -25,7 +25,6 @@ Page({
    */
   data: {
     isResExit:false,
-    resourceId: null,
     resourceType: null, //资源类型 0：用户图文，1：用户音频，3：系统图文，4：系统音频
     resourceContent: {}, //资源内容
     commentList: [], //资源评论列表
@@ -35,15 +34,15 @@ Page({
     pubSuccess: false, //评论发表成功
     scrollHeight: null, //滚动部分高度
   },
+  resourceId: null,
+  
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
     console.log(options);
-    this.setData({
-      resourceId: options.resourceId
-    })
+    this.resourceId= options.resourceId
     // 高度适配
     let that = this
     wx.getSystemInfo({
@@ -110,8 +109,8 @@ Page({
    */
   findResourceInfo: function() {
     const param = {
-      rid: this.data.resourceId,
-      uid: 19
+      rid: this.resourceId,
+      uid: app.globalData.uid
       // uid:app.globalData.uid
     }
     findInfo(param).then((data) => {
@@ -135,8 +134,8 @@ Page({
    */
   findCommentInfoNew: function() {
     const param = {
-      rid: this.data.resourceId,
-      uid: 19
+      rid: this.resourceId,
+      uid: app.globalData.uid
       // uid:app.globalData.uid
     }
     findInfoNew(param).then((data) => {
@@ -181,9 +180,9 @@ Page({
     var comment = this.data.commentMsgValue;
     if (!!comment) {
       const param = {
-        commentUid: 19,
+        commentUid: app.globalData.uid,
         content: comment,
-        workId: 1
+        workId: this.resourceId
       }
       commentAddOne(param).then((data) => {
         this.setData({
@@ -213,7 +212,7 @@ Page({
       praiseId: e.target.dataset.praiseid,
       workId: e.target.dataset.id,
       workType: 1,
-      praiseUid: 19
+      praiseUid: app.globalData.uid
     }
     praiseDeleteOne(param).then((data) => {
       this.findResourceInfo();
@@ -228,7 +227,7 @@ Page({
     const param = {
       workId: e.target.dataset.id,
       workType: 1,
-      praiseUid: 19
+      praiseUid: app.globalData.data
     }
     praiseAddOne(param).then((data) => {
       this.findResourceInfo();
@@ -243,7 +242,7 @@ Page({
       reportId: e.target.dataset.reportid,
       workId: e.target.dataset.id,
       workType: 1,
-      reportUid: 19
+      reportUid: app.globalData.data
     }
     reportDeleteOne(param).then((data) => {
       this.findResourceInfo();
@@ -259,7 +258,7 @@ Page({
       // reportid:e.target.dataset.reportid,
       workId: e.target.dataset.id,
       workType: 1,
-      reportUid: 19
+      reportUid: app.globalData.data
     }
     reportAddOne(param).then((data) => {
       this.findResourceInfo();

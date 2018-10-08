@@ -32,7 +32,7 @@
           <view class='comment-username displayInlineBlock'>{{item.userFakeName}}</view>
           <view class='comment-time displayInlineBlock'>{{item.createTime}}</view>
           <view class='comment-text displayInlineBlock'>
-            <text>啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦</text>
+            <text>{{item.content}}</text>
           </view>
           <!-- 点赞后 -->
           <view data-id="{{item.commentId}}" data-praiseid="{{item.praiseStatus}}" class='comment-praise displayInlineBlock' wx:if="{{!!item.praiseStatus}}" bindtap='deletePraise'>

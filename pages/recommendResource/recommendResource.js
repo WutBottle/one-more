@@ -146,27 +146,7 @@ Page({
    * 加载三条图文用户资源
    */
   loadUserResource: function () {
-    var that = this;
-    const param = {
-      chapterId: that.data.chapterId,
-      uid:app.globalData.uid
-    }
-    findUserThreeResource(param).then((data) => {
-      var param=param;
-      // 如果是图文类型的话 加载三条
-      if (data.status === true&&data.resources[0].type==0) {
-        that.setData({
-          userResource: data.resources
-        })
-        console.log(that.data.userResource);
-      } else if (data.status === true && data.resources[0].type == 1){
-        // 如果是音频类型的话 加载一条
-        that.setData({
-          userResourceSingle: data.resources[0]
-        })
-        console.log(that.data.userResourceSingle);        
-      }
-    })
+    this.changeResource();
   },
 
   /**
@@ -230,17 +210,30 @@ Page({
   },
 
   /**
-   * 资源换一换
+   * 加载资源封装函数
    */
   changeResource:function() {
-    let index = this.userResourceIndex;
-    index=(index+1)%3;
-    console.log(index);
-    this.setData({
-      userResourceSingle:this.data.userResource[index],
-      changeCount: this.data.changeCount-1
+    var that = this;
+    const param = {
+      chapterId: that.data.chapterId,
+      uid: app.globalData.uid
+    }
+    findUserThreeResource(param).then((data) => {
+      var param = param;
+      // 如果是图文类型的话 加载三条
+      if (data.status === true && data.resources[0].type == 0) {
+        that.setData({
+          userResource: data.resources
+        })
+        console.log(that.data.userResource);
+      } else if (data.status === true && data.resources[0].type == 1) {
+        // 如果是音频类型的话 加载一条
+        that.setData({
+          userResourceSingle: data.resources[0]
+        })
+        console.log(that.data.userResourceSingle);
+      }
     })
-    this.userResourceIndex = index;
   },
 
   /**

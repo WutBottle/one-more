@@ -20,6 +20,7 @@
   position: relative;
   width: 100%;
   height: 490rpx;
+  overflow: hidden;
 }
 
 .resource-img {
