@@ -179,6 +179,7 @@
 
 .sys-comment-box text {
   float: left;  
+  margin-left: 10rpx;
   font-size: 28rpx;
   color: #666;
 }

@@ -1,4 +1,4 @@
-// pages/recommendResource/recommendResouce.js
+// pages/recommendResource/recommendResource.js
 var app = getApp();
 import {
   findOurResource,
@@ -32,7 +32,7 @@ Page({
     sysResource: [],
     userResource: [],
     userResourceSingle:[],
-    changeCount:null,
+    // changeCount:null,
   },
     sysResourceType:null,
     userResourceIndex:0,//用户资源序号
@@ -150,9 +150,10 @@ Page({
   },
 
   /**
- * 给资源删除点赞
+ * 给图文资源删除点赞（本地修改）
  */
   deletePraise: function (e) {
+    var index = e.target.dataset.idx;
     const param = {
       praiseId: e.target.dataset.praiseid,
       workId: e.target.dataset.id,
@@ -160,21 +161,72 @@ Page({
       praiseUid: app.globalData.uid
     }
     praiseDeleteOne(param).then((data) => {
-      this.loadOurResource();
+      let tempData = this.data.userResource;
+      tempData[index].praiseStatus = null;
+      tempData[index].praiseNum = tempData[index].praiseNum - 1;
+      this.setData({
+        userResource: tempData
+      })
     })
   },
 
   /**
-   * 给资源添加点赞
+   * 给图文资源添加点赞（本地修改）
    */
   addPraise: function (e) {
+    var index = e.target.dataset.idx;
     const param = {
       workId: e.target.dataset.id,
       workType: 0,
       praiseUid: app.globalData.uid
     }
     praiseAddOne(param).then((data) => {
-      this.loadOurResource();
+      let tempData = this.data.userResource;
+      tempData[index].praiseStatus = 1;
+      tempData[index].praiseNum = tempData[index].praiseNum + 1;
+      this.setData({
+        userResource: tempData
+      })
+    })
+  },
+
+  /**
+ * 给音频资源删除点赞（本地修改）
+ */
+  deleteAudioPraise: function (e) {
+    const param = {
+      praiseId: e.target.dataset.praiseid,
+      workId: e.target.dataset.id,
+      workType: 0,
+      praiseUid: app.globalData.uid
+    }
+    praiseDeleteOne(param).then((data) => {
+      let tempData = this.data.userResourceSingle;
+      tempData.praiseStatus = null;
+      tempData.praiseNum = tempData.praiseNum - 1;
+      this.setData({
+        userResourceSingle: tempData
+      })
+    })
+  },
+
+  /**
+ * 给音频资源添加点赞（本地修改）
+ */
+  addAudioPraise: function (e) {
+    console.log(this.data.userResourceSingle)
+    const param = {
+      workId: e.target.dataset.id,
+      workType: 0,
+      praiseUid: app.globalData.uid
+    }
+    praiseAddOne(param).then((data) => {
+      let tempData = this.data.userResourceSingle;
+      tempData.praiseStatus = 1;
+      tempData.praiseNum = tempData.praiseNum+1;
+      this.setData({
+        userResourceSingle:tempData
+      })
     })
   },
 

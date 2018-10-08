@@ -92,7 +92,6 @@ Page({
    * 保存资源标题
    */
   saveTitle: function(e) {
-    console.log(e.detail.value);
     this.setData({
       resourceTitle: e.detail.value
     })

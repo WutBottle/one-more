@@ -49,16 +49,15 @@
             <image data-id='{{item.resourceId}}' src='../../images/comment.png' mode='widthFix'></image>
             <text data-id='{{item.resourceId}}' >{{item.commentNum}}</text>
           </view>
-
           <!-- 点赞后 -->
-          <view data-id="{{item.resourceId}}" data-praiseid="{{item.praiseStatus}}" class='resource-praise displayInlineBlock' wx:if="{{!!item.praiseStatus}}" bindtap='deletePraise'>
-            <image data-id="{{item.resourceId}}" data-praiseid="{{item.praiseStatus}}" src='../../../images/praise_after.png'></image>
-            <text data-id="{{item.resourceId}}" data-praiseid="{{item.praiseStatus}}">{{item.praiseNum}}</text>
+          <view data-idx="{{index}}" data-id="{{item.resourceId}}" data-praiseid="{{item.praiseStatus}}" class='resource-praise displayInlineBlock' wx:if="{{!!item.praiseStatus}}" bindtap='deletePraise'>
+            <image data-idx="{{index}}" data-id="{{item.resourceId}}" data-praiseid="{{item.praiseStatus}}" src='../../../images/praise_after.png'></image>
+            <text data-idx="{{index}}" data-id="{{item.resourceId}}" data-praiseid="{{item.praiseStatus}}">{{item.praiseNum}}</text>
           </view>
           <!-- 点赞前 -->
-          <view data-id="{{item.resourceId}}" class='resource-praise displayInlineBlock' wx:else bindtap='addPraise'>
-            <image data-id="{{item.resourceId}}" src='../../../images/praise_before.png'></image>
-            <text data-id="{{item.resourceId}}">{{item.praiseNum}}</text>
+          <view data-idx="{{index}}" data-id="{{item.resourceId}}" class='resource-praise displayInlineBlock' wx:else bindtap='addPraise'>
+            <image data-idx="{{index}}" data-id="{{item.resourceId}}" src='../../../images/praise_before.png'></image>
+            <text data-idx="{{index}}" data-id="{{item.resourceId}}">{{item.praiseNum}}</text>
           </view>
         </view>
       </view>
@@ -87,12 +86,12 @@
           <text data-id='{{userResourceSingle.resourceId}}' bindtap='gotoResDetailPage'>{{userResourceSingle.commentNum}}</text>
         </view>
         <!-- 点赞后 -->
-        <view class='user-praise-box' data-id="{{userResourceSingle.resourceId}}" data-praiseid="{{userResourceSingle.praiseStatus}}" wx:if="{{!!userResourceSingle.praiseStatus}}" bindtap='deletePraise'>
+        <view class='user-praise-box' data-id="{{userResourceSingle.resourceId}}" data-praiseid="{{userResourceSingle.praiseStatus}}" wx:if="{{!!userResourceSingle.praiseStatus}}" bindtap='deleteAudioPraise'>
           <image data-id="{{userResourceSingle.resourceId}}" data-praiseid="{{userResourceSingle.praiseStatus}}" src='../../images/praise_after1.png' mode='widthFix'></image>
           <text data-id="{{userResourceSingle.resourceId}}" data-praiseid="{{userResourceSingle.praiseStatus}}">{{userResourceSingle.praiseNum}}</text>
         </view>
         <!-- 点赞前 -->
-        <view data-id="{{userResourceSingle.resourceId}}" class='user-praise-box' wx:else bindtap='addPraise'>
+        <view data-id="{{userResourceSingle.resourceId}}" class='user-praise-box' wx:else bindtap='addAudioPraise'>
           <image data-id="{{userResourceSingle.resourceId}}" src='../../images/praise_before1.png' mode='widthFix'></image>
           <text data-id="{{userResourceSingle.resourceId}}">{{userResourceSingle.praiseNum}}</text>
         </view>
@@ -163,14 +162,14 @@
           </view>
 
           <!-- 点赞后 -->
-          <view data-id="{{item.resourceId}}" data-praiseid="{{item.praiseStatus}}" class='resource-praise displayInlineBlock' wx:if="{{!!item.praiseStatus}}" bindtap='deletePraise'>
-            <image data-id="{{item.resourceId}}" data-praiseid="{{item.praiseStatus}}" src='../../../images/praise_after.png'></image>
-            <text data-id="{{item.resourceId}}" data-praiseid="{{item.praiseStatus}}">{{item.praiseNum}}</text>
+          <view  data-idx="{{index}}" data-id="{{item.resourceId}}" data-praiseid="{{item.praiseStatus}}" class='resource-praise displayInlineBlock' wx:if="{{!!item.praiseStatus}}" bindtap='deletePraise'>
+            <image  data-idx="{{index}}" data-id="{{item.resourceId}}" data-praiseid="{{item.praiseStatus}}" src='../../../images/praise_after.png'></image>
+            <text data-idx="{{index}}" data-id="{{item.resourceId}}" data-praiseid="{{item.praiseStatus}}">{{item.praiseNum}}</text>
           </view>
           <!-- 点赞前 -->
-          <view data-id="{{item.resourceId}}" class='resource-praise displayInlineBlock' wx:else bindtap='addPraise'>
-            <image data-id="{{item.resourceId}}" src='../../../images/praise_before.png'></image>
-            <text data-id="{{item.resourceId}}">{{item.praiseNum}}</text>
+          <view data-idx="{{index}}" data-id="{{item.resourceId}}" class='resource-praise displayInlineBlock' wx:else bindtap='addPraise'>
+            <image data-idx="{{index}}" data-id="{{item.resourceId}}" src='../../../images/praise_before.png'></image>
+            <text data-idx="{{index}}" data-id="{{item.resourceId}}">{{item.praiseNum}}</text>
           </view>
         </view>
       </view>
@@ -199,12 +198,12 @@
           <text data-id='{{userResourceSingle.resourceId}}' bindtap='gotoResDetailPage'>{{userResourceSingle.commentNum}}</text>
         </view>
         <!-- 点赞后 -->
-        <view class='user-praise-box' data-id="{{userResourceSingle.resourceId}}" data-praiseid="{{userResourceSingle.praiseStatus}}" wx:if="{{!!userResourceSingle.praiseStatus}}" bindtap='deletePraise'>
+        <view class='user-praise-box' data-id="{{userResourceSingle.resourceId}}" data-praiseid="{{userResourceSingle.praiseStatus}}" wx:if="{{!!userResourceSingle.praiseStatus}}" bindtap='deleteAudioPraise'>
           <image data-id="{{userResourceSingle.resourceId}}" data-praiseid="{{userResourceSingle.praiseStatus}}" src='../../images/praise_after1.png' mode='widthFix'></image>
           <text data-id="{{userResourceSingle.resourceId}}" data-praiseid="{{userResourceSingle.praiseStatus}}">{{userResourceSingle.praiseNum}}</text>
         </view>
         <!-- 点赞前 -->
-        <view data-id="{{userResourceSingle.resourceId}}" class='user-praise-box' wx:else bindtap='addPraise'>
+        <view data-id="{{userResourceSingle.resourceId}}" class='user-praise-box' wx:else bindtap='addAudioPraise'>
           <image data-id="{{userResourceSingle.resourceId}}" src='../../images/praise_before1.png' mode='widthFix'></image>
           <text data-id="{{userResourceSingle.resourceId}}">{{userResourceSingle.praiseNum}}</text>
         </view>
@@ -218,7 +217,7 @@
           <image src='../../images/change.png' mode='widthFix'></image>
           <text>换一个</text>
         </view>
-        <text>剩余次数:{{changeCount}}</text>
+        <!-- <text>剩余次数:{{changeCount}}</text> -->
       </view>
     </view>
   </view>
