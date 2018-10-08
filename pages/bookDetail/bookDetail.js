@@ -82,6 +82,9 @@ Page({
       })
     }else{
       //跳转到资源配置页面
+      wx.navigateTo({
+        url: '../recommendResource/recommendResource?chapterId=' + e.target.dataset.id,
+      })
     }
   },
 
