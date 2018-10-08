@@ -47,7 +47,7 @@
           <!-- 评论部分 -->
           <view data-id='{{item.resourceId}}' bindtap='gotoResDetailPage' class='resource-comment displayInlineBlock'>
             <image data-id='{{item.resourceId}}' src='../../images/comment.png' mode='widthFix'></image>
-            <text data-id='{{item.resourceId}}' >{{sysResource.commentNum}}</text>
+            <text data-id='{{item.resourceId}}' >{{item.commentNum}}</text>
           </view>
 
           <!-- 点赞后 -->
@@ -159,7 +159,7 @@
           <!-- 评论部分 -->
           <view data-id='{{item.resourceId}}' bindtap='gotoResDetailPage' class='resource-comment displayInlineBlock'>
             <image data-id='{{userResourceSingle.resourceId}}' bindtap='gotoResDetailPage' src='../../images/comment.png' mode='widthFix'></image>
-            <text data-id='{{userResourceSingle.resourceId}}' bindtap='gotoResDetailPage'>{{sysResource.commentNum}}</text>
+            <text data-id='{{userResourceSingle.resourceId}}' bindtap='gotoResDetailPage'>{{item.commentNum}}</text>
           </view>
 
           <!-- 点赞后 -->
