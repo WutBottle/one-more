@@ -40,7 +40,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options);
     this.setData({
       chapterId: options.chapterId
     })
@@ -197,9 +196,7 @@ Page({
    * 对资源添加举报
    */
   addReport: function (e) {
-    // console.log(e.target.dataset.reportid)
     const param = {
-      // reportid:e.target.dataset.reportid,
       workId: e.target.dataset.id,
       workType: 0,
       reportUid: app.globalData.uid
@@ -225,13 +222,11 @@ Page({
         that.setData({
           userResource: data.resources
         })
-        console.log(that.data.userResource);
       } else if (data.status === true && data.resources[0].type == 1) {
         // 如果是音频类型的话 加载一条
         that.setData({
           userResourceSingle: data.resources[0]
         })
-        console.log(that.data.userResourceSingle);
       }
     })
   },
@@ -240,7 +235,6 @@ Page({
    * 跳转对应资源详情页
    */
   gotoResDetailPage:function(e) {
-    console.log(e.target.dataset.id);
     wx.navigateTo({
       url: 'recommendResourceDetail/recommendResourceDetail?resourceId='+e.target.dataset.id,
     })
@@ -250,7 +244,6 @@ Page({
    * 跳转发表资源页
    */
   gotoPublishPage:function(e) {
-    console.log(this.data.chapterId)
     wx.navigateTo({
       url: 'publishResource/publishResource?chapterId=' + this.data.chapterId +'&resourceType='+this.resourceType,
     })
