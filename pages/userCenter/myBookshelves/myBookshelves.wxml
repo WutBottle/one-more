@@ -1,40 +1,28 @@
 <!--pages/userCenter/myBookshelves/myBookshelves.wxml-->
 <view class='bookshelves-container'>
-  <view class='bookshelves-book-list'>
+  <view class='bookshelves-book-list' bindtap='handleClickBook'>
     <view class='tr'>
       <view class='td' wx:for-index='index' wx:if="{{index<3}}" wx:for="{{bookList}}" wx:key="">
-        <image src='{{item.cover}}'></image>
-        <view>
-          <text>《{{item.title}}》</text>
-          <!-- <text>{{index}}</text> -->
-        </view>
+        <image data-id='{{item.bookId}}' src='{{item.cover}}'></image>
+        <view data-id='{{item.bookId}}'>《{{item.title}}》</view>
       </view>
     </view>
     <view class='tr'>
       <view class='td' wx:for-index='index' wx:if="{{index>2&&index<6}}" wx:for="{{bookList}}" wx:key="">
-        <image src='{{item.cover}}'></image>
-        <view>
-          <!-- <text>《{{item.title}}》</text> -->
-          <text>{{index}}</text>
-        </view>
+        <image data-id='{{item.bookId}}' src='{{item.cover}}'></image>
+        <view data-id='{{item.bookId}}'>《{{item.title}}》</view>
       </view>
     </view>
     <view class='tr'>
       <view class='td' wx:for-index='index' wx:if="{{index>5&&index<9}}" wx:for="{{bookList}}" wx:key="">
-        <image src='{{item.cover}}'></image>
-        <view>
-          <!-- <text>《{{item.title}}》</text> -->
-          <text>{{index}}</text>
-        </view>
+        <image data-id='{{item.bookId}}' src='{{item.cover}}'></image>
+        <view data-id='{{item.bookId}}'>《{{item.title}}》</view>
       </view>
     </view>
     <view class='tr'>
       <view class='td' wx:for-index='index' wx:if="{{index>8&&index<12}}" wx:for="{{bookList}}" wx:key="">
-        <image src='{{item.cover}}'></image>
-        <view>
-          <!-- <text>《{{item.title}}》</text> -->
-          <text>{{index}}</text>
-        </view>
+        <image data-id='{{item.bookId}}' src='{{item.cover}}'></image>
+        <view data-id='{{item.bookId}}'>《{{item.title}}》</view>
       </view>
     </view>
   </view>

@@ -18,7 +18,7 @@
       <image class='resource-bg' src='{{resourceContent.imageUrl}}' mode="widthFix"></image>
     </view>
     <view class='resource-content'>
-      <audio id='audioRes' src='{{resourceContent.audioUrl}}' name='{{userResourceSingle.title}}' author='{{sysResource.fakeName}}' controls bindplay="audioPlay" bindpause='audioPause' bindtimeupdate="audioTimeUpdate" bindended="audioEnded" binderror="audioError"></audio>
+      <audio id='audioRes' src='{{resourceContent.audioUrl}}' name='{{resourceContent.title}}' author='{{resourceContent.fakeName}}' controls bindplay="audioPlay" bindpause='audioPause' bindtimeupdate="audioTimeUpdate" bindended="audioEnded" binderror="audioError"></audio>
     </view>
   </view>
   <!-- 资源评论模块 -->

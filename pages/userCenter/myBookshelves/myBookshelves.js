@@ -75,5 +75,13 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  handleClickBook(e){
+    if (!!e.target.dataset.id){
+      wx.navigateTo({
+        url: '../../bookDetail/bookDetail?bookId=' + e.target.dataset.id,
+      })
+    }
   }
 })

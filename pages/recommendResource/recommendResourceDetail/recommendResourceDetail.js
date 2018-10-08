@@ -176,7 +176,6 @@ Page({
    * 发表评论
    */
   submitSendComment: function() {
-    console.log(this.data.commentMsgValue)
     var comment = this.data.commentMsgValue;
     if (!!comment) {
       const param = {
@@ -191,7 +190,6 @@ Page({
           commentMsgValue: ''
         })
         if (this.data.pubSuccess === true) {
-          console.log("成功")
           this.findResourceInfo();
           wx.showToast({
             title: '发表成功',
@@ -207,7 +205,6 @@ Page({
    * 给评论删除点赞
    */
   deletePraise: function(e) {
-    console.log(e.target.dataset.praiseid)
     const param = {
       praiseId: e.target.dataset.praiseid,
       workId: e.target.dataset.id,
@@ -223,7 +220,6 @@ Page({
    * 给评论添加点赞
    */
   addPraise: function(e) {
-    console.log(e.target.dataset.id);
     const param = {
       workId: e.target.dataset.id,
       workType: 1,
@@ -253,9 +249,7 @@ Page({
    * 对评论添加举报
    */
   addReport: function(e) {
-    // console.log(e.target.dataset.reportid)
     const param = {
-      // reportid:e.target.dataset.reportid,
       workId: e.target.dataset.id,
       workType: 1,
       reportUid: app.globalData.data
