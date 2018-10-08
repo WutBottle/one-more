@@ -8,7 +8,7 @@
     <view class='resource-img'>
       <image class='resource-bg' src='{{resourceContent.imageUrl}}' mode="widthFix"></image>
     </view>
-    <view class='resource-content'>
+    <view class='resource-content-text'>
       <text>{{resourceContent.content}}</text>
     </view>
   </view>
