@@ -2,6 +2,7 @@
 <view class='comment-message-container'>
   <!-- tab标题 -->
   <view class='tablist'>
+    <view class='unread-tip' wx:if="{{!!unReadCount}}">{{unReadCount}}</view>
     <view wx:for="{{tabList}}" wx:key='' class='item {{current==index?"select":""}}' data-pos='{{index}}' bindtap='tabItemClick'>
       <text>{{item}}</text>
     </view>
@@ -13,12 +14,18 @@
       <!-- 我发出的 -->
       <view class='comment-container' wx:if="{{index===0}}">
         <scroll-view scroll-y style="height:{{clientHeight?clientHeight+'px':'auto'}}">
-          <view class='comment-msg-list send' wx:for="{{commentSend}}" data-id="{{item.userId}}" wx:key="{{index}}">
-            <image data-id="{{item.userId}}" src='{{item.avatarurl}}' mode='aspectFit'></image>
-            <view data-id="{{item.userId}}" class='comment-msg-username displayInlineBlock'>{{item.fakeName}}</view>
-            <view data-id="{{item.userId}}" class='comment-msg-time displayInlineBlock'>{{item.createTime}}</view>
-            <view data-id="{{item.userId}}" class='comment-msg-latestMsg displayInlineBlock'>{{item.content}}</view>
-            <view class='line'></view>
+          <view class='comment-msg-list send' wx:for="{{commentSend}}" wx:key="{{index}}">
+            <image src='{{item.avatarurl}}' mode='aspectFit'></image>
+            <view class='comment-msg-username displayInlineBlock'>{{item.fakeName}}</view>
+            <view class='comment-msg-time displayInlineBlock'>{{item.createTime}}</view>
+            <view class='comment-content'>
+              <image src='{{item.cover}}' mode='widthFix'></image>
+              <view class='comment-msg-latestMsg displayInlineBlock'>
+                <open-data type="userNickName" lang="zh_CN"></open-data>
+                <text>：{{item.content}}</text>
+              </view>
+            </view>
+            <view class='goto-btn' data-id="{{item.resourceId}}" bindtap='gotoResDetailPage'>查看资源详情</view>
           </view>
         </scroll-view>
       </view>
@@ -26,13 +33,19 @@
       <!-- 我收到的 -->
       <view class='comment-container' wx:elif="{{index===1}}">
         <scroll-view scroll-y style="height:{{clientHeight?clientHeight+'px':'auto'}}">
-          <view class='comment-msg-list get' wx:for="{{commentGet}}" data-id="{{item.userId}}" wx:key="{{index}}">
-            <image data-id="{{item.userId}}" src='{{item.avatarurl}}' mode='aspectFit'></image>
-            <view data-id="{{item.userId}}" class='comment-msg-username displayInlineBlock'>{{item.username}}</view>
-            <view data-id="{{item.userId}}" class='comment-msg-time displayInlineBlock'>{{item.createTime}}</view>
-            <view data-id="{{item.userId}}" class='comment-msg-latestMsg displayInlineBlock'>{{item.content}}</view>
-            <view data-id="{{item.userId}}" class='comment-msg-noRead displayInlineBlock' wx:if="{{!!item.status}}"></view>
-            <view class='line'></view>
+          <view class='comment-msg-list get' wx:for="{{commentGet}}" wx:key="{{index}}">
+            <image src='{{item.avatarurl}}' mode='aspectFit'></image>
+            <view class='comment-msg-username displayInlineBlock'>{{item.fakeName}}</view>
+            <view class='comment-msg-time displayInlineBlock'>{{item.createTime}}</view>
+            <view class='comment-content'>
+              <image src='{{item.cover}}' mode='widthFix'></image>
+              <view class='comment-msg-latestMsg displayInlineBlock'>
+                {{item.fakeName}}
+                <text>：{{item.content}}</text>
+              </view>
+            </view>
+            <view class='comment-msg-noRead displayInlineBlock' wx:if="{{!!!item.status}}"></view>
+            <view data-id="{{item.resourceId}}" bindtap='gotoResDetailPage' class='goto-btn'>查看资源详情</view>
           </view>
         </scroll-view>
       </view>

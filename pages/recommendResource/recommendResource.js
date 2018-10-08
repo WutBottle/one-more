@@ -2,7 +2,8 @@
 var app = getApp();
 import {
   findOurResource,
-  findUserResource
+  findUserOneResource,
+  findUserThreeResource
 } from '../../api/resourceController.js'
 
 import {
@@ -55,7 +56,6 @@ Page({
     });
     this.addBookShelf();//添加一条书架记录
     this.loadOurResource();
-    this.loadUserResource();
   },
 
   /**
@@ -83,7 +83,10 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-
+    this.setData({
+      userResource: [],
+      userResourceSingle: []
+    })
   },
 
   /**
@@ -135,23 +138,33 @@ Page({
           sysResource: data.resources[0],
         })
       }
+      this.loadUserResource();
     })
   },
 
   /**
-   * 加载用户资源
+   * 加载三条图文用户资源
    */
   loadUserResource: function () {
+    var that = this;
     const param = {
-      chapterId: this.data.chapterId,
+      chapterId: that.data.chapterId,
       uid:app.globalData.uid
     }
-    findUserResource(param).then((data) => {
-      if (data.status === true) {
-        this.setData({
-          userResource: data.resources,
-          userResourceSingle: data.resources[this.userResourceIndex]
+    findUserThreeResource(param).then((data) => {
+      var param=param;
+      // 如果是图文类型的话 加载三条
+      if (data.status === true&&data.resources[0].type==0) {
+        that.setData({
+          userResource: data.resources
         })
+        console.log(that.data.userResource);
+      } else if (data.status === true && data.resources[0].type == 1){
+        // 如果是音频类型的话 加载一条
+        that.setData({
+          userResourceSingle: data.resources[0]
+        })
+        console.log(that.data.userResourceSingle);        
       }
     })
   },
@@ -168,7 +181,6 @@ Page({
     }
     praiseDeleteOne(param).then((data) => {
       this.loadOurResource();
-      this.loadUserResource();
     })
   },
 
@@ -183,7 +195,6 @@ Page({
     }
     praiseAddOne(param).then((data) => {
       this.loadOurResource();
-      this.loadUserResource();
     })
   },
 
@@ -199,7 +210,6 @@ Page({
     }
     reportDeleteOne(param).then((data) => {
       this.loadOurResource();
-      this.loadUserResource();
     })
   },
 
@@ -216,7 +226,6 @@ Page({
     }
     reportAddOne(param).then((data) => {
       this.loadOurResource();
-      this.loadUserResource();
     })
   },
 

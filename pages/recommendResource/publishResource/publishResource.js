@@ -352,6 +352,7 @@ Page({
    */
   submitText:function(){
     if (this.data.textContent||(this.data.textContent&&this.data.isPicExit)){
+      // console.log(this.data.textContent);
       const param ={
         imageUrl: this.data.picUrl,
         chapterId: this.data.chapterId,

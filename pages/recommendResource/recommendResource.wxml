@@ -33,7 +33,7 @@
       <text>有所感</text>
     </view>
     <!-- 用户图文 -->
-    <view class='user-text-resource-content' wx:if="{{userResourceSingle.type===0}}">
+    <view class='user-text-resource-content' wx:if="{{userResource[0].type==0}}">
       <view class='user-text'>
         <view class='user-text-list' wx:for="{{userResource}}" data-id="{{item.resourceId}}" wx:key="{{index}}">
           <view class="{{index===0 ? 'none':'line'}} "></view>
@@ -64,7 +64,7 @@
       </view>
     </view>
     <!-- 用户音频 -->
-    <view class='user-audio-resource-content' wx:if="{{userResourceSingle.type===1}}">
+    <view class='user-audio-resource-content' wx:else>
       <view class='user-audio'>
         <audio id='audioRes' src='{{userResourceSingle.audioUrl}}' name='{{userResourceSingle.title}}' author='{{userResourceSingle.fakeName}}' controls bindplay="audioPlay" bindpause='audioPause' bindtimeupdate="audioTimeUpdate" bindended="audioEnded" binderror="audioError"></audio>
       </view>
@@ -113,7 +113,7 @@
 </view>
 
 <!-- 语音资源 -->
-<view class='recommend-resource-container' wx:elif="{{sysResource.type===4}}">
+<view class='recommend-resource-container' wx:elif="{{sysResource.type==4}}">
   <!-- 系统资源模块 -->
   <view class='sys-resource-box'>
     <view class='sys-resource-img'>
@@ -147,7 +147,7 @@
       <text>有所感</text>
     </view>
     <!-- 用户图文 -->
-    <view class='user-text-resource-content' wx:if="{{userResourceSingle.type===0}}">
+    <view class='user-text-resource-content' wx:if="{{userResource[0].type==0}}">
       <view class='user-text'>
         <view class='user-text-list' wx:for="{{userResource}}" data-id="{{item.resourceId}}" wx:key="{{index}}">
           <view class="{{index===0 ? 'none':'line'}} "></view>
@@ -176,7 +176,7 @@
       </view>
     </view>
     <!-- 用户音频 -->
-    <view class='user-audio-resource-content' wx:if="{{userResourceSingle.type===1}}">
+    <view class='user-audio-resource-content'  wx:else>
       <view class='user-audio'>
         <audio id='audioRes' src='{{userResourceSingle.audioUrl}}' name='{{userResourceSingle.title}}' author='{{userResourceSingle.fakeName}}' controls bindplay="audioPlay" bindpause='audioPause' bindtimeupdate="audioTimeUpdate" bindended="audioEnded" binderror="audioError"></audio>
       </view>
