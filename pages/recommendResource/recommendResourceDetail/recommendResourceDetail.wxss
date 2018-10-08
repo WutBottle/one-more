@@ -33,15 +33,15 @@
 }
 
 .resource-content {
+  text-align: center;
   z-index: 1;
   position: absolute;
   left: 10rpx;
   top: 346rpx;
   box-sizing: border-box;
   border-radius: 10rpx;
-  padding: 30rpx 45rpx;
   width: 730rpx;
-  height: 140rpx;
+  height: 135rpx;
   box-shadow: 0 3rpx 15rpx rgba(0, 0, 0, 0.24);
   line-height: 28rpx;
   background-color: #fff;
