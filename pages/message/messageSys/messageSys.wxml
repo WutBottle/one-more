@@ -2,8 +2,8 @@
 
 <view class='sys-message-container'>
   <view class='sys-content-container' wx:for="{{messageInfo}}" wx:key="{{index}}">
-    <view class='sys-info'>{{item.content}}</view>
-    <view class='sys-time'>{{item.time}}</view>
-    <view class='sys-hasRead-index' wx:if="{{!item.hasRead}}"></view>
+    <view class='sys-info'>{{item.text}}</view>
+    <view class='sys-time'>{{item.createTime}}</view>
+    <!-- <view class='sys-hasRead-index' wx:if="{{!item.hasRead}}"></view>//是否查阅过的状态 -->
   </view>
 </view>

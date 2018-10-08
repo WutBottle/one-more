@@ -10,10 +10,18 @@ module.exports = {
   },
   //2.查找最新书籍
   bookFindNew: (data) => {
-    return bookController('get', 'book', 'findNew', data)
+    return bookController('get', 'book', 'findNew', data);
   },
   //3.根据标题查找最新书籍
   bookSelectByTitle: (data) => {
-    return bookController('post','book','selectByTitle',data)
+    return bookController('post','book','selectByTitle',data);
+  },
+  //4.查找热门书籍
+  bookFindHot: (data) => {
+    return bookController('get', 'book', 'findHot', data);
+  },
+  //5.查询书籍详情
+  selectBookInfo: (data) => {
+    return bookController('post', 'book', 'selectBookInfo', data);
   }
 }

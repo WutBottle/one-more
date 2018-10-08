@@ -2,14 +2,22 @@
   "pages": [
     "pages/index/index",
     "pages/login/login",
+    "pages/echarts/echarts",
+    "pages/bookDetail/bookDetail",
+    "pages/funTest/funTest",
+    "pages/history/history",
     "pages/message/message",
     "pages/userCenter/userCenter",
-    "pages/recommendResource/recommendResource",
     "pages/readMore/readMore",
+    "pages/funTest/testDetail/testDetail",
     "pages/message/messageSys/messageSys",
     "pages/message/messagePrivate/messagePrivate",
+    "pages/message/messagePrivate/friendsApplication/friendsApplication",
     "pages/userCenter/myBookshelves/myBookshelves",
-    "pages/message/messageComment/messageComment"
+    "pages/message/messageComment/messageComment",
+    "pages/recommendResource/recommendResource",
+    "pages/recommendResource/recommendResourceDetail/recommendResourceDetail",
+    "pages/recommendResource/publishResource/publishResource"
   ],
   "window": {
     "backgroundTextStyle": "light",

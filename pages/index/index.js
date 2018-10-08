@@ -14,7 +14,24 @@ Page({
       })
     })
   },
+
   recommendBookClick(e){
-    console.log(e.target.dataset.id)
-  }
+    wx.navigateTo({
+      url: '../bookDetail/bookDetail?bookId=' + e.target.dataset.id,
+    })
+  },
+
+  // 跳转随笔页面
+  gotoTextPage: function () {
+    wx.navigateTo({
+      url: '../recommendResource/recommendResource?chapterId=3',
+    })
+  },
+
+  // 跳转音频页面
+  gotoAudioPage:function() {
+    wx.navigateTo({
+      url: '../recommendResource/recommendResource?chapterId=1',
+    })
+  },
 })

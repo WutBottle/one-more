@@ -20,17 +20,19 @@
     <view class='recommend-title'>
       <view class='recommend-title-left'>oneMore世界</view>
     </view>
-    <view class='function-essay'>
+    <view class='function-essay' bindtap='gotoTextPage'>
       <image src='../../images/function_pen.png' mode="widthFix"></image>
       <text class='function-words'>随笔</text>
     </view>
-    <view class='function-voice'>
+    <view class='function-voice' bindtap='gotoAudioPage'>
       <image src='../../images/function_voice.png' mode="widthFix"></image>
       <text class='function-words'>语音</text>
     </view>
-    <view class='function-text'>
-      <image src='../../images/function_test.png' mode="widthFix"></image>
-      <text class='function-words'>趣味测试</text>
-    </view>
+    <navigator url='../funTest/funTest'>
+      <view class='function-text'>
+        <image src='../../images/function_test.png' mode="widthFix"></image>
+        <text class='function-words'>趣味测试</text>
+      </view>
+    </navigator>
   </view>
 </view>

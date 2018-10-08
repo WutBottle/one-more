@@ -1,0 +1,54 @@
+<!--pages/recommendResource/publishResource/publishResource.wxml-->
+<!-- 发表音频资源 -->
+<view class='publish-resource-container' wx:if="{{resourceType==1||resourceType==4}}">
+  <view class='resource-title'>
+    <input value='{{resourceTitle}}' placeholder='输入标题' bindconfirm='saveTitle' placeholder-class='content-placeholder'></input>
+  </view>
+  <!-- 录音按钮 -->
+  <view class='recorder'>
+    <image src='../../../images/record.png' mode='widthFix'></image>
+    <button class="{{isRecording ? 'active-btn':'record-btn'}}" bindtouchstart='recorderStart' bindtouchend='recorderEnd'>按住开始录音</button>
+  </view>
+
+  <view class='tip'>
+    <text wx:if="{{playDuration&&playDuration<timeLimit}}">录音时长{{playDuration}}s，未满足要求</text>
+  </view>
+
+  <view class='function-btn-box'>
+    <!-- 播放按钮 -->
+    <view class='function-btn play-record'>
+      <button bindtap='play'>
+        <image src='../../../images/play.png' mode='widthFix'></image>
+        <text>试听</text>
+      </button>
+    </view>
+    <!-- 重新录音按钮 -->
+    <view class='function-btn re-record'>
+      <button bindtap='reRecord'>
+        <image src='../../../images/re_record.png' mode='widthFix'></image>
+        <text>重新录音</text>
+      </button>
+    </view>
+    <!-- 提交按钮 -->
+    <view class='function-btn submit-record'>
+      <button bindtap='submitRecord'>
+        <image src='../../../images/submit.png' mode='widthFix'></image>
+        <text>提交</text>
+      </button>
+    </view>
+  </view>
+</view>
+<!-- 发表图文资源 -->
+<view class='publish-resource-container' wx:else>
+  <view class='resource-content'>
+    <textarea value="{{textContent}}" placeholder='请输入文本...' placeholder-class='content-placeholder' bindinput="doInput"></textarea>
+    <view class='add-pic' bindtap='addPic'>
+    <image wx:if="{{isPicExit}}" src='{{picUrl}}' mode='widthFix' ></image>
+    <image wx:else src='../../../images/add_pic.png' mode='widthFix' ></image>
+    </view>
+    <text>添加图片</text>
+  </view>
+  <view class='submit-text'>
+      <button bindtap='submitText'>提交</button>
+    </view>
+</view>

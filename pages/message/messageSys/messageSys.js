@@ -1,40 +1,21 @@
+const app = getApp();
+import {
+  selectSysMsg
+} from '../../../api/messageController.js';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    messageInfo:[
-      {
-        content:'您的xxx评论已成功删除',
-        time: "09-16 18:00",
-        hasRead: true,
-      }, {
-        content: '您的xxx评论已成功删除',
-        time: "09-16 18:00",
-        hasRead: false,
-      }, {
-        content: '您的xxx评论已成功删除',
-        time: "09-16 18:00",
-        hasRead: true,
-      }, {
-        content: '您的xxx评论已成功删除',
-        time: "09-16 18:00",
-        hasRead: false,
-      }, {
-        content: '您的xxx评论已成功删除',
-        time: "09-16 18:00",
-        hasRead: false,
-      }
-      
-    ]
+    messageInfo:[],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    this.updateSysMsg();
   },
 
   /**
@@ -84,5 +65,17 @@ Page({
    */
   onShareAppMessage: function () {
     
+  },
+
+  //查询系统消息
+  updateSysMsg() {
+    const param = {
+      uid: app.globalData.uid
+    }
+    selectSysMsg(param).then((data) => {
+      this.setData({
+        messageInfo: data.comment
+      })
+    })
   }
 })

@@ -1,165 +1,192 @@
+const app = getApp();
+import {
+  selectMessageBrief,
+  selectMessageInfo,
+  messageAddOne,
+} from '../../../api/messageController.js';
+import {
+  followerAddOne,
+  selectNoAgree
+} from '../../../api/followerController.js';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    privateMessage:[
-      {
-        userId: 1,
-        username: "王玉菡",
-        avatarUrl: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1810152264,2923293270&fm=27&gp=0.jpg",
-        time: "09-16 18:00",
-        latestMsg: "你今天读了哪一本书",
-        noReadMsgNum: 3,
-      }, {
-        userId: 2,
-        username: "杨震",
-        avatarUrl: "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1804819840,2974605393&fm=27&gp=0.jpg",
-        time: "09-16 18:00",
-        latestMsg: "你今天读了哪一本书",
-        noReadMsgNum: 5,
-      }, {
-        userId: 3,
-        username: "张鹏",
-        avatarUrl: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3028269206,4116848032&fm=27&gp=0.jpg",
-        time: "09-16 18:00",
-        latestMsg: "你今天读了哪一本书",
-        noReadMsgNum: 0,
-      }, {
-        userId: 4,
-        username: "曹雪纯",
-        avatarUrl: "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1663046701,2739831134&fm=27&gp=0.jpg",
-        time: "09-16 18:00",
-        latestMsg: "你今天读了哪一本书",
-        noReadMsgNum: 1,
-      }
-    ],
-    userDialogInfo:{
-      userId: 1,
-      username: "王玉菡",
-      contentList: [
-        {
-          userId: 1,
-          avatarUrl: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1810152264,2923293270&fm=27&gp=0.jpg",
-          content: "你今天读了哪一本书你今天读了哪一本书你今天读了哪一本书你今天读了哪一本书你今天读了哪一本书你今天读了哪一本书你今天读了哪一本书",
-          sendTime: "18:00",
-        }, {
-          userId: 3,
-          avatarUrl: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3028269206,4116848032&fm=27&gp=0.jpg",
-          content: "百年孤独啦",
-          sendTime: "18:05",
-        }, {
-          userId: 3,
-          avatarUrl: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3028269206,4116848032&fm=27&gp=0.jpg",
-          content: "百年孤独啦百年孤独啦百年孤独啦百年孤独啦百年孤独啦百年孤独啦百年孤独啦百年孤独啦百年孤独啦百年孤独啦",
-          sendTime: "18:05",
-        }, {
-          userId: 1,
-          avatarUrl: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1810152264,2923293270&fm=27&gp=0.jpg",
-          content: "我最近迷上了红楼梦",
-          sendTime: "18:05",
-        }, {
-          userId: 1,
-          avatarUrl: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1810152264,2923293270&fm=27&gp=0.jpg",
-          content: "我最近迷上了红楼梦",
-          sendTime: "18:05",
-        }, {
-          userId: 3,
-          avatarUrl: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3028269206,4116848032&fm=27&gp=0.jpg",
-          content: "动态？动态？动态？动态？动态？动态？动态？动态？动态？动态？动态？动态？动态？动态？动态？动态？动态？",
-          sendTime: "18:05",
-        }, 
-      ],
-    },
+    privateMessage: [],
+    userDialogInfo: [],
     showDialogModal: false,
-    sendMsgValue: '',
-    currentUserId: '',
+    sendMsgValue: '',//发送私信的内容
+    currentUserName: '',//当前点击用户name
+    uid: '',//当前用户id
+    isFollow: '',//与点击用户是否是好友
+    hasFriendsHints: false,//是否有好友申请
   },
+  currentUserId: '',//当前点击用户ID
+  pageSize: 10,
+  pageNum: 0,
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    
+  onLoad: function(options) {
+    this.setData({
+      uid: app.globalData.uid,
+    })
+    this.updatePrivateMsgList();
+    this.updateFriendApplication();
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
     
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-    
+  onShow: function() {
+    this.updateFriendApplication();
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-    
+  onHide: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-    
+  onUnload: function() {
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-    
+  onPullDownRefresh: function() {
+    this.updatePrivateMsgList();//刷新私信列表数据
+    this.updateFriendApplication()//刷新好友申请数据
+    wx.stopPullDownRefresh();//回弹下拉
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-    
+  onReachBottom: function() {
+
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-    
+  onShareAppMessage: function() {
+
   },
-  showDialogModal(e){
-    console.log(e.target.dataset.id);
+  showDialogModal(e) {
+    this.currentUserId = e.target.dataset.id; //设置当前点击私信用户的id
     this.setData({
-      showDialogModal: true,
+      currentUserName: e.target.dataset.name,//设置当前点击私信用户的name
+      isFollow: !!e.target.dataset.isfollow
     })
-    this.currentUserId = e.target.dataset.id;//设置当前点击私信用户的id
+    this.updateDialogList();
+    this.updatePrivateMsgList();
   },
-  closeDialogModal(e){
-    if (e.target.dataset.modalblank){
+  closeDialogModal(e) {
+    if (e.target.dataset.modalblank) {
+      this.updateFriendApplication();
+      this.updatePrivateMsgList();
       this.setData({
         showDialogModal: false,
-        sendMsgValue: ''
+        sendMsgValue: '',
       })
     }
   },
-  sendMsgValueChange(e){
+  sendMsgValueChange(e) {
     this.setData({
       sendMsgValue: e.detail.value
     })
   },
-  submitSendMsgValue(){
+  submitSendMsgValue() {
     let msgValue = this.data.sendMsgValue;
-    if(!!msgValue){
+    if (!!msgValue) {
       //发送私信接口
-      console.log("发送成功！");
-      this.setData({
-        sendMsgValue: '',
+      let param = {
+        publishUid: app.globalData.uid,
+        receiveUid: this.currentUserId,
+        text: msgValue,
+      }
+      messageAddOne(param).then((data) => {
+        this.updatePrivateMsgList();
+        this.updateDialogList();
+        this.setData({
+          sendMsgValue: '',
+        })
       })
     }
-  }
+  },
+  //获取私信列表
+  updatePrivateMsgList(){
+    const param = {
+      uid: app.globalData.uid
+    }
+    selectMessageBrief(param).then((data) => {
+      this.setData({
+        privateMessage: data.comment,
+      })
+    })
+  },
+  //获取私信弹窗对话
+  updateDialogList(){
+    const param = {
+      publishUid: this.currentUserId,
+      receiveUid: app.globalData.uid,
+      pageNum: this.pageNum,
+      pageSize: this.pageSize
+    }
+    selectMessageInfo(param).then((data) => {
+      this.setData({
+        showDialogModal: true,
+        userDialogInfo: data.comment.reverse(),
+      })
+    })
+  },
+  //处理添加好友
+  handleAddFriends(){
+    const param = {
+      publishUid: app.globalData.uid,
+      followerUid: this.currentUserId,
+      status: 0,
+    }
+    followerAddOne(param).then((data) => {
+      wx.showToast({
+        title: '已发送申请',
+        icon: 'success',
+        duration: 1500,
+        mask: true,
+      })
+    })
+  },
+  //是否有好友申请
+  updateFriendApplication(){
+    const param = {
+      uid: app.globalData.uid
+    }
+    selectNoAgree(param).then((data) => {
+      if (!!data.followers.length){
+        this.setData({
+          hasFriendsHints: true
+        })
+      }else {
+        this.setData({
+          hasFriendsHints: false
+        })
+      }
+    })
+  },
 })

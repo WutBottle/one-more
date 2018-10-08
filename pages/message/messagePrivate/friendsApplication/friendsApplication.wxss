@@ -1,0 +1,65 @@
+.friend-application-item{
+  height: 100rpx;
+  padding: 30rpx 40rpx 30rpx 26rpx;
+  position: relative;
+  border-bottom: 1rpx #dedfe0 solid;
+}
+
+.friend-application-item image{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
+
+.friend-application-gender{
+  width: 30rpx!important;
+  height: 25rpx!important;
+  position: absolute;
+  top: 70rpx;
+  left: 160rpx;
+}
+
+.friend-application-username{
+  position: absolute;
+  font-size: 36rpx;
+  color: #000;
+  top: 18rpx;
+  left: 160rpx;
+}
+
+.friend-application-time{
+  position: absolute;
+  font-size: 24rpx;
+  color: #a6a6a6;
+  top: 96rpx;
+  left: 160rpx;
+}
+
+.application-agree-btn{
+  font-size: 30rpx;
+  color: #fff;
+  background-color: #1eb9f2;
+  padding: 10rpx 20rpx;
+  border-radius: 10rpx;
+  position: absolute;
+  top: 42rpx;
+  right: 160rpx;
+}
+
+.application-disagree-btn{
+  font-size: 30rpx;
+  color: #fff;
+  background-color: #fb7d90;
+  padding: 10rpx 20rpx;
+  border-radius: 10rpx;
+  position: absolute;
+  top: 42rpx;
+  right: 30rpx;
+}
+
+.noapplication-msg{
+  text-align: center;
+  font-size: 30rpx;
+  color: #a6a6a6;
+  padding: 20rpx 0;
+}

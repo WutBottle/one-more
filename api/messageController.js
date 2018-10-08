@@ -24,4 +24,8 @@ module.exports = {
   updateAllStatus: (data) => {
     return messageController('post', 'message', 'updateAllStatus', data);
   },
+  //6.查询系统消息
+  selectSysMsg: (data) => {
+    return messageController('post', 'message', 'selectSysMsg', data);
+  },
 }

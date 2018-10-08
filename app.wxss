@@ -13,6 +13,10 @@
   display: inline-block;
 }
 
+.displayB{
+  display: block;
+}
+
 /* 隐藏scroll-view滚动条 */
 ::-webkit-scrollbar{
 width: 0;

@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 4,
+			"current": 8,
 			"list": [
 				{
 					"id": 0,
@@ -44,16 +44,9 @@
 				},
 				{
 					"id": 1,
-					"name": "配置资源页面",
-					"pathName": "pages/recommendResource/recommendResource",
-					"query": "recommendModal=1&userResourceModal=1",
-					"scene": "1011"
-				},
-				{
-					"id": -1,
-					"name": "系统消息",
-					"pathName": "pages/message/messageSys/messageSys",
-					"query": "",
+					"name": "资源详情页面",
+					"pathName": "pages/recommendResource/recommendResourceDetail/recommendResourceDetail",
+					"query": "resourceId=1",
 					"scene": "1011"
 				},
 				{
@@ -66,7 +59,42 @@
 				{
 					"id": -1,
 					"name": "个人中心",
-					"pathName": "pages/userCenter/userCenter"
+					"pathName": "pages/userCenter/userCenter",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "评论",
+					"pathName": "pages/message/messageComment/messageComment",
+					"query": "",
+					"scene": "1011"
+				},
+				{
+					"id": 7,
+					"name": "资源初始化页面",
+					"pathName": "pages/recommendResource/recommendResource",
+					"query": "chapterId=1",
+					"scene": "1011"
+				},
+				{
+					"id": 8,
+					"name": "资源发表页面",
+					"pathName": "pages/recommendResource/publishResource/publishResource",
+					"query": "chapterId=1&resourceType=0",
+					"scene": "1011"
+				},
+				{
+					"id": 8,
+					"name": "测试结果统计图",
+					"pathName": "pages/echarts/echarts",
+					"query": "I=8&D=32&S=11&C=8&problemId=1"
+				},
+				{
+					"id": -1,
+					"name": "书籍详情",
+					"pathName": "pages/bookDetail/bookDetail",
+					"query": "bookId=2&uid=8",
+					"scene": "1011"
 				}
 			]
 		}

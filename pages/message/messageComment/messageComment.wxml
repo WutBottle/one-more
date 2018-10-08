@@ -14,11 +14,10 @@
       <view class='comment-container' wx:if="{{index===0}}">
         <scroll-view scroll-y style="height:{{clientHeight?clientHeight+'px':'auto'}}">
           <view class='comment-msg-list send' wx:for="{{commentSend}}" data-id="{{item.userId}}" wx:key="{{index}}">
-            <image data-id="{{item.userId}}" src='{{item.avatarUrl}}' mode='aspectFit'></image>
-            <view data-id="{{item.userId}}" class='comment-msg-username displayInlineBlock'>{{item.username}}</view>
-            <view data-id="{{item.userId}}" class='comment-msg-time displayInlineBlock'>{{item.time}}</view>
-            <view data-id="{{item.userId}}" class='comment-msg-latestMsg displayInlineBlock'>{{item.latestMsg}}</view>
-            <view data-id="{{item.userId}}" class='comment-msg-noRead displayInlineBlock' wx:if="{{!!item.noRead}}"></view>
+            <image data-id="{{item.userId}}" src='{{item.avatarurl}}' mode='aspectFit'></image>
+            <view data-id="{{item.userId}}" class='comment-msg-username displayInlineBlock'>{{item.fakeName}}</view>
+            <view data-id="{{item.userId}}" class='comment-msg-time displayInlineBlock'>{{item.createTime}}</view>
+            <view data-id="{{item.userId}}" class='comment-msg-latestMsg displayInlineBlock'>{{item.content}}</view>
             <view class='line'></view>
           </view>
         </scroll-view>
@@ -28,11 +27,11 @@
       <view class='comment-container' wx:elif="{{index===1}}">
         <scroll-view scroll-y style="height:{{clientHeight?clientHeight+'px':'auto'}}">
           <view class='comment-msg-list get' wx:for="{{commentGet}}" data-id="{{item.userId}}" wx:key="{{index}}">
-            <image data-id="{{item.userId}}" src='{{item.avatarUrl}}' mode='aspectFit'></image>
+            <image data-id="{{item.userId}}" src='{{item.avatarurl}}' mode='aspectFit'></image>
             <view data-id="{{item.userId}}" class='comment-msg-username displayInlineBlock'>{{item.username}}</view>
-            <view data-id="{{item.userId}}" class='comment-msg-time displayInlineBlock'>{{item.time}}</view>
-            <view data-id="{{item.userId}}" class='comment-msg-latestMsg displayInlineBlock'>{{item.latestMsg}}</view>
-            <view data-id="{{item.userId}}" class='comment-msg-noRead displayInlineBlock' wx:if="{{!!item.noRead}}"></view>
+            <view data-id="{{item.userId}}" class='comment-msg-time displayInlineBlock'>{{item.createTime}}</view>
+            <view data-id="{{item.userId}}" class='comment-msg-latestMsg displayInlineBlock'>{{item.content}}</view>
+            <view data-id="{{item.userId}}" class='comment-msg-noRead displayInlineBlock' wx:if="{{!!item.status}}"></view>
             <view class='line'></view>
           </view>
         </scroll-view>

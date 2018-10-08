@@ -1,0 +1,17 @@
+<view class="history-wrapper">
+  <block wx:if="{{!!historyListInfo.length}}">
+    <view class='history-item-wrapper' wx:for="{{historyListInfo}}" wx:key="{{index}}">
+      <image src='{{item.cover}}' mode='aspectFit'></image>
+      <view class='text-info-wrapper'>
+        <view class='first-line'>
+          <view class='book-title'>《{{item.bookTitle}}》</view>
+          <view class='history-time'>{{item.createTime}}</view>
+        </view>
+        <view class='second-line'>{{item.chapterDescription}}</view>
+        <view class='third-line'>{{item.resourceTitle}}</view>
+      </view>
+    </view>
+  </block>
+
+  <view class='no-history-msg' wx:else>暂无历史浏览记录~</view>
+</view>

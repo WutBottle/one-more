@@ -1,4 +1,9 @@
 // pages/message/messageComment/messageComment.js
+import {
+  findAllReceive,
+  findAllSend
+} from '../../../api/commentController.js'
+var app = getApp()
 Page({
 
   /**
@@ -8,96 +13,8 @@ Page({
     tabList: ['我发出的', '我收到的'],
     current: 0, //当前选中的Tab项
     clientHeight: null, //高度适配
-    commentSend: [
-      {
-        userId: 1,
-        username: "王玉菡",
-        avatarUrl: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1810152264,2923293270&fm=27&gp=0.jpg",
-        time: "09-16 18:00",
-        latestMsg: "你今天读了哪一本书",
-        noRead: true,
-      }, {
-        userId: 2,
-        username: "杨震",
-        avatarUrl: "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1804819840,2974605393&fm=27&gp=0.jpg",
-        time: "09-16 18:00",
-        latestMsg: "你今天读了哪一本书",
-        noRead: true,
-      }, {
-        userId: 3,
-        username: "张鹏",
-        avatarUrl: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3028269206,4116848032&fm=27&gp=0.jpg",
-        time: "09-16 18:00",
-        latestMsg: "你今天读了哪一本书",
-        noRead: true,
-      }, {
-        userId: 4,
-        username: "曹雪纯",
-        avatarUrl: "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1663046701,2739831134&fm=27&gp=0.jpg",
-        time: "09-16 18:00",
-        latestMsg: "你今天读了哪一本书",
-        noRead: false,
-      }, {
-        userId: 4,
-        username: "曹雪纯",
-        avatarUrl: "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1663046701,2739831134&fm=27&gp=0.jpg",
-        time: "09-16 18:00",
-        latestMsg: "你今天读了哪一本书",
-        noRead: false,
-      }, {
-        userId: 4,
-        username: "曹雪纯",
-        avatarUrl: "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1663046701,2739831134&fm=27&gp=0.jpg",
-        time: "09-16 18:00",
-        latestMsg: "你今天读了哪一本书",
-        noRead: false,
-      }, {
-        userId: 4,
-        username: "曹雪纯",
-        avatarUrl: "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1663046701,2739831134&fm=27&gp=0.jpg",
-        time: "09-16 18:00",
-        latestMsg: "你今天读了哪一本书",
-        noRead: false,
-      }, {
-        userId: 4,
-        username: "曹雪纯",
-        avatarUrl: "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1663046701,2739831134&fm=27&gp=0.jpg",
-        time: "09-16 18:00",
-        latestMsg: "你今天读了哪一本书",
-        noRead: false,
-      }
-    ],
-    commentGet: [
-      {
-        userId: 1,
-        username: "王玉菡",
-        avatarUrl: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1810152264,2923293270&fm=27&gp=0.jpg",
-        time: "09-16 18:00",
-        latestMsg: "你今天读了哪一本书",
-        noRead: true,
-      }, {
-        userId: 2,
-        username: "杨震",
-        avatarUrl: "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1804819840,2974605393&fm=27&gp=0.jpg",
-        time: "09-16 18:00",
-        latestMsg: "你今天读了哪一本书",
-        noRead: false,
-      }, {
-        userId: 3,
-        username: "张鹏",
-        avatarUrl: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3028269206,4116848032&fm=27&gp=0.jpg",
-        time: "09-16 18:00",
-        latestMsg: "你今天读了哪一本书",
-        noRead: true,
-      }, {
-        userId: 4,
-        username: "曹雪纯",
-        avatarUrl: "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1663046701,2739831134&fm=27&gp=0.jpg",
-        time: "09-16 18:00",
-        latestMsg: "你今天读了哪一本书",
-        noRead: false,
-      }
-    ],
+    commentSend: [],
+    commentGet: [],
   },
 
   /**
@@ -108,10 +25,13 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
-          clientHeight: res.windowHeight - 50, //40为调试测试出的tabBar高度 160为轮播栏高度（ip6换算rpx和px标准）
+          clientHeight: res.windowHeight - 50, //50为导航切换栏高度
         });
       }
     });
+    
+    this.findSend();
+    this.findReceive();
   },
 
   /**
@@ -190,4 +110,30 @@ Page({
     })
   },
 
+  /**
+   * 加载我发出的所有评论
+   */
+  findSend:function() {
+    const param = {
+      uid:1,
+    }
+    findAllSend(param).then((data) =>{
+      this.setData({
+        commentSend:data.comment
+      })
+    })
+  },
+  /**
+   * 加载我收到的所有评论
+   */
+  findReceive: function () {
+    const param = {
+      uid: 1,
+    }
+    findAllReceive(param).then((data) => {
+      this.setData({
+        commentGet: data.comment
+      })
+    })
+  },
 })

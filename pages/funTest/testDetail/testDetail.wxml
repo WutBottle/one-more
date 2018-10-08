@@ -1,0 +1,9 @@
+<view class="question-list-wrapper">
+  <view class='question-order'>第{{questionOrder + 1}}题</view>
+  <view class='question-item-wrapper' bindtap='chooseAnswer'>
+    <view class='question-item'  data-type='optionI'>{{currentQuestion.optionI}}</view>
+    <view class='question-item' data-type='optionD'>{{currentQuestion.optionD}}</view>
+    <view class='question-item' data-type='optionS'>{{currentQuestion.optionS}}</view>
+    <view class='question-item' data-type='optionC'>{{currentQuestion.optionC}}</view>
+  </view>
+</view>
