@@ -19,8 +19,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.bookId = 2;
-    this.uid = 8;
+    this.bookId = options.bookId;
+    this.uid = app.globalData.uid;
     this.updateCatalog();
   },
 
@@ -93,7 +93,7 @@ Page({
     }
     selectBookInfo(param).then((data) => {
       this.setData({
-        bookInfo: data.book[0]
+        bookInfo: data.book
       })
     })
   },
