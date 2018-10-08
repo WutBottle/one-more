@@ -17,7 +17,7 @@ import {
   reportDeleteOne
 } from '../../../api/reportController.js'
 
-var app = getApp()
+const app = getApp()
 Page({
 
   /**
