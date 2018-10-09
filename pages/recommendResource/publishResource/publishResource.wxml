@@ -46,7 +46,6 @@
     <image wx:if="{{isPicExit}}" src='{{picUrl}}' mode='widthFix' ></image>
     <image wx:else src='../../../images/add_pic.png' mode='widthFix' ></image>
     </view>
-    <text>添加图片</text>
   </view>
   <view class='submit-text'>
       <button bindtap='submitText'>提交</button>
