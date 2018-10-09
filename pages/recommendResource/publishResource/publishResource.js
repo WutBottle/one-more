@@ -189,10 +189,10 @@ Page({
         console.log(res.errMsg)
         console.log(res.errCode)
         wx.hideLoading();
-        wx.showToast({
-          title: '无可播放录音',
-          icon: 'success',
-          duration: 2000
+        wx.showModal({
+          title: '提示',
+          content: '无可播放录音',
+          showCancel: false
         })
       })
       // 播放结束
@@ -203,10 +203,10 @@ Page({
         })
       })
     } else {
-      wx.showToast({
-        title: '无可播放录音',
-        icon: 'success',
-        duration: 2000
+      wx.showModal({
+        title: '提示',
+        content: '无可播放录音',
+        showCancel: false
       })
     }
   },
@@ -218,6 +218,7 @@ Page({
     this.setData({
       recorderTempFilePath: '', // 录音地址
       playDuration: null, // 播放时间
+
     })
     wx.showToast({
       title: '请重新录音',
@@ -266,16 +267,16 @@ Page({
         }
       })
     } else if (!this.data.resourceTitle) {
-      wx.showToast({
-        title: '请添加音频标题',
-        icon: 'loading',
-        duration: 1500
+      wx.showModal({
+        title: '提示',
+        content: '请添加音频标题',
+        showCancel: false
       })
     } else {
-      wx.showToast({
-        title: '无可上传录音',
-        icon: 'loading',
-        duration: 1500
+      wx.showModal({
+        title: '提示',
+        content: '无可上传录音',
+        showCancel: false
       })
     }
   },

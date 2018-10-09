@@ -132,8 +132,8 @@ Page({
     }
     findOurResource(param).then((data) => {
       if (data.status === true) {
+        this.sysResourceType = data.resources[0].type
         this.setData({
-          sysResourceType: data.resources[0].type,
           sysResource: data.resources[0],
         })
       }
@@ -326,7 +326,7 @@ Page({
    */
   gotoPublishPage:function(e) {
     wx.navigateTo({
-      url: 'publishResource/publishResource?chapterId=' + this.data.chapterId +'&resourceType='+this.resourceType,
+      url: 'publishResource/publishResource?chapterId=' + this.data.chapterId +'&resourceType='+this.sysResourceType,
     })
   },
 

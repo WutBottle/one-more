@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 8,
+			"current": 6,
 			"list": [
 				{
 					"id": 0,
@@ -77,10 +77,10 @@
 					"scene": "1011"
 				},
 				{
-					"id": 8,
+					"id": 6,
 					"name": "资源发表页面",
 					"pathName": "pages/recommendResource/publishResource/publishResource",
-					"query": "chapterId=1&resourceType=0",
+					"query": "chapterId=1&resourceType=1",
 					"scene": "1011"
 				},
 				{
