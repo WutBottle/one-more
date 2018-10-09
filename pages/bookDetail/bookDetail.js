@@ -93,7 +93,7 @@ Page({
     }
     selectBookInfo(param).then((data) => {
       this.setData({
-        bookInfo: data.book[0]
+        bookInfo: data.book
       })
     })
   },
