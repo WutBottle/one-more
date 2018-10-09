@@ -36,11 +36,15 @@ module.exports = {
   findOurResource: (data) => {
     return resourceController('post', 'resource', 'findOurResource', data);
   },
-  //9.用户发表资源首页初始化
-  findUserResource: (data) => {
-    return resourceController('post', 'resource', 'findUserResource', data);
+  //9.用户一条资源首页初始化
+  findUserOneResource: (data) => {
+    return resourceController('post', 'resource', 'findUserOneResource', data);
   },
-  //10.查找某人发表的资源(可分页)
+  //10.用户三条资源首页初始化
+  findUserThreeResource: (data) => {
+    return resourceController('post', 'resource', 'findUserThreeResource', data);
+  },
+  //11.查找某人发表的资源(可分页)
   selectByPublish: (data) => {
     return resourceController('post', 'resource', 'selectByPublish', data);
   },

@@ -1,8 +1,9 @@
-// pages/recommendResource/recommendResouce.js
+// pages/recommendResource/recommendResource.js
 var app = getApp();
 import {
   findOurResource,
-  findUserResource
+  findUserOneResource,
+  findUserThreeResource
 } from '../../api/resourceController.js'
 
 import {
@@ -31,7 +32,7 @@ Page({
     sysResource: [],
     userResource: [],
     userResourceSingle:[],
-    changeCount:null,
+    // changeCount:null,
   },
     sysResourceType:null,
     userResourceIndex:0,//用户资源序号
@@ -39,7 +40,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options);
     this.setData({
       chapterId: options.chapterId
     })
@@ -55,7 +55,6 @@ Page({
     });
     this.addBookShelf();//添加一条书架记录
     this.loadOurResource();
-    this.loadUserResource();
   },
 
   /**
@@ -83,7 +82,10 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-
+    this.setData({
+      userResource: [],
+      userResourceSingle: []
+    })
   },
 
   /**
@@ -135,29 +137,19 @@ Page({
           sysResource: data.resources[0],
         })
       }
+      this.loadUserResource();
     })
   },
 
   /**
-   * 加载用户资源
+   * 加载三条图文用户资源
    */
   loadUserResource: function () {
-    const param = {
-      chapterId: this.data.chapterId,
-      uid:app.globalData.uid
-    }
-    findUserResource(param).then((data) => {
-      if (data.status === true) {
-        this.setData({
-          userResource: data.resources,
-          userResourceSingle: data.resources[this.userResourceIndex]
-        })
-      }
-    })
+    this.changeResource();
   },
 
   /**
- * 给资源删除点赞
+ * 给系统资源删除点赞
  */
   deletePraise: function (e) {
     const param = {
@@ -168,12 +160,11 @@ Page({
     }
     praiseDeleteOne(param).then((data) => {
       this.loadOurResource();
-      this.loadUserResource();
     })
   },
 
   /**
-   * 给资源添加点赞
+   * 给系统资源添加点赞
    */
   addPraise: function (e) {
     const param = {
@@ -183,7 +174,87 @@ Page({
     }
     praiseAddOne(param).then((data) => {
       this.loadOurResource();
-      this.loadUserResource();
+    })
+  },
+
+  /**
+ * 给图文资源删除点赞（本地修改）
+ */
+  deleteTextPraise: function (e) {
+    var index = e.target.dataset.idx;
+    const param = {
+      praiseId: e.target.dataset.praiseid,
+      workId: e.target.dataset.id,
+      workType: 0,
+      praiseUid: app.globalData.uid
+    }
+    praiseDeleteOne(param).then((data) => {
+      let tempData = this.data.userResource;
+      tempData[index].praiseStatus = null;
+      tempData[index].praiseNum = tempData[index].praiseNum - 1;
+      this.setData({
+        userResource: tempData
+      })
+    })
+  },
+
+  /**
+   * 给图文资源添加点赞（本地修改）
+   */
+  addTextPraise: function (e) {
+    var index = e.target.dataset.idx;
+    const param = {
+      workId: e.target.dataset.id,
+      workType: 0,
+      praiseUid: app.globalData.uid
+    }
+    praiseAddOne(param).then((data) => {
+      let tempData = this.data.userResource;
+      tempData[index].praiseStatus = 1;
+      tempData[index].praiseNum = tempData[index].praiseNum + 1;
+      this.setData({
+        userResource: tempData
+      })
+    })
+  },
+
+  /**
+ * 给音频资源删除点赞（本地修改）
+ */
+  deleteAudioPraise: function (e) {
+    const param = {
+      praiseId: e.target.dataset.praiseid,
+      workId: e.target.dataset.id,
+      workType: 0,
+      praiseUid: app.globalData.uid
+    }
+    praiseDeleteOne(param).then((data) => {
+      let tempData = this.data.userResourceSingle;
+      tempData.praiseStatus = null;
+      tempData.praiseNum = tempData.praiseNum - 1;
+      this.setData({
+        userResourceSingle: tempData
+      })
+    })
+  },
+
+  /**
+ * 给音频资源添加点赞（本地修改）
+ */
+  addAudioPraise: function (e) {
+    console.log(this.data.userResourceSingle)
+    const param = {
+      workId: e.target.dataset.id,
+      workType: 0,
+      praiseUid: app.globalData.uid
+    }
+    praiseAddOne(param).then((data) => {
+      let tempData = this.data.userResourceSingle;
+      tempData.praiseStatus = 1;
+      tempData.praiseNum = tempData.praiseNum+1;
+      this.setData({
+        userResourceSingle:tempData
+      })
     })
   },
 
@@ -199,7 +270,6 @@ Page({
     }
     reportDeleteOne(param).then((data) => {
       this.loadOurResource();
-      this.loadUserResource();
     })
   },
 
@@ -207,38 +277,45 @@ Page({
    * 对资源添加举报
    */
   addReport: function (e) {
-    // console.log(e.target.dataset.reportid)
     const param = {
-      // reportid:e.target.dataset.reportid,
       workId: e.target.dataset.id,
       workType: 0,
       reportUid: app.globalData.uid
     }
     reportAddOne(param).then((data) => {
       this.loadOurResource();
-      this.loadUserResource();
     })
   },
 
   /**
-   * 资源换一换
+   * 加载资源封装函数
    */
   changeResource:function() {
-    let index = this.userResourceIndex;
-    index=(index+1)%3;
-    console.log(index);
-    this.setData({
-      userResourceSingle:this.data.userResource[index],
-      changeCount: this.data.changeCount-1
+    var that = this;
+    const param = {
+      chapterId: that.data.chapterId,
+      uid: app.globalData.uid
+    }
+    findUserThreeResource(param).then((data) => {
+      var param = param;
+      // 如果是图文类型的话 加载三条
+      if (data.status === true && data.resources[0].type == 0) {
+        that.setData({
+          userResource: data.resources
+        })
+      } else if (data.status === true && data.resources[0].type == 1) {
+        // 如果是音频类型的话 加载一条
+        that.setData({
+          userResourceSingle: data.resources[0]
+        })
+      }
     })
-    this.userResourceIndex = index;
   },
 
   /**
    * 跳转对应资源详情页
    */
   gotoResDetailPage:function(e) {
-    console.log(e.target.dataset.id);
     wx.navigateTo({
       url: 'recommendResourceDetail/recommendResourceDetail?resourceId='+e.target.dataset.id,
     })
@@ -248,7 +325,6 @@ Page({
    * 跳转发表资源页
    */
   gotoPublishPage:function(e) {
-    console.log(this.data.chapterId)
     wx.navigateTo({
       url: 'publishResource/publishResource?chapterId=' + this.data.chapterId +'&resourceType='+this.resourceType,
     })

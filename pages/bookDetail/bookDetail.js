@@ -19,8 +19,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.bookId = 2;
-    this.uid = 8;
+    this.bookId = options.bookId;
+    this.uid = app.globalData.uid;
     this.updateCatalog();
   },
 
@@ -82,6 +82,9 @@ Page({
       })
     }else{
       //跳转到资源配置页面
+      wx.navigateTo({
+        url: '../recommendResource/recommendResource?chapterId=' + e.target.dataset.id,
+      })
     }
   },
 
