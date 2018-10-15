@@ -30,7 +30,6 @@ Page({
   problemId: null,//题目ID
 
   onLoad(options){
-    console.log(options)
     this.answerArray[0] = parseInt(options.I);
     this.answerArray[1] = parseInt(options.D);
     this.answerArray[2] = parseInt(options.S);
