@@ -2,6 +2,7 @@
 
 <view class='sys-message-container'>
   <view class='sys-content-container' wx:for="{{messageInfo}}" wx:key="{{index}}">
+    <image src='../../../images/sys_message1.png'></image>
     <view class='sys-info'>{{item.text}}</view>
     <view class='sys-time'>{{item.createTime}}</view>
     <!-- <view class='sys-hasRead-index' wx:if="{{!item.hasRead}}"></view>//是否查阅过的状态 -->
