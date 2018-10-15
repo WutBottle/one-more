@@ -8,4 +8,8 @@ module.exports = {
   insertUpMatch: (data) => {
     return upMatchController('post', 'upMatch', 'insertUpMatch', data);
   },
+  //2.查询性格相似好友
+  selectUpMatch: (data) => {
+    return upMatchController('post', 'upMatch', 'selectUpMatch', data);
+  },
 }

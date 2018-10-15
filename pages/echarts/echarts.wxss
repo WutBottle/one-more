@@ -66,6 +66,93 @@ ec-canvas {
   display: inline-block;
   position: fixed;
   z-index: 100;
-  bottom: 12vh;
+  bottom: 14vh;
   right: 10vw;
+}
+
+.find-similar-partner{
+  text-align: center;
+  box-sizing: border-box;
+  background: linear-gradient(to bottom right, rgb(24, 141, 240), rgb(12, 248, 231));
+  font-size: 36rpx;
+  color: #fff;
+  border-radius: 15rpx;
+  padding: 20rpx 0;
+  margin-top: 40rpx;
+}
+
+.show-similar-wrapper{
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 99999;
+  background: rgba(95, 95, 95, 0.6);
+}
+
+.similar-user-wrapper{
+  width: 640rpx;
+  height: 550rpx;
+  background-color: #fff;
+  border-radius: 20rpx;
+  margin: 0 auto;
+  margin-top: 250rpx;
+  overflow: hidden;
+  position: relative;
+}
+
+.similar-user-avatar{
+  width: 150rpx;
+  height: 150rpx;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 8rpx #fff solid;
+  position: relative;
+  bottom: -150rpx;
+}
+
+.similar-user-gender{
+  width: 40rpx;
+  height: 35rpx;
+}
+
+.similar-user-info{
+  padding: 60rpx 0 20rpx 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.similar-user-name{
+  font-size: 40rpx;
+}
+
+.similar-user-intro{
+  width: 400rpx;
+  margin: 0 auto;
+  text-align: center;
+  color: #188df0;
+  font-size: 30rpx;
+}
+
+.make-friends-btn{
+  padding: 20rpx 0;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+  color: #fff;
+  background-color: rgb(248, 141, 0);
+}
+
+.make-friends-btn>image{
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 10rpx;
 }

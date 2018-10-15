@@ -2,8 +2,12 @@ const app = getApp();
 
 import * as echarts from '../../ec-canvas/echarts.min';
 import {
-  insertUpMatch
+  insertUpMatch,
+  selectUpMatch
 } from '../../api/upMatchController.js';
+import {
+  followerAddOne
+} from '../../api/followerController.js';
 
 Page({
   onShareAppMessage: function (res) {
@@ -19,6 +23,8 @@ Page({
     resultObj: {},
     barLoadStatus:false,
     resultLoadStatus: false,
+    showSimilar: false,//推送相似用户弹窗
+    similarUserInfo:{},//相似用户信息
   },
   answerArray: [0,0,0,0],//答案的临时存储
   problemId: null,//题目ID
@@ -169,6 +175,51 @@ Page({
   backToTestList(){
     wx.navigateBack({
       delta: 2,
+    })
+  },
+
+  //推送相似用户
+  findSimilar(){
+    const param = {
+      pageNum: 1,
+      pageSize: 1,
+      uid: app.globalData.uid
+    }
+    selectUpMatch(param).then((data) => {
+      this.setData({
+        showSimilar: true,
+        similarUserInfo: data.chapters[0],
+      })
+    })
+
+  },
+
+  //关闭好友推送
+  closeDialogModal(e) {
+    if (e.target.dataset.modalblank) {
+      this.setData({
+        showSimilar: false,
+      })
+    }
+  },
+
+  //添加好友
+  addFriend(e){
+    const param = {
+      publishUid: app.globalData.uid,
+      followerUid: e.target.dataset.id,
+      status: 0,
+    }
+    followerAddOne(param).then((data) => {
+      wx.showToast({
+        title: '已发送申请',
+        icon: 'success',
+        duration: 1500,
+        mask: true,
+        success: this.setData({
+          showSimilar: false
+        })
+      })
     })
   }
 });
