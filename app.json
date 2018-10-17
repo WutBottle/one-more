@@ -15,6 +15,7 @@
     "pages/message/privateDialog/privateDialog",
     "pages/message/messagePrivate/friendsApplication/friendsApplication",
     "pages/userCenter/myBookshelves/myBookshelves",
+    "pages/userCenter/friendsList/friendsList",
     "pages/message/messageComment/messageComment",
     "pages/recommendResource/recommendResource",
     "pages/recommendResource/recommendResourceDetail/recommendResourceDetail",

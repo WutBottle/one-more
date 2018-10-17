@@ -22,7 +22,7 @@
         <text>我的书架</text>
       </view>
     </navigator>
-    <navigator class='function' url='#'>
+    <navigator class='function' url='./friendsList/friendsList'>
       <view class='function-item bookshelves'>
         <image src='../../images/logo_friend.png' style='width:54rpx;height:52rpx;'></image>
         <text>我的朋友</text>

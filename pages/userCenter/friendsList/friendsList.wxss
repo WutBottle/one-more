@@ -1,0 +1,54 @@
+.bg-cover{
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to right, rgb(210, 210, 210), rgb(255, 255, 255));
+  z-index: -1;
+}
+
+.list-wrapper{
+  padding: 40rpx 80rpx;
+}
+
+.list-wrapper .title{
+  padding-bottom: 40rpx;
+  font-size: 100rpx;
+  font-weight: bold;
+  color: #000;
+  border-bottom: 1rpx #ccc solid;
+}
+
+.friend-item-wrapper{
+  padding: 40rpx 40rpx 30rpx 0;
+  position: relative;
+}
+
+.friend-item-wrapper image{
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.friend-application-gender{
+  width: 30rpx!important;
+  height: 25rpx!important;
+  position: absolute;
+  top: 94rpx;
+  left: 160rpx;
+}
+
+.friend-application-username{
+  position: absolute;
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #000;
+  top: 35rpx;
+  left: 160rpx;
+}
+
+.friend-application-time{
+  position: absolute;
+  font-size: 26rpx;
+  color: #999999;
+  top: 125rpx;
+  left: 160rpx;
+}

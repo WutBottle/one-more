@@ -1,0 +1,12 @@
+<view class="bg-cover"></view>
+
+<view class='list-wrapper'>
+  <view class='title'>L i s t</view>
+  <view class='friend-item-wrapper' data-uid='{{item."followerUid}}' wx:for="{{listInfo}}" wx:key="{{index}}">
+    <image src="{{item.followerImg}}" mode='aspectFit'></image>
+    <view class='friend-application-username displayInlineBlock'>{{item.followerFakeName}}</view>
+    <view class='friend-application-time displayInlineBlock'>{{item.createTime}}</view>
+    <image class='friend-application-gender' src="{{item.gender === 1 ? '../../../images/male.png' : '../../../images/female.png'}}" mode='aspectFit'></image>
+
+  </view>
+</view>
