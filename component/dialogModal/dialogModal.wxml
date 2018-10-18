@@ -1,0 +1,27 @@
+<view class='dialog-pop-container' data-modalBlank='true' bindtap='closeDialogModal' wx:if="{{showDialogModal}}">
+  <view class='user-dialog-div'>
+    <view class='user-dialog-name'>
+      {{currentUserName}}
+      <view class='user-establish-friend' bindtap='handleAddFriends' wx:if="{{!isFollow}}">申请好友</view>
+    </view>
+    <scroll-view class='dialog-scrollY' scroll-into-view="{{toIndex}}" scroll-y="true">
+      <block wx:for="{{userDialogInfo}}" wx:key="{{index}}">
+        <view class='dialog-time'>{{item.createTime}}</view>
+        <view id="{{userDialogInfo.length === index + 1 ? 'lastOne':''}}" class='left-dialog-container' wx:if="{{item.receiveUid === uid}}">
+          <image src='{{item.publishImg}}' mode='aspectFit'></image>
+          <view class='dialog-content'>{{item.text}}</view>
+        </view>
+        <view id="{{userDialogInfo.length === index + 1 ? 'lastOne':''}}" wx:else class='right-dialog-container'>
+          <view class='dialog-content'>{{item.text}}</view>
+          <image src='{{item.publishImg}}' mode='aspectFit'></image>
+        </view>
+      </block>
+    </scroll-view>
+    <view class='dialog-send-msg'>
+      <view class='dialog-msg-input'>
+        <textarea value="{{sendMsgValue}}" auto-height='true' bindinput="sendMsgValueChange"></textarea>
+      </view>
+      <view class="dialog-send-btn {{!!sendMsgValue ? 'btn-active' : 'btn-disable'}}" bindtap='submitSendMsgValue' type='primary'>发送</view>
+    </view>
+  </view>
+</view>

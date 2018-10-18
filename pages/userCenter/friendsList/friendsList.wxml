@@ -2,11 +2,28 @@
 
 <view class='list-wrapper'>
   <view class='title'>L i s t</view>
-  <view class='friend-item-wrapper' data-uid='{{item."followerUid}}' wx:for="{{listInfo}}" wx:key="{{index}}">
+  <view class='friend-item-wrapper' wx:for="{{listInfo}}" wx:key="{{index}}">
     <image src="{{item.followerImg}}" mode='aspectFit'></image>
     <view class='friend-application-username displayInlineBlock'>{{item.followerFakeName}}</view>
     <view class='friend-application-time displayInlineBlock'>{{item.createTime}}</view>
     <image class='friend-application-gender' src="{{item.gender === 1 ? '../../../images/male.png' : '../../../images/female.png'}}" mode='aspectFit'></image>
-
+    <view class='dialog-btn' data-id='{{item.followerUid}}' data-name='{{item.followerFakeName}}' bindtap='handleDialogClick'>私信</view>
+    <view class='delete-btn' data-id='{{item.followerId}}' bindtap='showDeleteModal'>删除</view>
   </view>
 </view>
+
+<view class='delete-warning-modal' data-modalBlank='true' bindtap='closeDialogModal' wx:if="{{showDeteleModal}}">
+  <view class='btn-wrapper'>
+    <view class='cofirm-title'>确认删除好友？</view>
+    <view class='cofirm-content'>删除之后好友无法恢复，我的私信中相关记录也同步删除</view>
+    <view class='btn'>
+      <view class='cancel' bindtap='cencelDelete'>取消</view>
+      <view class='confirm' bindtap='confirmDelete'>确认</view>
+    </view>
+  </view>
+</view>
+
+<dialogModal id='dialogModal'
+  fakeName = "{{fakeName}}"
+  isFollow = "{{isFollow}}"
+></dialogModal>
