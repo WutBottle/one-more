@@ -38,13 +38,3 @@
     </view>
   </view>
 </view>
-
-<navigator url='./friendsApplication/friendsApplication'>
-  <view class='friends-application-hints displayInlineBlock' wx:if="{{hasFriendsHints}}">
-    <view class='friends-hints-wrapper'>
-      您有新的好友申请!
-      <view class='triangle-arrow displayInlineBlock'></view>
-    </view>
-    <image src='../../../images/friends_hints.png' mode='widthFit'></image>
-  </view>
-</navigator>

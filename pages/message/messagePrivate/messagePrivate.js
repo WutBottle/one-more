@@ -20,7 +20,6 @@ Page({
     currentUserName: '',//当前点击用户name
     uid: '',//当前用户id
     isFollow: '',//与点击用户是否是好友
-    hasFriendsHints: false,//是否有好友申请
   },
   currentUserId: '',//当前点击用户ID
   pageSize: 10,
@@ -70,8 +69,6 @@ Page({
    */
   onPullDownRefresh: function() {
     this.updatePrivateMsgList();//刷新私信列表数据
-    this.updateFriendApplication()//刷新好友申请数据
-    wx.stopPullDownRefresh();//回弹下拉
   },
 
   /**
@@ -169,23 +166,6 @@ Page({
         duration: 1500,
         mask: true,
       })
-    })
-  },
-  //是否有好友申请
-  updateFriendApplication(){
-    const param = {
-      uid: app.globalData.uid
-    }
-    selectNoAgree(param).then((data) => {
-      if (!!data.followers.length){
-        this.setData({
-          hasFriendsHints: true
-        })
-      }else {
-        this.setData({
-          hasFriendsHints: false
-        })
-      }
     })
   },
 })

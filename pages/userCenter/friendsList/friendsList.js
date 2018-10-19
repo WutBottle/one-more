@@ -2,7 +2,8 @@ const app = getApp();
 
 import {
   selectAllFollower,
-  followerDeleteOne
+  followerDeleteOne,
+  selectNoAgree
 } from '../../../api/followerController.js';
 
 Page({
@@ -16,12 +17,14 @@ Page({
     fakeName: '',//点击的用户name
     isFollow: null,
     showDeteleModal: false,//删除确认弹窗
+    hasFriendsHints: false,//是否有好友申请
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     this.getFriendsList();
+    this.updateFriendApplication();
     this.setData({
       uid: app.globalData.uid
     })
@@ -38,7 +41,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    this.getFriendsList();
+    this.updateFriendApplication();
   },
 
   /**
@@ -59,7 +63,9 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    
+    this.getFriendsList();
+    this.updateFriendApplication();
+    wx.stopPullDownRefresh();//回弹下拉
   },
 
   /**
@@ -135,6 +141,24 @@ Page({
       this.setData({
         listInfo: data.followers
       })
+    })
+  },
+
+  //是否有好友申请
+  updateFriendApplication() {
+    const param = {
+      uid: app.globalData.uid
+    }
+    selectNoAgree(param).then((data) => {
+      if (!!data.followers.length) {
+        this.setData({
+          hasFriendsHints: true
+        })
+      } else {
+        this.setData({
+          hasFriendsHints: false
+        })
+      }
     })
   },
 })

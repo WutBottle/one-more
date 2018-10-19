@@ -2,14 +2,17 @@
 
 <view class='list-wrapper'>
   <view class='title'>L i s t</view>
-  <view class='friend-item-wrapper' wx:for="{{listInfo}}" wx:key="{{index}}">
-    <image src="{{item.followerImg}}" mode='aspectFit'></image>
-    <view class='friend-application-username displayInlineBlock'>{{item.followerFakeName}}</view>
-    <view class='friend-application-time displayInlineBlock'>{{item.createTime}}</view>
-    <image class='friend-application-gender' src="{{item.gender === 1 ? '../../../images/male.png' : '../../../images/female.png'}}" mode='aspectFit'></image>
-    <view class='dialog-btn' data-id='{{item.followerUid}}' data-name='{{item.followerFakeName}}' bindtap='handleDialogClick'>私信</view>
-    <view class='delete-btn' data-id='{{item.followerId}}' bindtap='showDeleteModal'>删除</view>
-  </view>
+  <block wx:if="{{!!listInfo.length}}">
+    <view class='friend-item-wrapper' wx:for="{{listInfo}}" wx:key="{{index}}">
+      <image src="{{item.followerImg}}" mode='aspectFit'></image>
+      <view class='friend-application-username displayInlineBlock'>{{item.followerFakeName}}</view>
+      <view class='friend-application-time displayInlineBlock'>{{item.createTime}}</view>
+      <image class='friend-application-gender' src="{{item.gender === 1 ? '../../../images/male.png' : '../../../images/female.png'}}" mode='aspectFit'></image>
+      <view class='dialog-btn' data-id='{{item.followerUid}}' data-name='{{item.followerFakeName}}' bindtap='handleDialogClick'>私信</view>
+      <view class='delete-btn' data-id='{{item.followerId}}' bindtap='showDeleteModal'>删除</view>
+    </view>
+  </block>
+  <view wx:else class='no-list-info'>您还没有好友呢，快去找找吧！</view>
 </view>
 
 <view class='delete-warning-modal' data-modalBlank='true' bindtap='closeDialogModal' wx:if="{{showDeteleModal}}">
@@ -27,3 +30,13 @@
   fakeName = "{{fakeName}}"
   isFollow = "{{isFollow}}"
 ></dialogModal>
+
+<navigator url='../../message/messagePrivate/friendsApplication/friendsApplication'>
+  <view class='friends-application-hints displayInlineBlock' wx:if="{{hasFriendsHints}}">
+    <view class='friends-hints-wrapper'>
+      您有新的好友申请!
+      <view class='triangle-arrow displayInlineBlock'></view>
+    </view>
+    <image src='../../../images/friends_hints.png' mode='widthFit'></image>
+  </view>
+</navigator>

@@ -206,37 +206,3 @@
 .btn-active{
   background-color: #6f564b;
 }
-
-.friends-application-hints{
-  text-align: center;
-  position: fixed;
-  bottom: 80rpx;
-  right: 40rpx;
-}
-
-.friends-application-hints>image{
-  width: 100rpx;
-  height: 100rpx;
-  margin-top: 20rpx;
-}
-
-.friends-hints-wrapper{
-  position: relative;
-  background-color: #f3a55d;
-  color: #fff;
-  font-size: 30rpx;
-  line-height: 60rpx;
-  padding: 10rpx;
-  border-radius: 10rpx;
-  text-align: center;  
-}
-
-.triangle-arrow{
-  background-color: #f3a55d;
-  width: 20rpx;
-  height: 20rpx;
-  position: absolute;
-  bottom: -8rpx;
-  left: 100rpx;
-  transform: rotate(45deg);
-}

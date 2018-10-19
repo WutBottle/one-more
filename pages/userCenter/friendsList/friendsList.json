@@ -1,5 +1,6 @@
 {
   "navigationBarTitleText": "好友列表",
+  "enablePullDownRefresh": true,
   "usingComponents": {
     "dialogModal": "/component/dialogModal/dialogModal"
   }
