@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "推荐资源"
+  "navigationBarTitleText": "推荐资源",
+  "usingComponents": {
+    "wxzx-slider": "../../component/wxzx-slider/wxzx-slider"
+  }
 }

@@ -47,7 +47,7 @@
           <!-- 评论部分 -->
           <view data-id='{{item.resourceId}}' bindtap='gotoResDetailPage' class='resource-comment displayInlineBlock'>
             <image data-id='{{item.resourceId}}' src='../../images/comment.png' mode='widthFix'></image>
-            <text data-id='{{item.resourceId}}' >{{item.commentNum}}</text>
+            <text data-id='{{item.resourceId}}'>{{item.commentNum}}</text>
           </view>
           <!-- 点赞后 -->
           <view data-idx="{{index}}" data-id="{{item.resourceId}}" data-praiseid="{{item.praiseStatus}}" class='resource-praise displayInlineBlock' wx:if="{{!!item.praiseStatus}}" bindtap='deletePraise'>
@@ -105,7 +105,7 @@
       </view>
     </view>
   </view>
-  <view class='publish-box' bindtap='gotoPublishPage' >
+  <view class='publish-box' bindtap='gotoPublishPage'>
     <image src='../../images/publish.png' mode='widthFix'></image>
     <text>发布</text>
   </view>
@@ -120,7 +120,29 @@
     </view>
     <view class='sys-resource-content2'>
       <view class='sys-audio'>
-        <audio id='audioRes' src='{{sysResource.audioUrl}}' name='{{sysResource.title}}' author='{{sysResource.fakeName}}' controls bindplay="audioPlay" bindpause='audioPause' bindtimeupdate="audioTimeUpdate" bindended="audioEnded" binderror="audioError"></audio>
+        <view class='audio-box'>
+          <view class='slider_bg'>
+            <view class='controlBtn'>
+              <button bindtap='start' wx:if="{{!isStart}}">
+                <image src='../../images/play.png' mode='widthFix'></image>
+              </button>
+              <button bindtap='pause' disabled='{{pause_disable}}' wx:else>
+                <image src='{{picSrc}}' mode='widthFix'></image>
+              </button>
+            </view>
+            <wxzx-slider id='wxzxSlider' blockSrc='../../images/slider.png' blockImageWidth='54' blockImageHeight='54' value='{{value}}' max='{{max}}' percent='{{percent}}' width='430' bind:sliderTap="sliderTap" bind:sliderStart="sliderStart" bind:sliderChange="sliderChange"
+              bind:sliderEnd="sliderEnd" bind:sliderCancel="sliderCancel" slider-left='100' disabled='{{disabled}}'>
+            </wxzx-slider>
+            <button class='stop-btn' bindtap='stop'>
+              <image src='../../images/stop_disable.png' mode='widthFix' wx:if="{{!isStart}}"></image>
+              <image src='../../images/stop.png' mode='widthFix' wx:else></image>
+            </button>
+          </view>
+          <view class='time_view'>
+            <view>{{pass_time}}</view>
+            <view>{{total_time_sys}}</view>
+          </view>
+        </view>
       </view>
       <!-- 评论部分 -->
       <view data-id='{{sysResource.resourceId}}' bindtap='gotoResDetailPage' class='sys-comment-box'>
@@ -162,8 +184,8 @@
           </view>
 
           <!-- 点赞后 -->
-          <view  data-idx="{{index}}" data-id="{{item.resourceId}}" data-praiseid="{{item.praiseStatus}}" class='resource-praise displayInlineBlock' wx:if="{{!!item.praiseStatus}}" bindtap='deletePraise'>
-            <image  data-idx="{{index}}" data-id="{{item.resourceId}}" data-praiseid="{{item.praiseStatus}}" src='../../images/praise_after.png'></image>
+          <view data-idx="{{index}}" data-id="{{item.resourceId}}" data-praiseid="{{item.praiseStatus}}" class='resource-praise displayInlineBlock' wx:if="{{!!item.praiseStatus}}" bindtap='deletePraise'>
+            <image data-idx="{{index}}" data-id="{{item.resourceId}}" data-praiseid="{{item.praiseStatus}}" src='../../images/praise_after.png'></image>
             <text data-idx="{{index}}" data-id="{{item.resourceId}}" data-praiseid="{{item.praiseStatus}}">{{item.praiseNum}}</text>
           </view>
           <!-- 点赞前 -->
@@ -175,9 +197,31 @@
       </view>
     </view>
     <!-- 用户音频 -->
-    <view class='user-audio-resource-content'  wx:else>
+    <view class='user-audio-resource-content' wx:else>
       <view class='user-audio'>
-        <audio id='audioRes' src='{{userResourceSingle.audioUrl}}' name='{{userResourceSingle.title}}' author='{{userResourceSingle.fakeName}}' controls bindplay="audioPlay" bindpause='audioPause' bindtimeupdate="audioTimeUpdate" bindended="audioEnded" binderror="audioError"></audio>
+        <view class='audio-box'>
+          <view class='slider_bg'>
+            <view class='controlBtn'>
+              <button bindtap='startUser' wx:if="{{!isStart}}">
+                <image src='../../images/play.png' mode='widthFix'></image>
+              </button>
+              <button bindtap='pause' disabled='{{pause_disable}}' wx:else>
+                <image src='{{picSrc}}' mode='widthFix'></image>
+              </button>
+            </view>
+            <wxzx-slider id='wxzxSlider' blockSrc='../../images/slider.png' blockImageWidth='54' blockImageHeight='54' value='{{value}}' max='{{max}}' percent='{{percent}}' width='430' bind:sliderTap="sliderTap" bind:sliderStart="sliderStart" bind:sliderChange="sliderChange"
+              bind:sliderEnd="sliderEnd" bind:sliderCancel="sliderCancel" slider-left='100' disabled='{{disabled}}'>
+            </wxzx-slider>
+            <button class='stop-btn' bindtap='stop'>
+              <image src='../../images/stop_disable.png' mode='widthFix' wx:if="{{!isStart}}"></image>
+              <image src='../../images/stop.png' mode='widthFix' wx:else></image>
+            </button>
+          </view>
+          <view class='time_view'>
+            <view>{{pass_time}}</view>
+            <view>{{total_time_user}}</view>
+          </view>
+        </view>
       </view>
       <view class='resource-function-btn'>
         <!-- 举报部分 -->
@@ -221,7 +265,7 @@
       </view>
     </view>
   </view>
-  <view class='publish-box' bindtap='gotoPublishPage' >
+  <view class='publish-box' bindtap='gotoPublishPage'>
     <image src='../../images/publish.png' mode='widthFix'></image>
     <text>发布</text>
   </view>

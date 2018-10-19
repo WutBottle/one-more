@@ -1,4 +1,7 @@
 {
   "navigationBarTitleText": "资源详情",
-  "disableScroll": true
+  "disableScroll": true,
+  "usingComponents": {
+    "wxzx-slider": "../../../component/wxzx-slider/wxzx-slider"
+  }
 }

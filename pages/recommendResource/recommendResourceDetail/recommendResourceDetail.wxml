@@ -18,7 +18,29 @@
       <image class='resource-bg' src='{{resourceContent.imageUrl}}' mode="widthFix"></image>
     </view>
     <view class='resource-content'>
-      <audio id='audioRes' src='{{resourceContent.audioUrl}}' name='{{resourceContent.title}}' author='{{resourceContent.fakeName}}' controls bindplay="audioPlay" bindpause='audioPause' bindtimeupdate="audioTimeUpdate" bindended="audioEnded" binderror="audioError"></audio>
+      <view class='audio-box'>
+          <view class='slider_bg'>
+            <view class='controlBtn'>
+              <button bindtap='startSys' wx:if="{{!isStart}}">
+                <image src='../../../images/play.png' mode='widthFix'></image>
+              </button>
+              <button bindtap='pause' disabled='{{pause_disable}}' wx:else>
+                <image src='{{picSrc}}' mode='widthFix'></image>
+              </button>
+            </view>
+            <wxzx-slider id='wxzxSlider' blockSrc='../../images/slider.png' blockImageWidth='54' blockImageHeight='54' value='{{value}}' max='{{max}}' percent='{{percent}}' width='430' bind:sliderTap="sliderTap" bind:sliderStart="sliderStart" bind:sliderChange="sliderChange"
+              bind:sliderEnd="sliderEnd" bind:sliderCancel="sliderCancel" slider-left='100' disabled='{{disabled}}'>
+            </wxzx-slider>
+            <button class='stop-btn' bindtap='stop'>
+              <image src='../../../images/stop_disable.png' mode='widthFix' wx:if="{{!isStart}}"></image>
+              <image src='../../../images/stop.png' mode='widthFix' wx:else></image>
+            </button>
+          </view>
+          <view class='time_view'>
+            <view>{{pass_time}}</view>
+            <view>{{total_time_sys}}</view>
+          </view>
+        </view>
     </view>
   </view>
   <!-- 资源评论模块 -->

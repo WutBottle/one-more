@@ -17,6 +17,7 @@ import {
   reportDeleteOne
 } from '../../../api/reportController.js'
 
+const audioManager = wx.getBackgroundAudioManager()
 var app = getApp()
 Page({
 
@@ -24,7 +25,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    isResExit:false,
+    isResExit: false,
+    resource:[],//资源内容
     resourceType: null, //资源类型 0：用户图文，1：用户音频，3：系统图文，4：系统音频
     resourceContent: {}, //资源内容
     commentList: [], //资源评论列表
@@ -33,16 +35,45 @@ Page({
     showMask: false, //发表评论时遮盖其他部分
     pubSuccess: false, //评论发表成功
     scrollHeight: null, //滚动部分高度
+    value: 0,
+    percent: 0,
+    max: 401,
+    pass_time: '00:00',
+    total_time_sys: '00:00',
+    total_time_user: '00:00',
+    // pause: '暂停',
+    picSrc: '../../../images/pause.png',
+    pause_disable: true,
+    isStart: false,
   },
   resourceId: null,
-  
+
+  secondTransferTime: function(time) {
+    if (time > 3600) {
+      return [
+          parseInt(time / 60 / 60),
+          parseInt(time / 60 % 60),
+          parseInt(time % 60)
+        ]
+        .join(":")
+        .replace(/\b(\d)\b/g, "0$1");
+    } else {
+      return [
+          parseInt(time / 60 % 60),
+          parseInt(time % 60)
+        ]
+        .join(":")
+        .replace(/\b(\d)\b/g, "0$1");
+    }
+  },
+
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
     console.log(options);
-    this.resourceId= options.resourceId
+    this.resourceId = options.resourceId
     // 高度适配
     let that = this
     wx.getSystemInfo({
@@ -53,6 +84,124 @@ Page({
       }
     });
     this.findResourceInfo();
+    setTimeout(function() {
+      that.wxzxSlider = that.selectComponent('#wxzxSlider');
+      audioManager.onTimeUpdate(function() {
+        if (!that.wxzxSlider.properties.isMonitoring) {
+          return
+        }
+        var currentTime = audioManager.currentTime.toFixed(0);
+        if (currentTime > that.data.max) {
+          currentTime = that.data.max;
+        }
+        var pass_time = that.secondTransferTime(currentTime);
+
+        that.setData({
+          value: currentTime,
+          pass_time: pass_time,
+          percent: audioManager.buffered / audioManager.duration * 100,
+          disabled: false
+        })
+      })
+
+      audioManager.onWaiting(function() {
+        that.setData({
+          disabled: true
+        })
+      })
+
+      audioManager.onEnded(function() {
+        that.setData({
+          // pause: '暂停',
+          picSrc: '../../../images/play.png',
+          pause_disable: true,
+          value: 0,
+          pass_time: '00:00',
+          percent: 0,
+          disabled: true,
+          isStart: false
+        })
+      })
+    }, 1000)
+  },
+
+  // 点击slider时调用
+  sliderTap: function(e) {
+    console.log("sliderTap")
+    this.seek()
+  },
+
+  // 开始滑动时
+  sliderStart: function(e) {
+    console.log("sliderStart")
+  },
+
+  // 正在滑动
+  sliderChange: function(e) {
+    console.log("sliderChange")
+  },
+
+  // 滑动结束
+  sliderEnd: function(e) {
+    console.log("sliderEnd")
+    this.seek()
+  },
+
+  // 滑动取消 （左滑时滑到上一页面或电话等情况）
+  sliderCancel: function(e) {
+    console.log("sliderCancel")
+    this.seek()
+  },
+
+  seek: function() {
+    var value = this.wxzxSlider.properties.value
+    console.log(value)
+    var seek_time = value.toFixed(0);
+    var pass_time = this.secondTransferTime(seek_time);
+    this.setData({
+      pass_time: pass_time,
+    })
+    audioManager.seek(Number(seek_time));
+  },
+
+  start: function() {
+    audioManager.title = this.data.resource.title;
+    audioManager.epname = '';
+    audioManager.singer = this.data.sysResource.fakeName;
+    audioManager.coverImgUrl = this.data.sysResource.imageUrl;
+    audioManager.src = this.data.sysResource.audioUrl;
+    this.setData({
+      isStart: true,
+      picSrc: '../../../images/pause.png',
+      pause_disable: false
+    })
+  },
+
+  pause: function(e) {
+    if (audioManager.paused) {
+      audioManager.play()
+      this.setData({
+        picSrc: '../../../images/pause.png',
+      })
+    } else {
+      audioManager.pause()
+      this.setData({
+        picSrc: '../../../images/play.png',
+      })
+    }
+  },
+
+  stop: function() {
+    audioManager.stop()
+    this.setData({
+      isStart: false,
+      picSrc: '../../../images/play.png',
+      pause_disable: true,
+      value: 0,
+      pass_time: '00:00',
+      percent: 0,
+      disabled: true
+    })
   },
 
   /**
@@ -116,7 +265,8 @@ Page({
     findInfo(param).then((data) => {
       if (data.status) {
         this.setData({
-          isResExit:true,
+          isResExit: true,
+          resource: data.resource,
           resourceType: data.resource.type,
           resourceContent: data.resource,
           commentList: data.resource.commentInfos,
@@ -124,7 +274,7 @@ Page({
         this.findCommentInfoNew();
       } else {
         this.setData({
-          isResExit:false
+          isResExit: false
         })
       }
     })

@@ -18,7 +18,7 @@
     <!-- 播放按钮 -->
     <view class='function-btn play-record'>
       <button bindtap='play'>
-        <image src='../../../images/play.png' mode='widthFix'></image>
+        <image src='../../../images/play_record.png' mode='widthFix'></image>
         <text>试听</text>
       </button>
     </view>

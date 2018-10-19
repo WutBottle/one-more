@@ -31,7 +31,7 @@ Page({
   // 跳转音频页面
   gotoAudioPage:function() {
     wx.navigateTo({
-      url: '../recommendResource/recommendResource?chapterId=1',
+      url: '../recommendResource/recommendResource?chapterId=4',
     })
   },
 })

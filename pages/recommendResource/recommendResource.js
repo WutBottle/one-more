@@ -1,4 +1,5 @@
 // pages/recommendResource/recommendResource.js
+const audioManager = wx.getBackgroundAudioManager()
 var app = getApp();
 import {
   findOurResource,
@@ -18,7 +19,7 @@ import {
 
 import {
   shelfAddOne
-}from '../../api/bookShelfController.js'
+} from '../../api/bookShelfController.js'
 
 var app = getApp();
 Page({
@@ -27,34 +28,197 @@ Page({
    * 页面的初始数据
    */
   data: {
-    chapterId:null,
+    chapterId: null,
     scrollHeight: null, //滚动部分高度
     sysResource: [],
     userResource: [],
-    userResourceSingle:[],
+    userResourceSingle: [],
     // changeCount:null,
+    value: 0,
+    percent: 0,
+    max: 401,
+    pass_time: '00:00',
+    total_time_sys: '00:00',
+    total_time_user: '00:00',
+    // pause: '暂停',
+    picSrc: '../../images/pause.png',
+    pause_disable: true,
+    isStart: false,
   },
-    sysResourceType:null,
-    userResourceIndex:0,//用户资源序号
+  wxzxSlider: null,
+  sysResourceType: null,
+  userResourceIndex: 0, //用户资源序号
+
+  secondTransferTime: function(time) {
+    if (time > 3600) {
+      return [
+          parseInt(time / 60 / 60),
+          parseInt(time / 60 % 60),
+          parseInt(time % 60)
+        ]
+        .join(":")
+        .replace(/\b(\d)\b/g, "0$1");
+    } else {
+      return [
+          parseInt(time / 60 % 60),
+          parseInt(time % 60)
+        ]
+        .join(":")
+        .replace(/\b(\d)\b/g, "0$1");
+    }
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    var that = this
     this.setData({
       chapterId: options.chapterId
     })
     // 高度适配
-    let that = this
     wx.getSystemInfo({
       success: function(res) {
         that.setData({
           scrollHeight: res.windowHeight, //250为页面出去滚动部分其余高度
-          changeCount:3,
+          changeCount: 3,
         });
       }
     });
-    this.addBookShelf();//添加一条书架记录
+    this.addBookShelf(); //添加一条书架记录
     this.loadOurResource();
+    setTimeout(function() {
+      that.wxzxSlider = that.selectComponent('#wxzxSlider');
+      audioManager.onTimeUpdate(function() {
+        if (!that.wxzxSlider.properties.isMonitoring) {
+          return
+        }
+        var currentTime = audioManager.currentTime.toFixed(0);
+        if (currentTime > that.data.max) {
+          currentTime = that.data.max;
+        }
+        var pass_time = that.secondTransferTime(currentTime);
+
+        that.setData({
+          value: currentTime,
+          pass_time: pass_time,
+          percent: audioManager.buffered / audioManager.duration * 100,
+          disabled: false
+        })
+      })
+
+      audioManager.onWaiting(function() {
+        that.setData({
+          disabled: true
+        })
+      })
+
+      audioManager.onEnded(function() {
+        that.setData({
+          // pause: '暂停',
+          picSrc: '../../images/play.png',
+          pause_disable: true,
+          value: 0,
+          pass_time: '00:00',
+          percent: 0,
+          disabled: true,
+          isStart:false
+        })
+      })
+    }, 1000)
+
+  },
+
+  // 点击slider时调用
+  sliderTap: function(e) {
+    console.log("sliderTap")
+    this.seek()
+  },
+
+  // 开始滑动时
+  sliderStart: function(e) {
+    console.log("sliderStart")
+  },
+
+  // 正在滑动
+  sliderChange: function(e) {
+    console.log("sliderChange")
+  },
+
+  // 滑动结束
+  sliderEnd: function(e) {
+    console.log("sliderEnd")
+    this.seek()
+  },
+
+  // 滑动取消 （左滑时滑到上一页面或电话等情况）
+  sliderCancel: function(e) {
+    console.log("sliderCancel")
+    this.seek()
+  },
+
+  seek: function() {
+    var value = this.wxzxSlider.properties.value
+    console.log(value)
+    var seek_time = value.toFixed(0);
+    var pass_time = this.secondTransferTime(seek_time);
+    this.setData({
+      pass_time: pass_time,
+    })
+    audioManager.seek(Number(seek_time));
+  },
+
+  startSys: function() {
+    audioManager.title = this.data.sysResource.title;
+    audioManager.epname = '';
+    audioManager.singer = this.data.sysResource.fakeName;
+    audioManager.coverImgUrl = this.data.sysResource.imageUrl;
+    audioManager.src = this.data.sysResource.audioUrl;
+    this.setData({
+      isStart: true,
+      picSrc: '../../images/pause.png',
+      pause_disable: false
+    })
+  },
+
+  startUser: function () {
+    audioManager.title = this.data.userResourceSingle.title;
+    audioManager.epname = '';
+    audioManager.singer = this.data.userResourceSingle.fakeName;
+    audioManager.coverImgUrl = this.data.userResourceSingle.imageUrl;
+    audioManager.src = this.data.userResourceSingle.audioUrl;
+    this.setData({
+      isStart: true,
+      picSrc: '../../images/pause.png',
+      pause_disable: false
+    })
+  },
+
+  pause: function(e) {
+    if (audioManager.paused) {
+      audioManager.play()
+      this.setData({
+        picSrc: '../../images/pause.png',
+      })
+    } else {
+      audioManager.pause()
+      this.setData({
+        picSrc: '../../images/play.png',
+      })
+    }
+  },
+
+  stop: function() {
+    audioManager.stop()
+    this.setData({
+      isStart: false,
+      picSrc: '../../images/play.png',
+      pause_disable: true,
+      value: 0,
+      pass_time: '00:00',
+      percent: 0,
+      disabled: true
+    })
   },
 
   /**
@@ -112,10 +276,10 @@ Page({
   /**
    * 添加一条书架记录
    */
-  addBookShelf:function() {
-    const param ={
-      chapterId:this.data.chapterId,
-      shelfUid:app.globalData.uid
+  addBookShelf: function() {
+    const param = {
+      chapterId: this.data.chapterId,
+      shelfUid: app.globalData.uid
     }
     shelfAddOne(param).then((data) => {
 
@@ -128,14 +292,19 @@ Page({
   loadOurResource: function() {
     const param = {
       chapterId: this.data.chapterId,
-      uid:app.globalData.uid
+      uid: app.globalData.uid
     }
     findOurResource(param).then((data) => {
-      if (data.status === true) {
+      if (data.status === true && data.resources.length != 0) {
+        console.log(data.resources.length);
         this.sysResourceType = data.resources[0].type
+        var timeLength = this.secondTransferTime(data.resources[0].timeLength)
         this.setData({
+          total_time_sys: timeLength,
           sysResource: data.resources[0],
         })
+      } else {
+        console.log("暂无系统发表资源或查找资源失败！")
       }
       this.loadUserResource();
     })
@@ -144,14 +313,14 @@ Page({
   /**
    * 加载三条图文用户资源
    */
-  loadUserResource: function () {
+  loadUserResource: function() {
     this.changeResource();
   },
 
   /**
- * 给系统资源删除点赞
- */
-  deletePraise: function (e) {
+   * 给系统资源删除点赞
+   */
+  deletePraise: function(e) {
     const param = {
       praiseId: e.target.dataset.praiseid,
       workId: e.target.dataset.id,
@@ -166,7 +335,7 @@ Page({
   /**
    * 给系统资源添加点赞
    */
-  addPraise: function (e) {
+  addPraise: function(e) {
     const param = {
       workId: e.target.dataset.id,
       workType: 0,
@@ -178,9 +347,9 @@ Page({
   },
 
   /**
- * 给图文资源删除点赞（本地修改）
- */
-  deleteTextPraise: function (e) {
+   * 给图文资源删除点赞（本地修改）
+   */
+  deleteTextPraise: function(e) {
     var index = e.target.dataset.idx;
     const param = {
       praiseId: e.target.dataset.praiseid,
@@ -201,7 +370,7 @@ Page({
   /**
    * 给图文资源添加点赞（本地修改）
    */
-  addTextPraise: function (e) {
+  addTextPraise: function(e) {
     var index = e.target.dataset.idx;
     const param = {
       workId: e.target.dataset.id,
@@ -219,9 +388,9 @@ Page({
   },
 
   /**
- * 给音频资源删除点赞（本地修改）
- */
-  deleteAudioPraise: function (e) {
+   * 给音频资源删除点赞（本地修改）
+   */
+  deleteAudioPraise: function(e) {
     const param = {
       praiseId: e.target.dataset.praiseid,
       workId: e.target.dataset.id,
@@ -239,9 +408,9 @@ Page({
   },
 
   /**
- * 给音频资源添加点赞（本地修改）
- */
-  addAudioPraise: function (e) {
+   * 给音频资源添加点赞（本地修改）
+   */
+  addAudioPraise: function(e) {
     console.log(this.data.userResourceSingle)
     const param = {
       workId: e.target.dataset.id,
@@ -251,17 +420,17 @@ Page({
     praiseAddOne(param).then((data) => {
       let tempData = this.data.userResourceSingle;
       tempData.praiseStatus = 1;
-      tempData.praiseNum = tempData.praiseNum+1;
+      tempData.praiseNum = tempData.praiseNum + 1;
       this.setData({
-        userResourceSingle:tempData
+        userResourceSingle: tempData
       })
     })
   },
 
   /**
- * 对资源删除举报
- */
-  deleteReport: function (e) {
+   * 对资源删除举报
+   */
+  deleteReport: function(e) {
     const param = {
       reportId: e.target.dataset.reportid,
       workId: e.target.dataset.id,
@@ -276,7 +445,7 @@ Page({
   /**
    * 对资源添加举报
    */
-  addReport: function (e) {
+  addReport: function(e) {
     const param = {
       workId: e.target.dataset.id,
       workType: 0,
@@ -290,7 +459,7 @@ Page({
   /**
    * 加载资源封装函数
    */
-  changeResource:function() {
+  changeResource: function() {
     var that = this;
     const param = {
       chapterId: that.data.chapterId,
@@ -299,15 +468,21 @@ Page({
     findUserThreeResource(param).then((data) => {
       var param = param;
       // 如果是图文类型的话 加载三条
-      if (data.status === true && data.resources[0].type == 0) {
-        that.setData({
-          userResource: data.resources
-        })
-      } else if (data.status === true && data.resources[0].type == 1) {
-        // 如果是音频类型的话 加载一条
-        that.setData({
-          userResourceSingle: data.resources[0]
-        })
+      if (data.status === true && data.resources.length != 0) {
+        if (data.resources[0].type == 0) {
+          that.setData({
+            userResource: data.resources
+          })
+        } else if (data.resources[0].type == 1) {
+          //音频资源 加载一条
+          var timeLength = this.secondTransferTime(data.resources[0].timeLength)
+          that.setData({
+            total_time_user:timeLength,
+            userResourceSingle: data.resources[0]
+          })
+        }
+      } else {
+        console.log("暂无用户发表资源或查找资源失败！")
       }
     })
   },
@@ -315,35 +490,35 @@ Page({
   /**
    * 跳转对应资源详情页
    */
-  gotoResDetailPage:function(e) {
+  gotoResDetailPage: function(e) {
     wx.navigateTo({
-      url: 'recommendResourceDetail/recommendResourceDetail?resourceId='+e.target.dataset.id,
+      url: 'recommendResourceDetail/recommendResourceDetail?resourceId=' + e.target.dataset.id,
     })
   },
 
   /**
    * 跳转发表资源页
    */
-  gotoPublishPage:function(e) {
+  gotoPublishPage: function(e) {
     wx.navigateTo({
-      url: 'publishResource/publishResource?chapterId=' + this.data.chapterId +'&resourceType='+this.sysResourceType,
+      url: 'publishResource/publishResource?chapterId=' + this.data.chapterId + '&resourceType=' + this.sysResourceType,
     })
   },
 
-  audioPlay: function () {
+  audioPlay: function() {
     console.log("audio play");
   },
-  audioPause: function () {
+  audioPause: function() {
     console.log("audio pause");
   },
-  audioTimeUpdate: function (u) {
+  audioTimeUpdate: function(u) {
     // console.log(u.detail.currentTime);
     // console.log(u.detail.duration);
   },
-  audioEnded: function () {
+  audioEnded: function() {
     console.log("audio end");
   },
-  audioError: function (u) {
+  audioError: function(u) {
     console.log(u.detail.errMsg);
   }
 })

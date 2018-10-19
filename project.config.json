@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 6,
+			"current": 1,
 			"list": [
 				{
 					"id": 0,
@@ -46,7 +46,7 @@
 					"id": 1,
 					"name": "资源详情页面",
 					"pathName": "pages/recommendResource/recommendResourceDetail/recommendResourceDetail",
-					"query": "resourceId=1",
+					"query": "resourceId=33",
 					"scene": "1011"
 				},
 				{
@@ -70,10 +70,10 @@
 					"scene": "1011"
 				},
 				{
-					"id": 7,
+					"id": 5,
 					"name": "资源初始化页面",
 					"pathName": "pages/recommendResource/recommendResource",
-					"query": "chapterId=1",
+					"query": "chapterId=4",
 					"scene": "1011"
 				},
 				{
