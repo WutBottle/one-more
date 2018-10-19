@@ -22,9 +22,11 @@ Page({
     onPlay: false, // 播放状态样式判断
     timeLimit: 2, //时间限制
     resourceType: null, //发表资源类型(图文:0||3,音频:1||4)   
-    isPicExit:false,//是否上传图片
-    picUrl:null,//图片路径 
-    textContent:'',//文本内容
+    isPicExit: false, //是否上传图片
+    picUrl: null, //图片路径 
+    textContent: '', //文本内容
+    wordNumber: 0, //字数
+    maxWordNumer: 120,
   },
 
 
@@ -245,7 +247,7 @@ Page({
           const param = {
             audioUrl: audioUrl,
             chapterId: chapterId,
-            publishUid:app.globalData.uid,
+            publishUid: app.globalData.uid,
             status: 0, //可以评论
             title: resourceTitle,
             type: 1,
@@ -282,11 +284,14 @@ Page({
   },
 
   /**
- * 用户输入文本
- */
-  doInput: function (e) {
+   * 用户输入文本
+   */
+  doInput: function(e) {
+    var value = e.detail.value;
+    var len = parseInt(value.length);
     this.setData({
-      textContent: e.detail.value
+      wordNumber: len,
+      textContent: value
     })
   },
 
@@ -350,33 +355,33 @@ Page({
   /**
    * 上传图文资源
    */
-  submitText:function(){
-    if (this.data.textContent||(this.data.textContent&&this.data.isPicExit)){
+  submitText: function() {
+    if (this.data.textContent || (this.data.textContent && this.data.isPicExit)) {
       // console.log(this.data.textContent);
-      const param ={
+      const param = {
         imageUrl: this.data.picUrl,
         chapterId: this.data.chapterId,
         publishUid: app.globalData.uid,
         status: 0, //可以评论
         type: 0,
-        content:this.data.textContent
+        content: this.data.textContent
       }
       addResource(param).then((data) => {
         console.log(this.data);
-        var chapterId=this.data.chapterId;
+        var chapterId = this.data.chapterId;
         wx.showToast({
           title: '发布成功',
           icon: 'success',
           duration: 2000
         })
-        setTimeout(function () {
+        setTimeout(function() {
           wx.navigateBack({
             chapterId: chapterId
           })
         }, 2000)
 
       })
-    }else {
+    } else {
       wx.showModal({
         title: '提示',
         content: '请将资源完善',
