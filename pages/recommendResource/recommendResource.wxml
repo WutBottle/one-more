@@ -75,8 +75,8 @@
                 <image src='{{picSrc}}' mode='widthFix' data-res='userResource'></image>
               </button>
             </view>
-            <wxzx-slider id='wxzxSlider' blockSrc='../../images/slider.png' blockImageWidth='54' blockImageHeight='54' value='{{value}}' max='{{max}}' percent='{{percent}}' width='430' bind:sliderTap="sliderTap" bind:sliderStart="sliderStart" bind:sliderChange="sliderChange"
-              bind:sliderEnd="sliderEnd" bind:sliderCancel="sliderCancel" slider-left='100' disabled='{{disabled}}'>
+            <wxzx-slider id='wxzxSlider1' blockSrc='../../images/slider.png' blockImageWidth='54' blockImageHeight='54' value='{{value}}' max='{{max}}' percent='{{percent}}' width='430' bind:sliderTap="sliderTap" bind:sliderStart="sliderStart" bind:sliderChange="sliderChange"
+              bind:sliderEnd="sliderEnd" bind:sliderCancel="sliderCancel" slider-left='100' disabled='{{disabledUser}}'>
             </wxzx-slider>
             <button class='stop-btn' bindtap='stop' data-res='userResource'>
               <image src='../../images/stop_disable.png' mode='widthFix' wx:if="{{!isUserStart}}" data-res='userResource'></image>
@@ -84,7 +84,7 @@
             </button>
           </view>
           <view class='time_view'>
-            <view>{{pass_time}}</view>
+            <view>{{pass_time_user}}</view>
             <view>{{total_time_user}}</view>
           </view>
         </view>
@@ -157,7 +157,7 @@
               </button>
             </view>
             <wxzx-slider id='wxzxSlider' blockSrc='../../images/slider.png' blockImageWidth='54' blockImageHeight='54' value='{{value}}' max='{{max}}' percent='{{percent}}' width='430' bind:sliderTap="sliderTap" bind:sliderStart="sliderStart" bind:sliderChange="sliderChange"
-              bind:sliderEnd="sliderEnd" bind:sliderCancel="sliderCancel" slider-left='100' disabled='{{disabled}}'>
+              bind:sliderEnd="sliderEnd" bind:sliderCancel="sliderCancel" slider-left='100' disabled='{{disabledSys}}' data-res='sysResource'>
             </wxzx-slider>
             <button class='stop-btn' bindtap='stop' data-res='sysResource'>
               <image src='../../images/stop_disable.png' mode='widthFix' wx:if="{{!isSysStart}}" data-res='sysResource'></image>
@@ -165,7 +165,7 @@
             </button>
           </view>
           <view class='time_view'>
-            <view>{{pass_time}}</view>
+            <view>{{pass_time_sys}}</view>
             <view>{{total_time_sys}}</view>
           </view>
         </view>
@@ -235,8 +235,8 @@
                 <image src='{{picSrc}}' mode='widthFix' data-res='userResource'></image>
               </button>
             </view>
-            <wxzx-slider id='wxzxSlider' blockSrc='../../images/slider.png' blockImageWidth='54' blockImageHeight='54' value='{{value}}' max='{{max}}' percent='{{percent}}' width='430' bind:sliderTap="sliderTap" bind:sliderStart="sliderStart" bind:sliderChange="sliderChange"
-              bind:sliderEnd="sliderEnd" bind:sliderCancel="sliderCancel" slider-left='100' disabled='{{disabled}}'>
+            <wxzx-slider id='wxzxSlider1' blockSrc='../../images/slider.png' blockImageWidth='54' blockImageHeight='54' value='{{value}}' max='{{max}}' percent='{{percent}}' width='430' bind:sliderTap="sliderTap" bind:sliderStart="sliderStart" bind:sliderChange="sliderChange"
+              bind:sliderEnd="sliderEnd" bind:sliderCancel="sliderCancel" slider-left='100' disabled='{{disabledUser}}'>
             </wxzx-slider>
             <button class='stop-btn' bindtap='stop' data-res='userResource'>
               <image src='../../images/stop_disable.png' mode='widthFix' wx:if="{{!isUserStart}}" data-res='userResource'></image>
@@ -244,7 +244,7 @@
             </button>
           </view>
           <view class='time_view'>
-            <view>{{pass_time}}</view>
+            <view>{{pass_time_user}}</view>
             <view>{{total_time_user}}</view>
           </view>
         </view>

@@ -37,14 +37,17 @@ Page({
     value: 0,
     percent: 0,
     max: 401,
-    pass_time: '00:00',
+    pass_time_sys: '00:00',
+    pass_time_user: '00:00',
     total_time_sys: '00:00',
     total_time_user: '00:00',
     // pause: '暂停',
     picSrc: '../../images/pause.png',
     pause_disable: true,
     isSysStart: false,
-    isUserStart: false
+    isUserStart: false,
+    disabledSys: true,
+    disabledUser: true
   },
   wxzxSlider: null,
   sysResourceType: null,
@@ -90,42 +93,72 @@ Page({
     this.loadOurResource();
     setTimeout(function() {
       that.wxzxSlider = that.selectComponent('#wxzxSlider');
+      that.wxzxSlider1 = that.selectComponent('#wxzxSlider1');
       audioManager.onTimeUpdate(function() {
         if (!that.wxzxSlider.properties.isMonitoring) {
+          return
+        } else if (!that.wxzxSlider1.properties.isMonitoring) {
           return
         }
         var currentTime = audioManager.currentTime.toFixed(0);
         if (currentTime > that.data.max) {
           currentTime = that.data.max;
         }
-        var pass_time = that.secondTransferTime(currentTime);
-
-        that.setData({
-          value: currentTime,
-          pass_time: pass_time,
-          percent: audioManager.buffered / audioManager.duration * 100,
-          disabled: false
-        })
+        if (that.data.isSysStart) {
+          var pass_time = that.secondTransferTime(currentTime);
+          that.setData({
+            value: currentTime,
+            pass_time_sys: pass_time,
+            percent: audioManager.buffered / audioManager.duration * 100,
+            disabledSys: false
+          })
+        } else {
+          var pass_time = that.secondTransferTime(currentTime);
+          that.setData({
+            value: currentTime,
+            pass_time_user: pass_time,
+            percent: audioManager.buffered / audioManager.duration * 100,
+            disabledUser: false
+          })
+        }
       })
 
       audioManager.onWaiting(function() {
+        if (that.data.isSysStart) {
         that.setData({
-          disabled: true
+          disabledSys: true
         })
+        } else if (that.data.isSysStart) {
+          that.setData({
+            disabledUser: true
+          })
+        }
       })
 
       audioManager.onEnded(function() {
-        that.setData({
-          // pause: '暂停',
-          picSrc: '../../images/play.png',
-          pause_disable: true,
-          value: 0,
-          pass_time: '00:00',
-          percent: 0,
-          disabled: true,
-          isUserStart: false,
-          isSysStart: false
-        })
+        if (that.data.isSysStart) {
+          that.setData({
+            // pause: '暂停',
+            picSrc: '../../images/play.png',
+            pause_disable: true,
+            value: 0,
+            pass_time_sys: '00:00',
+            percent: 0,
+            disabledSys: true,
+            isSysStart: false
+          })
+        } else {
+          that.setData({
+            // pause: '暂停',
+            picSrc: '../../images/play.png',
+            pause_disable: true,
+            value: 0,
+            pass_time_user: '00:00',
+            percent: 0,
+            disabledUser: true,
+            isUserStart: false
+          })
+        }
       })
     }, 1000)
 
@@ -134,7 +167,7 @@ Page({
   // 点击slider时调用
   sliderTap: function(e) {
     console.log("sliderTap")
-    this.seek()
+    this.seek(e.target.dataset.res)
   },
 
   // 开始滑动时
@@ -150,24 +183,36 @@ Page({
   // 滑动结束
   sliderEnd: function(e) {
     console.log("sliderEnd")
-    this.seek()
+    this.seek(e.target.dataset.res)
   },
 
   // 滑动取消 （左滑时滑到上一页面或电话等情况）
   sliderCancel: function(e) {
     console.log("sliderCancel")
-    this.seek()
+    this.seek(e.target.dataset.res)
   },
 
-  seek: function() {
-    var value = this.wxzxSlider.properties.value
-    console.log(value)
-    var seek_time = value.toFixed(0);
-    var pass_time = this.secondTransferTime(seek_time);
-    this.setData({
-      pass_time: pass_time,
-    })
-    audioManager.seek(Number(seek_time));
+  seek: function(resType) {
+    var that = this;
+    if (resType =='sysResource') {
+      var value = parseInt(that.wxzxSlider.properties.value) 
+      console.log(value);
+      var seek_time = value.toFixed(0);
+      var pass_time = that.secondTransferTime(seek_time);
+      that.setData({
+        pass_time_sys: pass_time,
+      })
+      audioManager.seek(Number(seek_time));
+    } else {
+      var value = that.wxzxSlider1.properties.value
+      console.log(value)
+      var seek_time = value.toFixed(0);
+      var pass_time = that.secondTransferTime(seek_time);
+      that.setData({
+        pass_time_user: pass_time,
+      })
+      audioManager.seek(Number(seek_time));
+    }
   },
 
   startSys: function(e) {
@@ -238,7 +283,7 @@ Page({
         value: 0,
         pass_time: '00:00',
         percent: 0,
-        disabled: true
+        disabledSys: true
       })
     } else if (e.target.dataset.res === 'userResource') {
       audioManager.stop()
@@ -249,7 +294,7 @@ Page({
         value: 0,
         pass_time: '00:00',
         percent: 0,
-        disabled: true
+        disabledUser: true
       })
     }
   },
