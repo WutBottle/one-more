@@ -21,6 +21,10 @@ import {
   shelfAddOne
 } from '../../api/bookShelfController.js'
 
+import {
+  followerAddOne,
+} from '../../api/followerController.js'
+
 var app = getApp();
 Page({
 
@@ -47,11 +51,14 @@ Page({
     isSysStart: false,
     isUserStart: false,
     disabledSys: true,
-    disabledUser: true
+    disabledUser: true,
+    hiddenModal: true,//可以通过hidden是否掩藏弹出框的属性，来指定那个弹出框  
+    addName:'',//点击添加的好友名称
   },
   wxzxSlider: null,
   sysResourceType: null,
   userResourceIndex: 0, //用户资源序号
+  currentUserId: '',//当前点击用户ID
 
   secondTransferTime: function(time) {
     if (time > 3600) {
@@ -560,6 +567,46 @@ Page({
       } else {
         console.log("暂无用户发表资源或查找资源失败！")
       }
+    })
+  },
+
+  //点击按钮弹出添加好友弹出框  
+  showModal: function (e) {
+    console.log(e.target.dataset.uid)    
+    this.setData({
+      addName:e.target.dataset.name,
+      hiddenModal: !this.data.hiddenModal
+    })
+    this.currentUserId = e.target.dataset.uid
+  },
+  //取消按钮  
+  cancel: function () {
+    this.setData({
+      hiddenModal: true
+    });
+  },
+  //确认  
+  confirm: function () {
+    this.handleAddFriends();
+    this.setData({
+      hiddenModal: true
+    })
+  },
+
+  //处理添加好友
+  handleAddFriends() {
+    const param = {
+      publishUid: app.globalData.uid,
+      followerUid: this.currentUserId,
+      status: 0,
+    }
+    followerAddOne(param).then((data) => {
+      wx.showToast({
+        title: '已发送申请',
+        icon: 'success',
+        duration: 1500,
+        mask: true,
+      })
     })
   },
 

@@ -41,11 +41,12 @@
 <!-- 发表图文资源 -->
 <view class='publish-resource-container' wx:else>
   <view class='resource-content'>
-    <textarea value="{{textContent}}" placeholder='请输入文本...' placeholder-class='content-placeholder' bindinput="doInput"></textarea>
+    <textarea value="{{textContent}}" placeholder='请输入文本...' maxlength='{{maxWordNumer}}' placeholder-class='content-placeholder' bindinput="doInput"></textarea>
     <view class='add-pic' bindtap='addPic'>
     <image wx:if="{{isPicExit}}" src='{{picUrl}}' mode='widthFix' ></image>
     <image wx:else src='../../../images/add_pic.png' mode='widthFix' ></image>
     </view>
+    <view id='textCount'>{{wordNumber}}/120</view>    
   </view>
   <view class='submit-text'>
       <button bindtap='submitText'>提交</button>

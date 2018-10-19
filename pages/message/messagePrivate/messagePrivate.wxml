@@ -17,7 +17,7 @@
       {{currentUserName}}
       <view class='user-establish-friend' bindtap='handleAddFriends' wx:if="{{!isFollow}}">申请好友</view>
     </view>
-    <scroll-view class='dialog-scrollY' scroll-into-view="lastOne" scroll-y="true">
+    <scroll-view class='dialog-scrollY' scroll-into-view="{{scrollIndex}}" scroll-y="true">
       <block wx:for="{{userDialogInfo}}" wx:key="{{index}}">
         <view class='dialog-time'>{{item.createTime}}</view>
         <view id="{{userDialogInfo.length === index + 1 ? 'lastOne':''}}" class='left-dialog-container' wx:if="{{item.receiveUid === uid}}">

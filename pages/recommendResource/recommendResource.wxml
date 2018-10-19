@@ -37,7 +37,7 @@
       <view class='user-text'>
         <view class='user-text-list' wx:for="{{userResource}}" data-id="{{item.resourceId}}" wx:key="{{index}}">
           <view class="{{index===0 ? 'none':'line'}} "></view>
-          <image src='{{item.avatarUrl}}' mode='aspectFit'></image>
+          <image src='{{item.avatarUrl}}' mode='aspectFit' bindtap="showModal" data-uid='{{item.publishUid}}' data-name='{{item.fakeName}}'></image>
           <view class='resource-username displayInlineBlock'>{{item.fakeName}}</view>
           <view class='resource-time displayInlineBlock'>{{item.publishDate}}</view>
           <view class='resource-text displayInlineBlock'>
@@ -198,7 +198,7 @@
       <view class='user-text'>
         <view class='user-text-list' wx:for="{{userResource}}" data-id="{{item.resourceId}}" wx:key="{{index}}">
           <view class="{{index===0 ? 'none':'line'}} "></view>
-          <image src='{{item.avatarUrl}}' mode='aspectFit'></image>
+          <image src='{{item.avatarUrl}}' mode='aspectFit' bindtap="showModal" data-name='{{item.fakeName}}'></image>
           <view class='resource-username displayInlineBlock'>{{item.fakeName}}</view>
           <view class='resource-time displayInlineBlock'>{{item.publishDate}}</view>
           <view class='resource-text displayInlineBlock'>{{item.content}}</view>
@@ -296,3 +296,6 @@
     <text>发布</text>
   </view>
 </view>
+<modal hidden="{{hiddenModal}}" title="您要添加{{addName}}为好友吗？" confirm-text="添加好友" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm">  
+    <text type='text' style='display:block;width:100%;text-align:center;'>对方通过好友申请后即可开启私信聊天</text>  
+</modal>

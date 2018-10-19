@@ -138,6 +138,12 @@
   height: 120rpx;
 }
 
+#textCount {
+  position: absolute;
+  right: 30rpx;
+  bottom: 30rpx;
+}
+
 .resource-content text {
   position: absolute;
   left: 150rpx;

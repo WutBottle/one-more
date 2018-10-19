@@ -20,6 +20,7 @@ Page({
     currentUserName: '',//当前点击用户name
     uid: '',//当前用户id
     isFollow: '',//与点击用户是否是好友
+    scrollIndex: '',//下拉最下面标记
   },
   currentUserId: '',//当前点击用户ID
   pageSize: 10,
@@ -33,7 +34,6 @@ Page({
       uid: app.globalData.uid,
     })
     this.updatePrivateMsgList();
-    this.updateFriendApplication();
   },
 
   /**
@@ -47,7 +47,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    this.updateFriendApplication();
+
   },
 
   /**
@@ -95,11 +95,11 @@ Page({
   },
   closeDialogModal(e) {
     if (e.target.dataset.modalblank) {
-      this.updateFriendApplication();
       this.updatePrivateMsgList();
       this.setData({
         showDialogModal: false,
         sendMsgValue: '',
+        scrollIndex: ''
       })
     }
   },
@@ -149,6 +149,7 @@ Page({
       this.setData({
         showDialogModal: true,
         userDialogInfo: data.comment.reverse(),
+        scrollIndex: 'lastOne'
       })
     })
   },
