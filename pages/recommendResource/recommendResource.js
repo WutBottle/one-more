@@ -329,7 +329,6 @@ Page({
     }
     findOurResource(param).then((data) => {
       if (data.status === true && data.resources.length != 0) {
-        console.log(data.resources.length);
         this.sysResourceType = data.resources[0].type
         var timeLength = this.secondTransferTime(data.resources[0].timeLength)
         this.setData({

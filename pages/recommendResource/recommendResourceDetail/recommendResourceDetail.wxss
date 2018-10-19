@@ -52,7 +52,6 @@
   box-sizing: border-box;
   border-radius: 10rpx;
   width: 730rpx;
-  height: 150rpx;
   padding: 30rpx 45rpx;
   box-shadow: 0 3rpx 15rpx rgba(0, 0, 0, 0.24);
   line-height: 28rpx;
