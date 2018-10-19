@@ -50,7 +50,7 @@
         <!-- 点赞数最高的三条评论 -->
         <view class='comment-list send' wx:for="{{commentList}}" data-id="{{item.commentId}}" wx:key="{{index}}">
           <view class="{{index===0 ? 'none':'line'}} "></view>
-          <image src='{{item.userImg}}' mode='aspectFit'></image>
+          <image src='{{item.userImg}}' mode='aspectFit' bindtap="showModal" data-uid='{{item.commentUid}}' data-name='{{item.userFakeName}}'></image>
           <view class='comment-username displayInlineBlock'>{{item.userFakeName}}</view>
           <view class='comment-time displayInlineBlock'>{{item.createTime}}</view>
           <view class='comment-text displayInlineBlock'>
@@ -89,8 +89,10 @@
     <view class="comment-send-btn {{!!commentMsgValue ? 'btn-active' : 'btn-disable'}}" bindtap='submitSendComment' bindblur='maskClose' type='primary'>发表</view>
   </view>
 </view>
-
 <!-- 后台暂无配置资源 -->
 <view class='recommend-recource-container' wx:else>
   <image class='no-data-pic' src='../../../images/no_data.png' mode='widthFix'></image>
 </view>
+<modal hidden="{{hiddenModal}}" title="您要添加{{addName}}为好友吗？" confirm-text="添加好友" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm">
+  <text type='text' style='display:block;width:100%;text-align:center;'>对方通过好友申请后即可开启私信聊天</text>
+</modal>
