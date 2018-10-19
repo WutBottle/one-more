@@ -108,8 +108,8 @@
 
         <!-- 评论部分 -->
         <view data-id='{{userResourceSingle.resourceId}}' bindtap='gotoResDetailPage' class='user-comment-box'>
-          <image data-id='{{userResourceSingle.resourceId}}' bindtap='gotoResDetailPage' src='../../images/comment1.png' mode='widthFix'></image>
-          <text data-id='{{userResourceSingle.resourceId}}' bindtap='gotoResDetailPage'>{{userResourceSingle.commentNum}}</text>
+          <image data-id='{{userResourceSingle.resourceId}}' src='../../images/comment1.png' mode='widthFix'></image>
+          <text data-id='{{userResourceSingle.resourceId}}'>{{userResourceSingle.commentNum}}</text>
         </view>
         <!-- 点赞后 -->
         <view class='user-praise-box' data-id="{{userResourceSingle.resourceId}}" data-praiseid="{{userResourceSingle.praiseStatus}}" wx:if="{{!!userResourceSingle.praiseStatus}}" bindtap='deleteAudioPraise'>
@@ -209,8 +209,8 @@
 
           <!-- 评论部分 -->
           <view data-id='{{item.resourceId}}' bindtap='gotoResDetailPage' class='resource-comment displayInlineBlock'>
-            <image data-id='{{item.resourceId}}' bindtap='gotoResDetailPage' src='../../images/comment.png' mode='widthFix'></image>
-            <text data-id='{{item.resourceId}}' bindtap='gotoResDetailPage'>{{item.commentNum}}</text>
+            <image data-id='{{item.resourceId}}' src='../../images/comment.png' mode='widthFix'></image>
+            <text data-id='{{item.resourceId}}'>{{item.commentNum}}</text>
           </view>
 
           <!-- 点赞后 -->
@@ -272,8 +272,8 @@
 
         <!-- 评论部分 -->
         <view data-id='{{userResourceSingle.resourceId}}' bindtap='gotoResDetailPage' class='user-comment-box'>
-          <image data-id='{{userResourceSingle.resourceId}}' bindtap='gotoResDetailPage' src='../../images/comment1.png' mode='widthFix'></image>
-          <text data-id='{{userResourceSingle.resourceId}}' bindtap='gotoResDetailPage'>{{userResourceSingle.commentNum}}</text>
+          <image data-id='{{userResourceSingle.resourceId}}' src='../../images/comment1.png' mode='widthFix'></image>
+          <text data-id='{{userResourceSingle.resourceId}}'>{{userResourceSingle.commentNum}}</text>
         </view>
         <!-- 点赞后 -->
         <view class='user-praise-box' data-id="{{userResourceSingle.resourceId}}" data-praiseid="{{userResourceSingle.praiseStatus}}" wx:if="{{!!userResourceSingle.praiseStatus}}" bindtap='deleteAudioPraise'>
