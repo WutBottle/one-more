@@ -21,7 +21,7 @@
       <view class='audio-box'>
           <view class='slider_bg'>
             <view class='controlBtn'>
-              <button bindtap='startSys' wx:if="{{!isStart}}">
+              <button bindtap='start' wx:if="{{!isStart}}">
                 <image src='../../../images/play.png' mode='widthFix'></image>
               </button>
               <button bindtap='pause' disabled='{{pause_disable}}' wx:else>

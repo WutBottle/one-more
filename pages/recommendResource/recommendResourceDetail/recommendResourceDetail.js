@@ -167,9 +167,9 @@ Page({
   start: function() {
     audioManager.title = this.data.resource.title;
     audioManager.epname = '';
-    audioManager.singer = this.data.sysResource.fakeName;
-    audioManager.coverImgUrl = this.data.sysResource.imageUrl;
-    audioManager.src = this.data.sysResource.audioUrl;
+    audioManager.singer = this.data.resource.fakeName;
+    audioManager.coverImgUrl = this.data.resource.imageUrl;
+    audioManager.src = this.data.resource.audioUrl;
     this.setData({
       isStart: true,
       picSrc: '../../../images/pause.png',

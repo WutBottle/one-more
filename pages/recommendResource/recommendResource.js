@@ -43,7 +43,8 @@ Page({
     // pause: '暂停',
     picSrc: '../../images/pause.png',
     pause_disable: true,
-    isStart: false,
+    isSysStart: false,
+    isUserStart: false
   },
   wxzxSlider: null,
   sysResourceType: null,
@@ -122,7 +123,8 @@ Page({
           pass_time: '00:00',
           percent: 0,
           disabled: true,
-          isStart:false
+          isUserStart: false,
+          isSysStart: false
         })
       })
     }, 1000)
@@ -168,57 +170,88 @@ Page({
     audioManager.seek(Number(seek_time));
   },
 
-  startSys: function() {
-    audioManager.title = this.data.sysResource.title;
-    audioManager.epname = '';
-    audioManager.singer = this.data.sysResource.fakeName;
-    audioManager.coverImgUrl = this.data.sysResource.imageUrl;
-    audioManager.src = this.data.sysResource.audioUrl;
-    this.setData({
-      isStart: true,
-      picSrc: '../../images/pause.png',
-      pause_disable: false
-    })
-  },
-
-  startUser: function () {
-    audioManager.title = this.data.userResourceSingle.title;
-    audioManager.epname = '';
-    audioManager.singer = this.data.userResourceSingle.fakeName;
-    audioManager.coverImgUrl = this.data.userResourceSingle.imageUrl;
-    audioManager.src = this.data.userResourceSingle.audioUrl;
-    this.setData({
-      isStart: true,
-      picSrc: '../../images/pause.png',
-      pause_disable: false
-    })
-  },
-
-  pause: function(e) {
-    if (audioManager.paused) {
-      audioManager.play()
+  startSys: function(e) {
+    if (e.target.dataset.res === 'sysResource') {
+      audioManager.title = this.data.sysResource.title;
+      audioManager.epname = '';
+      audioManager.singer = this.data.sysResource.fakeName;
+      audioManager.coverImgUrl = this.data.sysResource.imageUrl;
+      audioManager.src = this.data.sysResource.audioUrl;
       this.setData({
+        isSysStart: true,
         picSrc: '../../images/pause.png',
-      })
-    } else {
-      audioManager.pause()
-      this.setData({
-        picSrc: '../../images/play.png',
+        pause_disable: false
       })
     }
   },
 
-  stop: function() {
-    audioManager.stop()
-    this.setData({
-      isStart: false,
-      picSrc: '../../images/play.png',
-      pause_disable: true,
-      value: 0,
-      pass_time: '00:00',
-      percent: 0,
-      disabled: true
-    })
+  startUser: function(e) {
+    if (e.target.dataset.res === 'userResource') {
+      audioManager.title = this.data.userResourceSingle.title;
+      audioManager.epname = '';
+      audioManager.singer = this.data.userResourceSingle.fakeName;
+      audioManager.coverImgUrl = this.data.userResourceSingle.imageUrl;
+      audioManager.src = this.data.userResourceSingle.audioUrl;
+      this.setData({
+        isUserStart: true,
+        picSrc: '../../images/pause.png',
+        pause_disable: false
+      })
+    }
+  },
+
+  pause: function(e) {
+    if (e.target.dataset.res === 'sysResource') {
+      if (audioManager.paused) {
+        audioManager.play()
+        this.setData({
+          picSrc: '../../images/pause.png',
+        })
+      } else {
+        audioManager.pause()
+        this.setData({
+          picSrc: '../../images/play.png',
+        })
+      }
+    } else if (e.target.dataset.res === 'userResource') {
+      if (audioManager.paused) {
+        audioManager.play()
+        this.setData({
+          picSrc: '../../images/pause.png',
+        })
+      } else {
+        audioManager.pause()
+        this.setData({
+          picSrc: '../../images/play.png',
+        })
+      }
+    }
+  },
+
+  stop: function(e) {
+    if (e.target.dataset.res === 'sysResource') {
+      audioManager.stop()
+      this.setData({
+        isSysStart: false,
+        picSrc: '../../images/play.png',
+        pause_disable: true,
+        value: 0,
+        pass_time: '00:00',
+        percent: 0,
+        disabled: true
+      })
+    } else if (e.target.dataset.res === 'userResource') {
+      audioManager.stop()
+      this.setData({
+        isUserStart: false,
+        picSrc: '../../images/play.png',
+        pause_disable: true,
+        value: 0,
+        pass_time: '00:00',
+        percent: 0,
+        disabled: true
+      })
+    }
   },
 
   /**
@@ -411,7 +444,6 @@ Page({
    * 给音频资源添加点赞（本地修改）
    */
   addAudioPraise: function(e) {
-    console.log(this.data.userResourceSingle)
     const param = {
       workId: e.target.dataset.id,
       workType: 0,
@@ -477,7 +509,7 @@ Page({
           //音频资源 加载一条
           var timeLength = this.secondTransferTime(data.resources[0].timeLength)
           that.setData({
-            total_time_user:timeLength,
+            total_time_user: timeLength,
             userResourceSingle: data.resources[0]
           })
         }

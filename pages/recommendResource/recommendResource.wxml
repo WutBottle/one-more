@@ -65,7 +65,29 @@
     <!-- 用户音频 -->
     <view class='user-audio-resource-content' wx:else>
       <view class='user-audio'>
-        <audio id='audioRes' src='{{userResourceSingle.audioUrl}}' name='{{userResourceSingle.title}}' author='{{userResourceSingle.fakeName}}' controls bindplay="audioPlay" bindpause='audioPause' bindtimeupdate="audioTimeUpdate" bindended="audioEnded" binderror="audioError"></audio>
+        <view class='audio-box'>
+          <view class='slider_bg'>
+            <view class='controlBtn'>
+              <button bindtap='startUser' wx:if="{{!isUserStart}}"  data-res='userResource'>
+                <image src='../../images/play.png' mode='widthFix' data-res='userResource'></image>
+              </button>
+              <button bindtap='pause' disabled='{{pause_disable}}' wx:else data-res='userResource'>
+                <image src='{{picSrc}}' mode='widthFix' data-res='userResource'></image>
+              </button>
+            </view>
+            <wxzx-slider id='wxzxSlider' blockSrc='../../images/slider.png' blockImageWidth='54' blockImageHeight='54' value='{{value}}' max='{{max}}' percent='{{percent}}' width='430' bind:sliderTap="sliderTap" bind:sliderStart="sliderStart" bind:sliderChange="sliderChange"
+              bind:sliderEnd="sliderEnd" bind:sliderCancel="sliderCancel" slider-left='100' disabled='{{disabled}}'>
+            </wxzx-slider>
+            <button class='stop-btn' bindtap='stop' data-res='userResource'>
+              <image src='../../images/stop_disable.png' mode='widthFix' wx:if="{{!isUserStart}}" data-res='userResource'></image>
+              <image src='../../images/stop.png' mode='widthFix' wx:else data-res='userResource'></image>
+            </button>
+          </view>
+          <view class='time_view'>
+            <view>{{pass_time}}</view>
+            <view>{{total_time_user}}</view>
+          </view>
+        </view>
       </view>
       <view class='resource-function-btn'>
         <!-- 举报部分 -->
@@ -97,11 +119,15 @@
         </view>
       </view>
       <view class='change-function-btn'>
-        <view class='change-box' bindtap='changeResource'>
+        <view class='change-box' bindtap='changeResource' wx:if="{{changeCount!==0}}">
           <image src='../../images/change.png' mode='widthFix'></image>
           <text>换一个</text>
         </view>
-        <text>剩余次数:{{changeCount}}</text>
+        <view class='change-box' wx:else>
+          <image src='../../images/change.png' mode='widthFix'></image>
+          <text>换一个</text>
+        </view>
+        <!-- <text>剩余次数:{{changeCount}}</text> -->
       </view>
     </view>
   </view>
@@ -123,19 +149,19 @@
         <view class='audio-box'>
           <view class='slider_bg'>
             <view class='controlBtn'>
-              <button bindtap='start' wx:if="{{!isStart}}">
-                <image src='../../images/play.png' mode='widthFix'></image>
+              <button bindtap='startSys' wx:if="{{!isSysStart}}" data-res='sysResource'>
+                <image src='../../images/play.png' mode='widthFix' data-res='sysResource'></image>
               </button>
-              <button bindtap='pause' disabled='{{pause_disable}}' wx:else>
-                <image src='{{picSrc}}' mode='widthFix'></image>
+              <button bindtap='pause' disabled='{{pause_disable}}' wx:else data-res='sysResource' data-res='sysResource'>
+                <image src='{{picSrc}}' mode='widthFix' data-res='sysResource'></image>
               </button>
             </view>
             <wxzx-slider id='wxzxSlider' blockSrc='../../images/slider.png' blockImageWidth='54' blockImageHeight='54' value='{{value}}' max='{{max}}' percent='{{percent}}' width='430' bind:sliderTap="sliderTap" bind:sliderStart="sliderStart" bind:sliderChange="sliderChange"
               bind:sliderEnd="sliderEnd" bind:sliderCancel="sliderCancel" slider-left='100' disabled='{{disabled}}'>
             </wxzx-slider>
-            <button class='stop-btn' bindtap='stop'>
-              <image src='../../images/stop_disable.png' mode='widthFix' wx:if="{{!isStart}}"></image>
-              <image src='../../images/stop.png' mode='widthFix' wx:else></image>
+            <button class='stop-btn' bindtap='stop' data-res='sysResource'>
+              <image src='../../images/stop_disable.png' mode='widthFix' wx:if="{{!isSysStart}}" data-res='sysResource'></image>
+              <image src='../../images/stop.png' mode='widthFix' wx:else data-res='sysResource'></image>
             </button>
           </view>
           <view class='time_view'>
@@ -202,19 +228,19 @@
         <view class='audio-box'>
           <view class='slider_bg'>
             <view class='controlBtn'>
-              <button bindtap='startUser' wx:if="{{!isStart}}">
-                <image src='../../images/play.png' mode='widthFix'></image>
+              <button bindtap='startUser' wx:if="{{!isUserStart}}"  data-res='userResource'>
+                <image src='../../images/play.png' mode='widthFix' data-res='userResource'></image>
               </button>
-              <button bindtap='pause' disabled='{{pause_disable}}' wx:else>
-                <image src='{{picSrc}}' mode='widthFix'></image>
+              <button bindtap='pause' disabled='{{pause_disable}}' wx:else data-res='userResource'>
+                <image src='{{picSrc}}' mode='widthFix' data-res='userResource'></image>
               </button>
             </view>
             <wxzx-slider id='wxzxSlider' blockSrc='../../images/slider.png' blockImageWidth='54' blockImageHeight='54' value='{{value}}' max='{{max}}' percent='{{percent}}' width='430' bind:sliderTap="sliderTap" bind:sliderStart="sliderStart" bind:sliderChange="sliderChange"
               bind:sliderEnd="sliderEnd" bind:sliderCancel="sliderCancel" slider-left='100' disabled='{{disabled}}'>
             </wxzx-slider>
-            <button class='stop-btn' bindtap='stop'>
-              <image src='../../images/stop_disable.png' mode='widthFix' wx:if="{{!isStart}}"></image>
-              <image src='../../images/stop.png' mode='widthFix' wx:else></image>
+            <button class='stop-btn' bindtap='stop' data-res='userResource'>
+              <image src='../../images/stop_disable.png' mode='widthFix' wx:if="{{!isUserStart}}" data-res='userResource'></image>
+              <image src='../../images/stop.png' mode='widthFix' wx:else data-res='userResource'></image>
             </button>
           </view>
           <view class='time_view'>
