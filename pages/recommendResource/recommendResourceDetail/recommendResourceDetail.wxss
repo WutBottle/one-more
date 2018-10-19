@@ -41,7 +41,6 @@
   border-radius: 10rpx;
   width: 730rpx;
   height: 135rpx;
-  box-shadow: 0 3rpx 15rpx rgba(0, 0, 0, 0.24);
   line-height: 28rpx;
 }
 
@@ -244,7 +243,7 @@
   width: 90%;
   border: #ddd solid 1px;
   border-radius: 20rpx;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 1);
 }
 
 .slider_bg {

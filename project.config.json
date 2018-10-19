@@ -73,7 +73,7 @@
 					"id": 5,
 					"name": "资源初始化页面",
 					"pathName": "pages/recommendResource/recommendResource",
-					"query": "chapterId=1",
+					"query": "chapterId=4",
 					"scene": "1011"
 				},
 				{

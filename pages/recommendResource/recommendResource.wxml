@@ -68,7 +68,7 @@
         <view class='audio-box'>
           <view class='slider_bg'>
             <view class='controlBtn'>
-              <button bindtap='startUser' wx:if="{{!isUserStart}}"  data-res='userResource'>
+              <button bindtap='startUser' wx:if="{{!isUserStart}}" data-res='userResource'>
                 <image src='../../images/play.png' mode='widthFix' data-res='userResource'></image>
               </button>
               <button bindtap='pause' disabled='{{pause_disable}}' wx:else data-res='userResource'>
@@ -88,6 +88,10 @@
             <view>{{total_time_user}}</view>
           </view>
         </view>
+      </view>
+      <view class='pub-user-info' data-uid='{{userResourceSingle.publishUid}}' data-name='{{userResourceSingle.fakeName}}'>
+        <image src='{{userResourceSingle.avatarUrl}}' mode='aspectFit' bindtap="showModal" data-uid='{{userResourceSingle.publishUid}}' data-name='{{userResourceSingle.fakeName}}'></image>
+        <text data-uid='{{userResourceSingle.publishUid}}' data-name='{{userResourceSingle.fakeName}}'>{{userResourceSingle.fakeName}}</text>
       </view>
       <view class='resource-function-btn'>
         <!-- 举报部分 -->
@@ -198,7 +202,7 @@
       <view class='user-text'>
         <view class='user-text-list' wx:for="{{userResource}}" data-id="{{item.resourceId}}" wx:key="{{index}}">
           <view class="{{index===0 ? 'none':'line'}} "></view>
-          <image src='{{item.avatarUrl}}' mode='aspectFit' bindtap="showModal" data-name='{{item.fakeName}}'></image>
+          <image src='{{item.avatarUrl}}' mode='aspectFit' bindtap="showModal" data-uid='{{item.publishUid}}' data-name='{{item.fakeName}}'></image>
           <view class='resource-username displayInlineBlock'>{{item.fakeName}}</view>
           <view class='resource-time displayInlineBlock'>{{item.publishDate}}</view>
           <view class='resource-text displayInlineBlock'>{{item.content}}</view>
@@ -228,7 +232,7 @@
         <view class='audio-box'>
           <view class='slider_bg'>
             <view class='controlBtn'>
-              <button bindtap='startUser' wx:if="{{!isUserStart}}"  data-res='userResource'>
+              <button bindtap='startUser' wx:if="{{!isUserStart}}" data-res='userResource'>
                 <image src='../../images/play.png' mode='widthFix' data-res='userResource'></image>
               </button>
               <button bindtap='pause' disabled='{{pause_disable}}' wx:else data-res='userResource'>
@@ -248,6 +252,10 @@
             <view>{{total_time_user}}</view>
           </view>
         </view>
+      </view>
+      <view class='pub-user-info' data-uid='{{userResourceSingle.publishUid}}' data-name='{{userResourceSingle.fakeName}}'>
+        <image src='{{userResourceSingle.avatarUrl}}' mode='aspectFit' bindtap="showModal" data-uid='{{userResourceSingle.publishUid}}' data-name='{{userResourceSingle.fakeName}}'></image>
+        <text data-uid='{{userResourceSingle.publishUid}}' data-name='{{userResourceSingle.fakeName}}'>{{userResourceSingle.fakeName}}</text>
       </view>
       <view class='resource-function-btn'>
         <!-- 举报部分 -->
@@ -296,6 +304,6 @@
     <text>发布</text>
   </view>
 </view>
-<modal hidden="{{hiddenModal}}" title="您要添加{{addName}}为好友吗？" confirm-text="添加好友" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm">  
-    <text type='text' style='display:block;width:100%;text-align:center;'>对方通过好友申请后即可开启私信聊天</text>  
+<modal hidden="{{hiddenModal}}" title="您要添加{{addName}}为好友吗？" confirm-text="添加好友" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm">
+  <text type='text' style='display:block;width:100%;text-align:center;'>对方通过好友申请后即可开启私信聊天</text>
 </modal>
